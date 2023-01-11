@@ -1,16 +1,12 @@
 import Head from 'next/head';
-import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 import { useUser, useSupabaseClient } from '@supabase/auth-helpers-react';
 import { getURL } from '@/utils/helpers';
 import { Auth, ThemeSupa } from '@supabase/auth-ui-react';
 
-import { AuthLayout } from '@/components/components/AuthLayout';
-import { Button } from '@/components/components/Button';
-import { TextField } from '@/components/components/Fields';
-import { Logo } from '@/components/components/Logo';
-import LoadingDots from '@/components/components/LoadingDots';
+import { AuthLayout } from '@/components/LandingPage/AuthLayout';
+import LoadingDots from '@/components/LoadingDots';
 
 export default function Login() {
   const router = useRouter();
