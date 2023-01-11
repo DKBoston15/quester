@@ -31,7 +31,7 @@ function Card({ title, description, footer, children }: Props) {
   );
 }
 
-export const getServerSideProps = withPageAuth({ redirectTo: '/signin' });
+export const getServerSideProps = withPageAuth({ redirectTo: '/login' });
 
 export default function Account({ user }: { user: User }) {
   const [loading, setLoading] = useState(false);
