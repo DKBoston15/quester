@@ -1,4 +1,5 @@
 import Stripe from 'stripe';
+
 export interface PageMeta {
   title: string;
   description: string;

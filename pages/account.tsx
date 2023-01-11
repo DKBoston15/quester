@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import { useState, ReactNode } from 'react';
 
-import LoadingDots from 'components/ui/LoadingDots';
+import LoadingDots from '@/components/LoadingDots';
 import Button from 'components/ui/Button';
 import { useUser } from 'utils/useUser';
 import { postData } from 'utils/helpers';

@@ -1,4 +1,15 @@
-import Pricing from 'components/Pricing';
+import Head from 'next/head';
+
+import { CallToAction } from '@/components/LandingPage/CallToAction';
+import { Faqs } from '@/components/LandingPage/Faqs';
+import { Footer } from '@/components/LandingPage/Footer';
+import { Header } from '@/components/LandingPage/Header';
+import { Hero } from '@/components/LandingPage/Hero';
+import { Pricing } from '@/components/LandingPage/Pricing';
+import { PrimaryFeatures } from '@/components/LandingPage/PrimaryFeatures';
+import { SecondaryFeatures } from '@/components/LandingPage/SecondaryFeatures';
+import { Testimonials } from '@/components/LandingPage/Testimonials';
+
 import { getActiveProductsWithPrices } from 'utils/supabase-client';
 import { Product } from 'types';
 import { GetStaticPropsResult } from 'next';
@@ -7,8 +18,26 @@ interface Props {
   products: Product[];
 }
 
-export default function PricingPage({ products }: Props) {
-  return <Pricing products={products} />;
+export default function Home({ products }: Props) {
+  return (
+    <>
+      <Head>
+        <title>Quester - A better way to manage research</title>
+        <meta name="description" content="A better way to manage research!" />
+      </Head>
+      <Header />
+      <main>
+        <Hero />
+        <PrimaryFeatures />
+        {/* <SecondaryFeatures /> */}
+        <Testimonials />
+        <CallToAction />
+        <Pricing products={products} />
+        {/* <Faqs /> */}
+      </main>
+      <Footer />
+    </>
+  );
 }
 
 export async function getStaticProps(): Promise<GetStaticPropsResult<Props>> {
@@ -16,7 +45,7 @@ export async function getStaticProps(): Promise<GetStaticPropsResult<Props>> {
 
   return {
     props: {
-      products
+      products: products.reverse()
     },
     revalidate: 60
   };

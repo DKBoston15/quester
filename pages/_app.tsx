@@ -1,5 +1,6 @@
 import 'styles/main.css';
 import 'styles/chrome-bug.css';
+import '@/styles/tailwind.css';
 import { useEffect, useState } from 'react';
 import React from 'react';
 
@@ -22,9 +23,7 @@ export default function MyApp({ Component, pageProps }: AppProps) {
     <div className="bg-black">
       <SessionContextProvider supabaseClient={supabaseClient}>
         <MyUserContextProvider>
-          <Layout>
-            <Component {...pageProps} />
-          </Layout>
+          <Component {...pageProps} />
         </MyUserContextProvider>
       </SessionContextProvider>
     </div>
