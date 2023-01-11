@@ -103,7 +103,7 @@ export function Header() {
             <Link href="#" aria-label="Home">
               <img
                 src="/quester_logo_name.png"
-                className="w-48 h-24 w-auto brightness-0 object-cover"
+                className="w-56 h-24 w-auto brightness-0 object-cover"
               />
             </Link>
             <div className="hidden md:flex md:gap-x-6">
