@@ -10,7 +10,7 @@ export function Footer() {
         <div className="py-16">
           <img
             src="/quester_logo_name.png"
-            className="w-56 h-24 w-auto brightness-0 object-cover mx-auto"
+            className="w-48 h-24 brightness-0 object-cover mx-auto"
           />
           <nav className="mt-10 text-sm" aria-label="quick links">
             <div className="-my-1 flex justify-center gap-x-6">
@@ -25,7 +25,7 @@ export function Footer() {
             <Link
               href="https://twitter.com"
               className="group"
-              aria-label="TaxPal on Twitter"
+              aria-label="Quester on Twitter"
             >
               <svg
                 aria-hidden="true"
@@ -37,7 +37,7 @@ export function Footer() {
             <Link
               href="https://github.com"
               className="group"
-              aria-label="TaxPal on GitHub"
+              aria-label="Quester on GitHub"
             >
               <svg
                 aria-hidden="true"

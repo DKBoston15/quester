@@ -1,13 +1,13 @@
 import Link from 'next/link';
-import { useState, ReactNode } from 'react';
+import { useState, ReactNode, useEffect } from 'react';
 
 import LoadingDots from '@/components/LoadingDots';
-import Button from 'components/ui/Button';
 import { useUser } from 'utils/useUser';
 import { postData } from 'utils/helpers';
 
 import { User } from '@supabase/supabase-js';
 import { withPageAuth } from '@supabase/auth-helpers-nextjs';
+import { useRouter } from 'next/router';
 
 interface Props {
   title: string;
@@ -35,7 +35,7 @@ export const getServerSideProps = withPageAuth({ redirectTo: '/signin' });
 
 export default function Account({ user }: { user: User }) {
   const [loading, setLoading] = useState(false);
-  const { isLoading, subscription, userDetails } = useUser();
+  const { userDetails, isLoading, subscription } = useUser();
 
   const redirectToCustomerPortal = async () => {
     setLoading(true);
@@ -83,14 +83,14 @@ export default function Account({ user }: { user: User }) {
               <p className="pb-4 sm:pb-0">
                 Manage your subscription on Stripe.
               </p>
-              <Button
-                variant="slim"
-                loading={loading}
+              <button
+                className="cursor-pointer"
+                // loading={loading}
                 disabled={loading || !subscription}
                 onClick={redirectToCustomerPortal}
               >
                 Open customer portal
-              </Button>
+              </button>
             </div>
           }
         >
@@ -117,7 +117,7 @@ export default function Account({ user }: { user: User }) {
             {userDetails ? (
               `${
                 userDetails.full_name ??
-                `${userDetails.first_name} ${userDetails.last_name}`
+                `${userDetails.first_name || ''} ${userDetails.last_name || ''}`
               }`
             ) : (
               <div className="h-8 mb-6">

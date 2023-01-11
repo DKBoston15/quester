@@ -19,10 +19,6 @@ export const UserContext = createContext<UserContextType | undefined>(
   undefined
 );
 
-export interface Props {
-  [propName: string]: any;
-}
-
 export const MyUserContextProvider = (props: Props) => {
   const {
     session,
@@ -32,8 +28,12 @@ export const MyUserContextProvider = (props: Props) => {
   const user = useSupaUser();
   const accessToken = session?.access_token ?? null;
   const [isLoadingData, setIsloadingData] = useState(false);
-  const [userDetails, setUserDetails] = useState<UserDetails | null>(null);
-  const [subscription, setSubscription] = useState<Subscription | null>(null);
+  const [userDetails, setUserDetails] = useState<UserDetails | null>(
+    props.userDetails || null
+  );
+  const [subscription, setSubscription] = useState<Subscription | null>(
+    props.subscription || null
+  );
 
   const getUserDetails = () => supabase.from('users').select('*').single();
   const getSubscription = () =>
@@ -46,6 +46,7 @@ export const MyUserContextProvider = (props: Props) => {
   useEffect(() => {
     if (user && !isLoadingData && !userDetails && !subscription) {
       setIsloadingData(true);
+
       Promise.allSettled([getUserDetails(), getSubscription()]).then(
         (results) => {
           const userDetailsPromise = results[0];

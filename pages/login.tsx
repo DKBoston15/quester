@@ -22,9 +22,13 @@ export default function Login() {
   return (
     <>
       <Head>
-        <title>Sign In - TaxPal</title>
+        <title>Sign In - Quester</title>
       </Head>
       <AuthLayout>
+        <div className="text-3xl text-black">Welcome</div>
+        <p className="text-md text-gray-500 pt-2 pb-8">
+          Sign in or Create your account below
+        </p>
         {!user && (
           <Auth
             supabaseClient={supabaseClient}
@@ -33,11 +37,15 @@ export default function Login() {
             magicLink={true}
             appearance={{
               theme: ThemeSupa,
+              className: {
+                message: 'text-black'
+              },
               variables: {
                 default: {
                   colors: {
                     brand: '#404040',
-                    brandAccent: '#52525b'
+                    brandAccent: '#52525b',
+                    messageText: 'black'
                   }
                 }
               }
