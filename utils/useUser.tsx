@@ -19,7 +19,7 @@ export const UserContext = createContext<UserContextType | undefined>(
   undefined
 );
 
-export const MyUserContextProvider = (props: Props) => {
+export const MyUserContextProvider = (props: any) => {
   const {
     session,
     isLoading: isLoadingUser,

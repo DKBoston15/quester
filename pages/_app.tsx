@@ -31,6 +31,7 @@ export default function MyApp({ Component, pageProps }: AppProps) {
     const userDetails = await getUserDetails();
     const subscription = await getSubscription();
     setInitialContext({
+      //@ts-ignore
       userDetails: userDetails.data,
       subscription: subscription.data
     });
