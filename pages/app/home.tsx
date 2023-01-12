@@ -59,7 +59,7 @@ export default function Home() {
   return (
     <Layout>
       {/* Page title & actions */}
-      <HomePageTitle />
+      <HomePageTItle />
       {/* Pinned projects */}
       <div className="mt-6 px-4 sm:px-6 lg:px-8">
         <h2 className="text-sm font-medium text-gray-900">Pinned Projects</h2>
