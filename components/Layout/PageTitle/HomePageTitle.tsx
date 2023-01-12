@@ -2,7 +2,7 @@ import React from 'react';
 import { useSidebar } from 'context/SidebarContext';
 import { Bars3CenterLeftIcon } from '@heroicons/react/24/outline';
 
-export default function HomePageTitle() {
+export default function HomePageTItle() {
   const [sidebarOpen, toggleSidebar] = useSidebar();
 
   return (
