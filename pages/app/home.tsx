@@ -10,7 +10,7 @@ import HomePageTitle from '@/components/Layout/PageTitle/HomePageTItle';
 
 export const getServerSideProps = withPageAuth({ redirectTo: '/login' });
 
-function classNames(...classes) {
+function classNames(...classes: any) {
   return classes.filter(Boolean).join(' ');
 }
 

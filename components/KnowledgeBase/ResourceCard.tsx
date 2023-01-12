@@ -9,7 +9,7 @@ export default function ResourceCard({ resources }: any) {
         </h3>
       </div>
       <ul>
-        {resources.map((resource) => (
+        {resources.map((resource: any) => (
           <li>
             <a
               href={resource.href}

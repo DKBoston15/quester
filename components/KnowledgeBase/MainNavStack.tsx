@@ -4,7 +4,7 @@ export default function MainNavStack({ items }: any) {
   return (
     <div className="p-2 border border-1-gray rounded-md my-4 mr-0">
       <ul role="list" className="divide-y divide-gray-200 xl:w-56 w-full">
-        {items.map((item) => (
+        {items.map((item: any) => (
           <div key={item.id}>
             {item.id === 1 && (
               <>
