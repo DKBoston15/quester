@@ -8,6 +8,7 @@ import { createBrowserSupabaseClient } from '@supabase/auth-helpers-nextjs';
 import { AppProps } from 'next/app';
 import { MyUserContextProvider } from 'utils/useUser';
 import type { Database } from 'types_db';
+import { SidebarProvider } from 'context/SidebarContext';
 
 export default function MyApp({ Component, pageProps }: AppProps) {
   const [initialContext, setInitialContext] = useState();
@@ -44,7 +45,9 @@ export default function MyApp({ Component, pageProps }: AppProps) {
   return (
     <SessionContextProvider supabaseClient={supabaseClient}>
       <MyUserContextProvider initial={initialContext}>
-        <Component {...pageProps} />
+        <SidebarProvider>
+          <Component {...pageProps} />
+        </SidebarProvider>
       </MyUserContextProvider>
     </SessionContextProvider>
   );
