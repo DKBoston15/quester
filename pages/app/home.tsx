@@ -6,7 +6,7 @@ import {
   ChevronRightIcon,
   EllipsisVerticalIcon
 } from '@heroicons/react/20/solid';
-import HomePageTitle from '@/components/Layout/PageTitle/HomePageTItle';
+import HomePageTItle from '@/components/Layout/PageTitle/HomePageTItle';
 
 export const getServerSideProps = withPageAuth({ redirectTo: '/login' });
 
