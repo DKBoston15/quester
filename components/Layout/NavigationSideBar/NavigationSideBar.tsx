@@ -14,11 +14,11 @@ import {
   XMarkIcon
 } from '@heroicons/react/24/outline';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 
 const navigation = [
-  { name: 'Home', href: '#', icon: HomeIcon, current: true },
-  { name: 'History', href: '#', icon: ClockIcon, current: false },
-  { name: 'Balances', href: '#', icon: ScaleIcon, current: false },
+  { name: 'Projects', href: '/app/projects', icon: HomeIcon, current: true },
+  { name: 'Documents', href: '#', icon: ScaleIcon, current: false },
   { name: 'Tasks', href: '#', icon: CreditCardIcon, current: false },
   {
     name: 'Knowledge Base',
@@ -33,6 +33,21 @@ const secondaryNavigation = [
   { name: 'Help', href: '#', icon: QuestionMarkCircleIcon },
   { name: 'Privacy', href: '#', icon: ShieldCheckIcon }
 ];
+const communities = [
+  { name: 'Articles', href: '#' },
+  { name: 'Designs', href: '#' },
+  { name: 'Figures', href: '#' },
+  { name: 'Journals', href: '#' },
+  { name: 'Key Terms', href: '#' },
+  { name: 'Labs', href: '#' },
+  { name: 'Models', href: '#' },
+  { name: 'Paradigms', href: '#' },
+  { name: 'Questions', href: '#' },
+  { name: 'Researchers', href: '#' },
+  { name: 'Samples', href: '#' },
+  { name: 'Tables', href: '#' },
+  { name: 'Techniques', href: '#' }
+];
 
 function classNames(...classes: any) {
   return classes.filter(Boolean).join(' ');
@@ -40,6 +55,9 @@ function classNames(...classes: any) {
 
 export default function NavigationSideBar() {
   const [sidebarOpen, toggleSidebar] = useSidebar();
+
+  const router = useRouter();
+  const { projectItemId } = router.query;
 
   return (
     <>
@@ -148,6 +166,35 @@ export default function NavigationSideBar() {
                       ))}
                     </div>
                   </div>
+                  <nav
+                    aria-label="Sidebar"
+                    className="sticky top-4 divide-y divide-gray-300"
+                  >
+                    {projectItemId && (
+                      <div className="pt-10">
+                        <p
+                          className="px-3 text-sm font-medium text-gray-500"
+                          id="communities-headline"
+                        >
+                          Communities
+                        </p>
+                        <div
+                          className="mt-3 space-y-2"
+                          aria-labelledby="communities-headline"
+                        >
+                          {communities.map((community) => (
+                            <a
+                              key={community.name}
+                              href={community.href}
+                              className="group flex items-center rounded-md px-3 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50 hover:text-gray-900"
+                            >
+                              <span className="truncate">{community.name}</span>
+                            </a>
+                          ))}
+                        </div>
+                      </div>
+                    )}
+                  </nav>
                 </nav>
               </Dialog.Panel>
             </Transition.Child>
@@ -216,6 +263,35 @@ export default function NavigationSideBar() {
                   ))}
                 </div>
               </div>
+              <nav
+                aria-label="Sidebar"
+                className="sticky top-4 divide-y divide-gray-300"
+              >
+                {projectItemId && (
+                  <div className="pt-10">
+                    <p
+                      className="px-3 text-sm font-medium text-gray-500"
+                      id="communities-headline"
+                    >
+                      Communities
+                    </p>
+                    <div
+                      className="mt-3 space-y-2"
+                      aria-labelledby="communities-headline"
+                    >
+                      {communities.map((community) => (
+                        <a
+                          key={community.name}
+                          href={community.href}
+                          className="group flex items-center rounded-md px-3 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50 hover:text-gray-900"
+                        >
+                          <span className="truncate">{community.name}</span>
+                        </a>
+                      ))}
+                    </div>
+                  </div>
+                )}
+              </nav>
             </div>
             <div className="flex flex-shrink-0 bg-gray-700 p-4">
               <a href="#" className="group block w-full flex-shrink-0">
