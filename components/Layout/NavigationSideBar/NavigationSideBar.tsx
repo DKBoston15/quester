@@ -19,14 +19,19 @@ import { useRouter } from 'next/router';
 const navigation = [
   { name: 'Projects', href: '/app/projects', icon: HomeIcon, current: true },
   { name: 'Documents', href: '#', icon: ScaleIcon, current: false },
-  { name: 'Tasks', href: '#', icon: CreditCardIcon, current: false },
+  { name: 'Tasks', href: '/app/tasks', icon: CreditCardIcon, current: false },
   {
     name: 'Knowledge Base',
     href: '/app/knowledge_base',
     icon: UserGroupIcon,
     current: false
   },
-  { name: 'Courses', href: '#', icon: DocumentChartBarIcon, current: false }
+  {
+    name: 'Courses',
+    href: '/app/courses',
+    icon: DocumentChartBarIcon,
+    current: false
+  }
 ];
 const secondaryNavigation = [
   { name: 'Settings', href: '#', icon: CogIcon },
