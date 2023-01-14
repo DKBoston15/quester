@@ -1,12 +1,16 @@
 import Layout from '@/components/Layout/Layout';
 import { withPageAuth } from '@supabase/auth-helpers-nextjs';
-import { Fragment } from 'react';
+import { Fragment, useEffect, useState } from 'react';
 import { Menu, Transition } from '@headlessui/react';
 import {
   ChevronRightIcon,
   EllipsisVerticalIcon
 } from '@heroicons/react/20/solid';
 import HomePageTItle from '@/components/Layout/PageTitle/HomePageTItle';
+import produce from 'immer';
+import _ from 'lodash';
+import CreateProjectModal from '@/components/Projects/CreateProjectModal';
+import DeleteProjectModal from '@/components/Projects/DeleteProjectModal';
 
 export const getServerSideProps = withPageAuth({ redirectTo: '/login' });
 
@@ -14,52 +18,151 @@ function classNames(...classes: any) {
   return classes.filter(Boolean).join(' ');
 }
 
+const projectColors = [
+  'bg-slate-600',
+  'bg-gray-600',
+  'bg-zinc-600',
+  'bg-neutral-600',
+  'bg-stone-600',
+  'bg-red-600',
+  'bg-orange-600',
+  'bg-amber-600',
+  'bg-yellow-600',
+  'bg-lime-600',
+  'bg-green-600',
+  'bg-emerald-600',
+  'bg-teal-600',
+  'bg-cyan-600',
+  'bg-sky-600',
+  'bg-blue-600',
+  'bg-indigo-600',
+  'bg-violet-600',
+  'bg-purple-600',
+  'bg-fuchsia-600',
+  'bg-pink-600',
+  'bg-rose-600'
+];
+
+const defaultProjects = [
+  {
+    id: 1,
+    title: 'GraphQL API',
+    initials: 'GA',
+    type: 'Literature Review',
+    lastUpdated: 'March 17, 2020',
+    pinned: true,
+    bgColorClass: 'bg-rose-600'
+  },
+  {
+    id: 2,
+    title: 'Literature Review',
+    initials: 'GA',
+    type: 'Data Table',
+    lastUpdated: 'March 17, 2020',
+    pinned: true,
+    bgColorClass: 'bg-gray-600'
+  },
+  {
+    id: 3,
+    title: 'Engineering Project',
+    initials: 'GA',
+    type: 'Thesis',
+    lastUpdated: 'March 17, 2020',
+    pinned: false,
+    bgColorClass: 'bg-violet-600'
+  }
+];
 export default function Home() {
-  const projects = [
-    {
-      id: 1,
-      title: 'GraphQL API',
-      initials: 'GA',
-      team: 'Engineering',
-      members: [
-        {
-          name: 'Dries Vincent',
-          handle: 'driesvincent',
-          imageUrl:
-            'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80'
-        },
-        {
-          name: 'Lindsay Walton',
-          handle: 'lindsaywalton',
-          imageUrl:
-            'https://images.unsplash.com/photo-1517841905240-472988babdf9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80'
-        },
-        {
-          name: 'Courtney Henry',
-          handle: 'courtneyhenry',
-          imageUrl:
-            'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80'
-        },
-        {
-          name: 'Tom Cook',
-          handle: 'tomcook',
-          imageUrl:
-            'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80'
-        }
-      ],
-      totalMembers: 12,
-      lastUpdated: 'March 17, 2020',
-      pinned: true,
-      bgColorClass: 'bg-pink-600'
+  const [projects, setProjects] = useState(defaultProjects);
+  const [open, setOpen] = useState(false);
+  const [deleteModalOpen, setDeleteModalOpen] = useState(false);
+  const [pinnedProjects, setPinnedProjects] = useState([]);
+  const [selectedType, setSelectedType] = useState(null);
+  const [projectName, setProjectName] = useState('');
+  const [selectedProjectId, setSelectedProjectId] = useState(null);
+
+  useEffect(() => {
+    setPinnedProjects(projects.filter((project) => project.pinned));
+  }, [projects]);
+
+  const togglePin = (id) => {
+    setProjects(
+      produce((draft) => {
+        const project = draft.find((project) => project.id === id);
+        project.pinned = !project.pinned;
+      })
+    );
+    setPinnedProjects(projects.filter((project) => project.pinned));
+  };
+
+  const getLastIndex = (array) => {
+    if (array.length === 0) {
+      return -1;
+    } else {
+      return array.length - 1;
     }
-    // More projects...
-  ];
-  const pinnedProjects = projects.filter((project) => project.pinned);
+  };
+
+  const deleteProject = (id) => {
+    setDeleteModalOpen(false);
+    setProjects(
+      produce(projects, (draftProjects) => {
+        const projectIndex = draftProjects.findIndex(
+          (project) => project.id === id
+        );
+        if (projectIndex !== -1) {
+          draftProjects.splice(projectIndex, 1);
+        } else {
+          console.error(`Project with id ${id} not found`);
+        }
+      })
+    );
+  };
+
+  const createProject = () => {
+    const index = getLastIndex(projects);
+    const id = index != -1 ? projects[index].id + 1 : 1;
+
+    const newProject = {
+      id: id,
+      title: projectName,
+      initials: 'GA',
+      type: selectedType.name,
+      lastUpdated: 'March 17, 2020',
+      pinned: false,
+      bgColorClass: _.sample(projectColors)
+    };
+
+    setProjects(
+      produce(projects, (draftProjects) => {
+        draftProjects.push(newProject);
+      })
+    );
+
+    setOpen(false);
+    setSelectedType(null);
+    setProjectName('');
+  };
 
   return (
     <Layout>
+      <CreateProjectModal
+        open={open}
+        setOpen={setOpen}
+        selectedType={selectedType}
+        setSelectedType={setSelectedType}
+        createProject={createProject}
+        projectName={projectName}
+        setProjectName={setProjectName}
+      />
+      <DeleteProjectModal
+        deleteProject={deleteProject}
+        selectedProjectId={selectedProjectId}
+        setDeleteModalOpen={setDeleteModalOpen}
+        deleteModalOpen={deleteModalOpen}
+      />
       {/* Page title & actions */}
-      <HomePageTItle />
+      <HomePageTItle setOpen={setOpen} />
       {/* Pinned projects */}
       <div className="mt-6 px-4 sm:px-6 lg:px-8">
         <h2 className="text-sm font-medium text-gray-900">Pinned Projects</h2>
@@ -70,7 +173,7 @@ export default function Home() {
           {pinnedProjects.map((project) => (
             <li
               key={project.id}
-              className="relative col-span-1 flex rounded-md shadow-sm"
+              className="relative col-span-1 flex rounded-md shadow-sm h-12"
             >
               <div
                 className={classNames(
@@ -88,9 +191,6 @@ export default function Home() {
                   >
                     {project.title}
                   </a>
-                  <p className="text-gray-500">
-                    {project.totalMembers} Members
-                  </p>
                 </div>
                 <Menu as="div" className="flex-shrink-0 pr-2">
                   <Menu.Button className="inline-flex h-8 w-8 items-center justify-center rounded-full bg-white text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2">
@@ -114,7 +214,7 @@ export default function Home() {
                         <Menu.Item>
                           {({ active }) => (
                             <a
-                              href="#"
+                              href={`/app/projects/${project.id}`}
                               className={classNames(
                                 active
                                   ? 'bg-gray-100 text-gray-900'
@@ -130,8 +230,8 @@ export default function Home() {
                       <div className="py-1">
                         <Menu.Item>
                           {({ active }) => (
-                            <a
-                              href="#"
+                            <div
+                              onClick={() => togglePin(project.id)}
                               className={classNames(
                                 active
                                   ? 'bg-gray-100 text-gray-900'
@@ -140,10 +240,10 @@ export default function Home() {
                               )}
                             >
                               Removed from pinned
-                            </a>
+                            </div>
                           )}
                         </Menu.Item>
-                        <Menu.Item>
+                        {/* <Menu.Item>
                           {({ active }) => (
                             <a
                               href="#"
@@ -157,7 +257,7 @@ export default function Home() {
                               Share
                             </a>
                           )}
-                        </Menu.Item>
+                        </Menu.Item> */}
                       </div>
                     </Menu.Items>
                   </Transition>
@@ -180,7 +280,7 @@ export default function Home() {
           {projects.map((project) => (
             <li key={project.id}>
               <a
-                href="#"
+                href={`/app/projects/${project.id}`}
                 className="group flex items-center justify-between px-4 py-4 hover:bg-gray-50 sm:px-6"
               >
                 <span className="flex items-center space-x-3 truncate">
@@ -194,7 +294,7 @@ export default function Home() {
                   <span className="truncate text-sm font-medium leading-6">
                     {project.title}{' '}
                     <span className="truncate font-normal text-gray-500">
-                      in {project.team}
+                      as {project.type}
                     </span>
                   </span>
                 </span>
@@ -221,17 +321,19 @@ export default function Home() {
                   <span className="lg:pl-2">Project</span>
                 </th>
                 <th
-                  className="border-b border-gray-200 bg-gray-50 px-6 py-3 text-left text-sm font-semibold text-gray-900"
-                  scope="col"
-                >
-                  Members
-                </th>
-                <th
                   className="hidden border-b border-gray-200 bg-gray-50 px-6 py-3 text-right text-sm font-semibold text-gray-900 md:table-cell"
                   scope="col"
                 >
                   Last updated
                 </th>
+                <th
+                  className="border-b border-gray-200 bg-gray-50 py-3 pr-6 text-right text-sm font-semibold text-gray-900"
+                  scope="col"
+                />
+                <th
+                  className="border-b border-gray-200 bg-gray-50 py-3 pr-6 text-right text-sm font-semibold text-gray-900"
+                  scope="col"
+                />
                 <th
                   className="border-b border-gray-200 bg-gray-50 py-3 pr-6 text-right text-sm font-semibold text-gray-900"
                   scope="col"
@@ -250,33 +352,17 @@ export default function Home() {
                         )}
                         aria-hidden="true"
                       />
-                      <a href="#" className="truncate hover:text-gray-600">
+                      <a
+                        href={`/app/projects/${project.id}`}
+                        className="truncate hover:text-gray-600"
+                      >
                         <span>
                           {project.title}{' '}
                           <span className="font-normal text-gray-500">
-                            in {project.team}
+                            as {project.type}
                           </span>
                         </span>
                       </a>
-                    </div>
-                  </td>
-                  <td className="px-6 py-3 text-sm font-medium text-gray-500">
-                    <div className="flex items-center space-x-2">
-                      <div className="flex flex-shrink-0 -space-x-1">
-                        {project.members.map((member) => (
-                          <img
-                            key={member.handle}
-                            className="h-6 w-6 max-w-none rounded-full ring-2 ring-white"
-                            src={member.imageUrl}
-                            alt={member.name}
-                          />
-                        ))}
-                      </div>
-                      {project.totalMembers > project.members.length ? (
-                        <span className="flex-shrink-0 text-xs font-medium leading-5">
-                          +{project.totalMembers - project.members.length}
-                        </span>
-                      ) : null}
                     </div>
                   </td>
                   <td className="hidden whitespace-nowrap px-6 py-3 text-right text-sm text-gray-500 md:table-cell">
@@ -284,10 +370,29 @@ export default function Home() {
                   </td>
                   <td className="whitespace-nowrap px-6 py-3 text-right text-sm font-medium">
                     <a
-                      href="#"
+                      href={`/app/projects/${project.id}`}
                       className="text-indigo-600 hover:text-indigo-900"
                     >
                       Edit
+                    </a>
+                  </td>
+                  <td className="whitespace-nowrap px-6 py-3 text-right text-sm font-medium">
+                    <div
+                      onClick={() => togglePin(project.id)}
+                      className="text-indigo-600 hover:text-indigo-900 cursor-pointer"
+                    >
+                      {project.pinned ? 'Unpin' : 'Pin'}
+                    </div>
+                  </td>
+                  <td className="whitespace-nowrap px-6 py-3 text-right text-sm font-medium">
+                    <a
+                      onClick={() => {
+                        setSelectedProjectId(project.id);
+                        setDeleteModalOpen(true);
+                      }}
+                      className="text-red-600 hover:text-red-900 cursor-pointer"
+                    >
+                      Delete
                     </a>
                   </td>
                 </tr>

@@ -2,7 +2,7 @@ import React from 'react';
 import { useSidebar } from 'context/SidebarContext';
 import { Bars3CenterLeftIcon } from '@heroicons/react/24/outline';
 
-export default function HomePageTItle() {
+export default function HomePageTItle({ setOpen }: any) {
   const [sidebarOpen, toggleSidebar] = useSidebar();
 
   return (
@@ -30,6 +30,7 @@ export default function HomePageTItle() {
           Share
         </button>
         <button
+          onClick={() => setOpen(true)}
           type="button"
           className="order-0 inline-flex items-center rounded-md border border-transparent bg-purple-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 sm:order-1 sm:ml-3"
         >
