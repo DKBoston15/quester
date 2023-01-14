@@ -40,6 +40,7 @@ body {
 
 main {
   background: white;
+  color: black
 }
 
 a {
@@ -58,9 +59,6 @@ a {
 .height-screen-helper {
   height: calc(100vh - 80px);
 }
-
-
-
 
  .ExcalidrawModal__overlay {
   display: flex;
@@ -1215,6 +1213,7 @@ i.send {
  .CommentEditorTheme__paragraph {
   margin: 0;
   position: 'relative';
+  color: black;
 }
 
 
@@ -1649,6 +1648,7 @@ i.send {
  .StickyEditorTheme__paragraph {
   margin: 0;
   position: 'relative';
+  color: black;
 }
 
 
@@ -1663,6 +1663,7 @@ i.send {
   border-radius: 5px;
   cursor: pointer;
   font-size: 14px;
+  color: black;
 }
 .Button__root:hover {
   background-color: #ddd;
@@ -1856,6 +1857,7 @@ i.send {
   font-size: 16px;
   border-radius: 5px;
   min-width: 0;
+  color: black;
 }
 
 
@@ -1891,6 +1893,7 @@ i.send {
   width: 100%;
   resize: none;
   padding: 7px;
+  border: 1px solid gray;
 }
 
 
@@ -2010,6 +2013,7 @@ i.send {
 }
 .Modal__content {
   padding-top: 20px;
+  color: black;
 }
 
 
@@ -3406,6 +3410,7 @@ i.send {
    z-index: 9;
    width: 300px;
    display: inline-block;
+   color: black;
  }
  
  .sticky-note {
