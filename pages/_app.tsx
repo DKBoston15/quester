@@ -1,6 +1,7 @@
 import 'styles/main.css';
 import 'styles/chrome-bug.css';
 import '@/styles/tailwind.css';
+import 'katex/dist/katex.css';
 import { useEffect, useState } from 'react';
 import React from 'react';
 import { SessionContextProvider } from '@supabase/auth-helpers-react';
