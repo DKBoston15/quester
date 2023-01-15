@@ -10,10 +10,10 @@ import HomePageTItle from '@/components/Layout/PageTitle/HomePageTItle';
 import _ from 'lodash';
 import CreateProjectModal from '@/components/Projects/CreateProjectModal';
 import DeleteProjectModal from '@/components/Projects/DeleteProjectModal';
-import useGetProjectsQuery from 'hooks/useProjects';
-import { useCreateProject } from 'hooks/useCreateProject';
-import { useUpdateProject } from 'hooks/useUpdateProject';
-import { useDeleteProject } from 'hooks/useDeleteProject';
+import useGetProjectsQuery from 'hooks/projects/useProjects';
+import { useCreateProject } from 'hooks/projects/useCreateProject';
+import { useUpdateProject } from 'hooks/projects/useUpdateProject';
+import { useDeleteProject } from 'hooks/projects/useDeleteProject';
 
 export const getServerSideProps = withPageAuth({ redirectTo: '/login' });
 

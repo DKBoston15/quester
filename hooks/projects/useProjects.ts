@@ -1,4 +1,4 @@
-import { getProjects } from 'queries/get-projects';
+import { getProjects } from 'queries/projects/get-projects';
 import { useQuery } from 'react-query';
 
 function useGetProjectsQuery() {

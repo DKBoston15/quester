@@ -33,11 +33,7 @@ const navigation = [
     current: false
   }
 ];
-const secondaryNavigation = [
-  { name: 'Settings', href: '#', icon: CogIcon },
-  { name: 'Help', href: '#', icon: QuestionMarkCircleIcon },
-  { name: 'Privacy', href: '#', icon: ShieldCheckIcon }
-];
+const secondaryNavigation = [{ name: 'Settings', href: '#', icon: CogIcon }];
 const communities = [
   { name: 'Articles', href: '#' },
   { name: 'Designs', href: '#' },

@@ -1,6 +1,6 @@
 import { PaperClipIcon } from '@heroicons/react/20/solid';
 
-export default function TestContentCard() {
+export default function DesignContentCard() {
   return (
     <div className="w-6/12 p-4">
       <div>

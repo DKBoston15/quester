@@ -1,6 +1,6 @@
 import Layout from '@/components/Layout/Layout';
 import ProjectItemPageTitle from '@/components/Layout/PageTitle/ProjectItemPageTitle';
-import TestContentCard from '@/components/Project/ContentCards/TestContentCard';
+import TestContentCard from '@/components/Projects/ContentCards/ProjectContentCard';
 import React from 'react';
 import { Disclosure } from '@headlessui/react';
 import {
