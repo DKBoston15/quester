@@ -10,6 +10,16 @@ import { AppProps } from 'next/app';
 import { MyUserContextProvider } from 'utils/useUser';
 import type { Database } from 'types_db';
 import { SidebarProvider } from 'context/SidebarContext';
+import { QueryClient, QueryClientProvider } from 'react-query';
+import { ReactQueryDevtools } from 'react-query/devtools';
+
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      retry: 0
+    }
+  }
+});
 
 export default function MyApp({ Component, pageProps }: AppProps) {
   const [initialContext, setInitialContext] = useState();
@@ -44,12 +54,15 @@ export default function MyApp({ Component, pageProps }: AppProps) {
   }, []);
 
   return (
-    <SessionContextProvider supabaseClient={supabaseClient}>
-      <MyUserContextProvider initial={initialContext}>
-        <SidebarProvider>
-          <Component {...pageProps} />
-        </SidebarProvider>
-      </MyUserContextProvider>
-    </SessionContextProvider>
+    <QueryClientProvider client={queryClient}>
+      <SessionContextProvider supabaseClient={supabaseClient}>
+        <MyUserContextProvider initial={initialContext}>
+          <SidebarProvider>
+            <Component {...pageProps} />
+            <ReactQueryDevtools initialIsOpen={false} />
+          </SidebarProvider>
+        </MyUserContextProvider>
+      </SessionContextProvider>
+    </QueryClientProvider>
   );
 }
