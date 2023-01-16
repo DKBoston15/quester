@@ -1,9 +1,8 @@
-import { PaperClipIcon } from '@heroicons/react/20/solid';
 import useGetProjectsQuery from 'hooks/projects/useProjects';
 import { useUpdateProject } from 'hooks/projects/useUpdateProject';
 import { useEffect, useState } from 'react';
 
-export default function ProjectContentCard({ projectItemId }) {
+export default function ProjectContentCard({ projectItemId }: any) {
   const { data: projects, isLoading, isError } = useGetProjectsQuery();
   const [selectedProject, setSelectedProject] = useState();
   const [currentlyUpdating, setCurrentlyUpdating] = useState(false);
@@ -14,9 +13,11 @@ export default function ProjectContentCard({ projectItemId }) {
   useEffect(() => {
     if (projects) {
       const project = projects.find((project) => project.id == projectItemId);
-      setSelectedProject(project);
-      setProjectTitle(project.title);
-      setDescription(project.description);
+      if (project) {
+        setSelectedProject(project);
+        setProjectTitle(project.title);
+        setDescription(project.description);
+      }
     }
   }, [projects, projectItemId]);
 

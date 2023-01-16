@@ -15,6 +15,7 @@ import {
 } from '@heroicons/react/24/outline';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
+import ThemeSelector from '@/components/ThemeSelector';
 
 const navigation = [
   { name: 'Projects', href: '/app/projects', icon: HomeIcon, current: true },
@@ -294,6 +295,7 @@ export default function NavigationSideBar() {
                 )}
               </nav>
             </div>
+            <ThemeSelector />
             <div className="flex flex-shrink-0 bg-gray-700 p-4">
               <a href="#" className="group block w-full flex-shrink-0">
                 <div className="flex items-center">

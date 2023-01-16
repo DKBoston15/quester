@@ -46,35 +46,6 @@ const projectColors = [
   'bg-rose-600'
 ];
 
-const defaultProjects = [
-  {
-    id: 1,
-    title: 'GraphQL API',
-    initials: 'GA',
-    type: 'Literature Review',
-    lastUpdated: 'March 17, 2020',
-    pinned: true,
-    bgColorClass: 'bg-rose-600'
-  },
-  {
-    id: 2,
-    title: 'Literature Review',
-    initials: 'GA',
-    type: 'Data Table',
-    lastUpdated: 'March 17, 2020',
-    pinned: true,
-    bgColorClass: 'bg-gray-600'
-  },
-  {
-    id: 3,
-    title: 'Engineering Project',
-    initials: 'GA',
-    type: 'Thesis',
-    lastUpdated: 'March 17, 2020',
-    pinned: false,
-    bgColorClass: 'bg-violet-600'
-  }
-];
 export default function Home() {
   const { data: projects, isLoading, isError } = useGetProjectsQuery();
   const createProject = useCreateProject();

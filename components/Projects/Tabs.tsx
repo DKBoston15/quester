@@ -98,18 +98,40 @@ export const Tabs = ({ color }: any) => {
             </li>
           </ul>
           <div className="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded">
-            <div className="px-4 py-5 flex-auto">
+            <div className="">
               <div className="tab-content tab-space">
-                <div className={openTab === 1 ? 'block' : 'hidden'} id="link1">
-                  <Tasks />
+                <div
+                  className={`${
+                    openTab === 1 ? 'block' : 'hidden'
+                  } p-2 flex-auto`}
+                  id="link1"
+                >
+                  {projectItemId && <Tasks projectItemId={projectItemId} />}
                 </div>
-                <div className={openTab === 2 ? 'block' : 'hidden'} id="link2">
+                <div
+                  className={`${
+                    openTab === 2 ? 'block' : 'hidden'
+                  } px-4 py-5 flex-auto`}
+                  id="link2"
+                >
                   {projectItemId && <Notes projectItemId={projectItemId} />}
                 </div>
-                <div className={openTab === 3 ? 'block' : 'hidden'} id="link3">
-                  <ProjectContentCard projectItemId={projectItemId} />
+                <div
+                  className={`${
+                    openTab === 3 ? 'block' : 'hidden'
+                  } px-4 py-5 flex-auto`}
+                  id="link3"
+                >
+                  {projectItemId && (
+                    <ProjectContentCard projectItemId={projectItemId} />
+                  )}
                 </div>
-                <div className={openTab === 4 ? 'block' : 'hidden'} id="link4">
+                <div
+                  className={`${
+                    openTab === 4 ? 'block' : 'hidden'
+                  } px-4 py-5 flex-auto`}
+                  id="link4"
+                >
                   <Checklist projectItemId={projectItemId} />
                 </div>
               </div>

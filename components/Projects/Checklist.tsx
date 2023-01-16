@@ -11,7 +11,9 @@ export default function Checklist({ projectItemId }: any) {
   useEffect(() => {
     if (projects) {
       const project = projects.find((project) => project.id == projectItemId);
-      setSelectedChecklist(project.checklist);
+      if (project) {
+        setSelectedChecklist(project.checklist);
+      }
     }
   }, [projects]);
 

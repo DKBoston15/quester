@@ -1,5 +1,4 @@
 import Head from 'next/head';
-
 import { CallToAction } from '@/components/LandingPage/CallToAction';
 import { Faqs } from '@/components/LandingPage/Faqs';
 import { Footer } from '@/components/LandingPage/Footer';

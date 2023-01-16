@@ -6,13 +6,6 @@ import { Tabs } from '@/components/Projects/Tabs';
 import useGetProjectsQuery from 'hooks/projects/useProjects';
 import { useEffect, useState } from 'react';
 
-const user = {
-  name: 'Chelsea Hagon',
-  email: 'chelsea.hagon@example.com',
-  imageUrl:
-    'https://images.unsplash.com/photo-1550525811-e5869dd03032?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80'
-};
-
 const documents = [
   {
     title: 'Document #1',
