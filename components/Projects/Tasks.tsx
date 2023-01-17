@@ -84,7 +84,7 @@ export default function Tasks({ projectItemId }: any) {
           </div>
         </div>
       </div>
-      <div className="bg-white px-4">
+      <div className="bg-white px-4 max-h-[29rem] h-[29rem]">
         <div className="sm:flex items-center justify-between">
           <div className="flex items-center">
             <div
@@ -140,7 +140,7 @@ export default function Tasks({ projectItemId }: any) {
           </button>
         </div>
         <div className="mt-7">
-          <table className="w-full whitespace-nowrap overflow-visible">
+          <table className="w-full whitespace-nowrap overflow-visible overflow-scroll">
             {tasks && (
               <tbody>
                 {filteredTasks?.map((task) => (

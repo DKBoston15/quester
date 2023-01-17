@@ -5,6 +5,7 @@ import Events from '@/components/Projects/Events';
 import { Tabs } from '@/components/Projects/Tabs';
 import useGetProjectsQuery from 'hooks/projects/useProjects';
 import { useEffect, useState } from 'react';
+import SectionGrid from '@/components/Projects/SectionGrid';
 
 const documents = [
   {
@@ -87,6 +88,8 @@ export default function Project() {
                 </div>
               </aside>
             </div>
+            <hr className="mb-4 mx-8 cursor-default" />
+            <SectionGrid projectItemId={projectItemId} />
           </div>
         </div>
       </>
