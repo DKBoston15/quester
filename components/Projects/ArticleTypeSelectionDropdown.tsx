@@ -27,11 +27,11 @@ const articleTypes = [
   { id: 22, name: 'Government Report Fact Sheet' },
   { id: 23, name: 'Government Report White Paper' },
   { id: 24, name: 'Government Report Other' },
-  { id: 20, name: 'Private Report' },
-  { id: 21, name: 'Private Report Brochure' },
-  { id: 22, name: 'Private Report Fact Sheet' },
-  { id: 23, name: 'Private Report White Paper' },
-  { id: 24, name: 'Private Report Other' },
+  { id: 25, name: 'Private Report' },
+  { id: 26, name: 'Private Report Brochure' },
+  { id: 27, name: 'Private Report Fact Sheet' },
+  { id: 28, name: 'Private Report White Paper' },
+  { id: 29, name: 'Private Report Other' },
   { id: 30, name: 'Other' }
 ];
 

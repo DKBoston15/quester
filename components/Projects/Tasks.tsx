@@ -29,7 +29,7 @@ export default function Tasks({ projectItemId }: any) {
   }, [currentFilter]);
 
   useEffect(() => {
-    if (!filteredTasks && tasks) {
+    if (tasks) {
       const newTasks = sortByCreatedAt(tasks, 'asc');
       setFilteredTasks(newTasks);
     }

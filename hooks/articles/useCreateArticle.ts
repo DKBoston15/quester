@@ -23,6 +23,7 @@ export const useCreateArticle = () => {
       endPage,
       link,
       literatureType,
+      read,
       projectItemId
     }: any) => {
       return createArticle(
@@ -41,6 +42,7 @@ export const useCreateArticle = () => {
         endPage,
         link,
         literatureType,
+        read,
         projectItemId,
         user.id
       ).then((result) => result.data);

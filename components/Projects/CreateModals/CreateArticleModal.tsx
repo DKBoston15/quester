@@ -14,6 +14,7 @@ export default function CreateArticleModal({
   const createArticle = useCreateArticle();
 
   const createNewArticle = async () => {
+    console.log(projectItemId);
     await createArticle.mutateAsync({
       title: title,
       literatureType: type.name,
