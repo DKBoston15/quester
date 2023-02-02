@@ -2,10 +2,10 @@ import Layout from '@/components/Layout/Layout';
 import ProjectPageTitle from '@/components/Layout/PageTitle/ProjectPageTitle';
 import { useRouter } from 'next/router';
 import Events from '@/components/Projects/Events';
-import { Tabs } from '@/components/Projects/Tabs';
+import { Tabs } from '@/components/Projects/Layout/Tabs';
 import useGetProjectsQuery from 'hooks/projects/useProjects';
 import { useEffect, useState } from 'react';
-import SectionGrid from '@/components/Projects/SectionGrid';
+import SectionGrid from '@/components/Projects/Layout/SectionGrid';
 
 const documents = [
   {

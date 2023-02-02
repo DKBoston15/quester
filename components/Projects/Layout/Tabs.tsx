@@ -2,10 +2,10 @@ import { useUser } from '@/utils/useUser';
 import { checklists } from 'constants/checklists';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
-import Checklist from './Checklist';
-import ProjectContentCard from './ContentCards/ProjectContentCard';
-import Notes from './Notes';
-import Tasks from './Tasks';
+import Checklist from '../Checklist/Checklist';
+import ProjectContentCard from '../ContentCards/ProjectContentCard';
+import Notes from '../Notes/Notes';
+import Tasks from '../Tasks/Tasks';
 
 export const Tabs = ({ color }: any) => {
   const [openTab, setOpenTab] = useState(1);

@@ -8,8 +8,8 @@ import {
 } from '@heroicons/react/20/solid';
 import HomePageTItle from '@/components/Layout/PageTitle/HomePageTItle';
 import _ from 'lodash';
-import CreateProjectModal from '@/components/Projects/CreateProjectModal';
-import DeleteProjectModal from '@/components/Projects/DeleteProjectModal';
+import CreateProjectModal from '@/components/Projects/CreateModals/CreateProjectModal';
+import DeleteProjectModal from '@/components/Projects/DeleteModals/DeleteProjectModal';
 import useGetProjectsQuery from 'hooks/projects/useProjects';
 import { useCreateProject } from 'hooks/projects/useCreateProject';
 import { useUpdateProject } from 'hooks/projects/useUpdateProject';
@@ -125,7 +125,7 @@ export default function Home() {
       {/* Pinned projects */}
       {!isLoading && (
         <>
-          <div className="mt-6 px-4 sm:px-6 lg:px-8">
+          <div className="mt-6 px-4 sm:px-6 lg:px-8 dark:bg-slate-800">
             <h2 className="text-sm font-medium text-gray-900">
               Pinned Projects
             </h2>

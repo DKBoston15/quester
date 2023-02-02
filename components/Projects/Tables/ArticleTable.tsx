@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import CreateArticleModal from '../CreateModals/CreateArticleModal';
-import useGetArticlesQuery from 'hooks/articles/useArticles';
+import useGetArticlesByIdQuery from 'hooks/articles/useArticlesById';
 
 export default function ArticleTable({
   projectItemId,
@@ -11,7 +11,7 @@ export default function ArticleTable({
     data: articles,
     isLoading,
     isError
-  } = useGetArticlesQuery({ projectItemId });
+  } = useGetArticlesByIdQuery({ projectItemId });
 
   return (
     <>

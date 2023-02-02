@@ -6,6 +6,8 @@ export const useCreateArticle = () => {
   const { user } = useUser();
   const queryClient = useQueryClient();
 
+  if (!user) return;
+
   return useMutation(
     ({
       title,

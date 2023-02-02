@@ -30,16 +30,16 @@ export default function Articles() {
               </div>
               {/* End main area */}
             </main>
-            <aside className="relative hidden w-96 flex-shrink-0 overflow-y-auto border-l bg-gray-100 border-gray-200 xl:flex xl:flex-col">
-              {/* Start secondary column (hidden on smaller screens) */}
+            {/* <aside className="relative hidden w-96 flex-shrink-0 overflow-y-auto border-l bg-gray-100 border-gray-200 xl:flex xl:flex-col">
               <div className="absolute inset-0 py-6">
-                {/* Details sidebar */}
                 <aside className="hidden w-96 overflow-y-auto border-l border-gray-200 bg-gray-100 px-4 lg:block text-black">
-                  <ArticleSideBar selectedArticle={selectedArticle} />
+                  <ArticleSideBar
+                    selectedArticle={selectedArticle}
+                    projectItemId={projectItemId}
+                  />
                 </aside>
               </div>
-              {/* End secondary column */}
-            </aside>
+            </aside> */}
           </div>
         </div>
       </div>

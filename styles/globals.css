@@ -8,6 +8,6 @@
 }
 
 :root.dark {
-	background-color: theme("colors.gray.900");
+	background-color: theme("colors.slate.900");
 	color: theme("colors.white");
 }

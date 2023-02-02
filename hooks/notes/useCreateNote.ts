@@ -7,8 +7,9 @@ export const useCreateNote = () => {
   const queryClient = useQueryClient();
 
   return useMutation(
-    ({ body, projectItemId }: any) => {
-      return createNote(body, projectItemId, user.id).then(
+    ({ body, projectItemId, itemId, itemType }: any) => {
+      console.log(user);
+      return createNote(body, projectItemId, user.id, itemId, itemType).then(
         (result) => result.data
       );
     },

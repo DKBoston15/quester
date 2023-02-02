@@ -2,7 +2,9 @@ import { Fragment, useState } from 'react';
 import { Dialog, Transition } from '@headlessui/react';
 import { useCreateArticle } from 'hooks/articles/useCreateArticle';
 import { XMarkIcon } from '@heroicons/react/24/outline';
-import ArticleTypeSelectionDropdown from '../ArticleTypeSelectionDropdown';
+import ArticleTypeSelectionDropdown from '../InputFields/ArticleTypeSelectionDropdown';
+import { articleTypes } from 'constants/dropdownLists';
+import InputTypeSelectionDropdown from '../InputFields/InputTypeSelectionDropdown';
 
 export default function CreateArticleModal({
   open,
@@ -14,7 +16,6 @@ export default function CreateArticleModal({
   const createArticle = useCreateArticle();
 
   const createNewArticle = async () => {
-    console.log(projectItemId);
     await createArticle.mutateAsync({
       title: title,
       literatureType: type.name,
@@ -82,9 +83,11 @@ export default function CreateArticleModal({
                           onChange={(e) => setTitle(e.target.value)}
                         />
                       </div>
-                      <ArticleTypeSelectionDropdown
+                      <InputTypeSelectionDropdown
                         selectedType={type}
                         setSelectedType={setType}
+                        title="Article Type"
+                        list={articleTypes}
                       />
                     </form>
                   </div>

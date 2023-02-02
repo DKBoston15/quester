@@ -6,6 +6,8 @@ export const useDeleteArticle = () => {
   const { user } = useUser();
   const queryClient = useQueryClient();
 
+  if (!user) return;
+
   return useMutation(
     ({ id }: any) => {
       return deleteArticle(id, user.id).then((result) => result.data);

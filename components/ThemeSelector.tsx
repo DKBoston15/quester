@@ -14,14 +14,14 @@ const ThemeSelector = () => {
     <>
       {theme === 'light' || theme === 'system' || theme == undefined ? (
         <button
-          className="p-2 bg-white border border-gray-300 rounded-lg hover:bg-gray-100 focus:ring-1 focus:ring-blue-300"
+          className="p-2 bg-white rounded-lg hover:bg-gray-100 w-10"
           onClick={() => setTheme('dark')}
         >
           <MoonIcon className="w-6 h-6 text-yellow-500" />
         </button>
       ) : (
         <button
-          className="p-2 bg-gray-700 rounded-md hover:bg-gray-800 focus:ring-1 focus:ring-blue-300"
+          className="p-2 bg-gray-700 rounded-md hover:bg-gray-800 w-10"
           onClick={() => setTheme('light')}
         >
           <SunIcon className="w-6 h-6 text-yellow-500" />

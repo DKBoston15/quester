@@ -1,9 +1,13 @@
 import { getNotesById } from './../../queries/notes/get-notes';
 import { useQuery } from 'react-query';
 
-function useGetNotesQuery({ projectItemId }: any) {
+function useGetNotesQuery({ projectItemId, itemId, itemType }: any) {
   return useQuery('notes', async () => {
-    return getNotesById({ projectItemId }).then((result) => result.data);
+    if (projectItemId) {
+      return getNotesById({ projectItemId, itemId, itemType }).then(
+        (result) => result.data
+      );
+    }
   });
 }
 

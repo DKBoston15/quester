@@ -4,7 +4,7 @@ import { Menu, Transition } from '@headlessui/react';
 import { EllipsisVerticalIcon } from '@heroicons/react/20/solid';
 import { useDeleteTask } from 'hooks/tasks/useDeleteTask';
 import { useUpdateTask } from 'hooks/tasks/useUpdateTask';
-import EditTaskModal from '../Tasks/EditTaskModal';
+import EditTaskModal from '../../Tasks/EditTaskModal';
 
 export default function Task({ task }: any) {
   const [status, setStatus] = useState(false);

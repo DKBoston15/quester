@@ -35,21 +35,6 @@ const navigation = [
   }
 ];
 const secondaryNavigation = [{ name: 'Settings', href: '#', icon: CogIcon }];
-const communities = [
-  { name: 'Articles', href: '#' },
-  { name: 'Designs', href: '#' },
-  { name: 'Figures', href: '#' },
-  { name: 'Journals', href: '#' },
-  { name: 'Key Terms', href: '#' },
-  { name: 'Labs', href: '#' },
-  { name: 'Models', href: '#' },
-  { name: 'Paradigms', href: '#' },
-  { name: 'Questions', href: '#' },
-  { name: 'Researchers', href: '#' },
-  { name: 'Samples', href: '#' },
-  { name: 'Tables', href: '#' },
-  { name: 'Techniques', href: '#' }
-];
 
 function classNames(...classes: any) {
   return classes.filter(Boolean).join(' ');
@@ -91,7 +76,7 @@ export default function NavigationSideBar() {
               leaveFrom="translate-x-0"
               leaveTo="-translate-x-full"
             >
-              <Dialog.Panel className="relative flex w-full max-w-xs flex-1 flex-col bg-cyan-700 pt-5 pb-4">
+              <Dialog.Panel className="relative flex w-full max-w-xs flex-1 flex-col bg-blue-700 pt-5 pb-4">
                 <Transition.Child
                   as={Fragment}
                   enter="ease-in-out duration-300"
@@ -118,12 +103,12 @@ export default function NavigationSideBar() {
                 <div className="flex flex-shrink-0 items-center px-4">
                   <img
                     className="h-8 w-auto"
-                    src="https://tailwindui.com/img/logos/mark.svg?color=cyan&shade=300"
+                    src="https://tailwindui.com/img/logos/mark.svg?color=white&shade=300"
                     alt="Easywire logo"
                   />
                 </div>
                 <nav
-                  className="mt-5 h-full flex-shrink-0 divide-y divide-cyan-800 overflow-y-auto"
+                  className="mt-5 h-full flex-shrink-0 overflow-y-auto"
                   aria-label="Sidebar"
                 >
                   <div className="space-y-1 px-2">
@@ -133,15 +118,15 @@ export default function NavigationSideBar() {
                         href={item.href}
                         className={classNames(
                           item.current
-                            ? 'bg-cyan-800 text-white'
-                            : 'text-cyan-100 hover:text-white hover:bg-cyan-600',
+                            ? 'bg-white-800 text-white'
+                            : 'text-white-100 hover:text-white hover:bg-white-600',
                           'group flex items-center px-2 py-2 text-base font-medium rounded-md'
                         )}
                         aria-current={item.current ? 'page' : undefined}
                       >
                         <div className="flex cursor-pointer">
                           <item.icon
-                            className="mr-4 h-6 w-6 flex-shrink-0 text-cyan-200"
+                            className="mr-4 h-6 w-6 flex-shrink-0 text-white-200"
                             aria-hidden="true"
                           />
                           {item.name}
@@ -155,11 +140,11 @@ export default function NavigationSideBar() {
                         <Link
                           key={item.name}
                           href={item.href}
-                          className="group flex items-center rounded-md px-2 py-2 text-base font-medium text-cyan-100 hover:bg-cyan-600 hover:text-white"
+                          className="group flex items-center rounded-md px-2 py-2 text-base font-medium text-white-100 hover:bg-white-600 hover:text-white"
                         >
                           <div className="flex cursor-pointer">
                             <item.icon
-                              className="mr-4 h-6 w-6 text-cyan-200"
+                              className="mr-4 h-6 w-6 text-white-200"
                               aria-hidden="true"
                             />
                             {item.name}
@@ -168,35 +153,6 @@ export default function NavigationSideBar() {
                       ))}
                     </div>
                   </div>
-                  <nav
-                    aria-label="Sidebar"
-                    className="sticky top-4 divide-y divide-gray-300"
-                  >
-                    {projectItemId && (
-                      <div className="pt-10">
-                        <p
-                          className="px-3 text-sm font-medium text-gray-500"
-                          id="communities-headline"
-                        >
-                          Communities
-                        </p>
-                        <div
-                          className="mt-3 space-y-2"
-                          aria-labelledby="communities-headline"
-                        >
-                          {communities.map((community) => (
-                            <a
-                              key={community.name}
-                              href={community.href}
-                              className="group flex items-center rounded-md px-3 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50 hover:text-gray-900"
-                            >
-                              <span className="truncate">{community.name}</span>
-                            </a>
-                          ))}
-                        </div>
-                      </div>
-                    )}
-                  </nav>
                 </nav>
               </Dialog.Panel>
             </Transition.Child>
@@ -210,16 +166,16 @@ export default function NavigationSideBar() {
       {/* Static sidebar for desktop */}
       <div className="hidden lg:fixed lg:inset-y-0 lg:flex lg:w-64 lg:flex-col">
         {/* Sidebar component, swap this element with another sidebar if you like */}
-        <div className="flex flex-grow flex-col overflow-y-auto bg-cyan-700 pt-5">
+        <div className="flex flex-grow flex-col overflow-y-auto bg-blue-700 pt-5">
           <div className="flex flex-shrink-0 items-center px-4">
             <img
               className="h-8 w-auto"
-              src="https://tailwindui.com/img/logos/mark.svg?color=cyan&shade=300"
+              src="https://tailwindui.com/img/logos/mark.svg?color=white&shade=300"
               alt="Easywire logo"
             />
           </div>
           <nav
-            className="mt-5 flex flex-1 flex-col divide-y divide-cyan-800 overflow-y-auto justify-between"
+            className="mt-5 flex flex-1 flex-col overflow-y-auto justify-between"
             aria-label="Sidebar"
           >
             <div>
@@ -230,15 +186,15 @@ export default function NavigationSideBar() {
                     href={item.href}
                     className={classNames(
                       item.current
-                        ? 'bg-cyan-800 text-white'
-                        : 'text-cyan-100 hover:text-white hover:bg-cyan-600',
+                        ? 'bg-white-800 text-white'
+                        : 'text-white-100 hover:text-white hover:bg-white-600',
                       'group flex items-center px-2 py-2 text-lg leading-6 font-medium rounded-md'
                     )}
                     aria-current={item.current ? 'page' : undefined}
                   >
                     <div className="flex cursor-pointer">
                       <item.icon
-                        className="mr-4 h-6 w-6 flex-shrink-0 text-cyan-200"
+                        className="mr-4 h-6 w-6 flex-shrink-0 text-white-200"
                         aria-hidden="true"
                       />
                       {item.name}
@@ -252,11 +208,11 @@ export default function NavigationSideBar() {
                     <Link
                       key={item.name}
                       href={item.href}
-                      className="group flex items-center rounded-md px-2 py-2 text-lg font-medium leading-6 text-cyan-100 hover:bg-cyan-600 hover:text-white cursor-pointer"
+                      className="group flex items-center rounded-md px-2 py-2 text-lg font-medium leading-6 text-white-100 hover:bg-white-600 hover:text-white cursor-pointer"
                     >
                       <div className="flex cursor-pointer">
                         <item.icon
-                          className="mr-4 h-6 w-6 text-cyan-200"
+                          className="mr-4 h-6 w-6 text-white-200"
                           aria-hidden="true"
                         />
                         {item.name}
@@ -265,35 +221,6 @@ export default function NavigationSideBar() {
                   ))}
                 </div>
               </div>
-              <nav
-                aria-label="Sidebar"
-                className="sticky top-4 divide-y divide-gray-300"
-              >
-                {projectItemId && (
-                  <div className="pt-10">
-                    <p
-                      className="px-3 text-sm font-medium text-gray-500"
-                      id="communities-headline"
-                    >
-                      Communities
-                    </p>
-                    <div
-                      className="mt-3 space-y-2"
-                      aria-labelledby="communities-headline"
-                    >
-                      {communities.map((community) => (
-                        <a
-                          key={community.name}
-                          href={community.href}
-                          className="group flex items-center rounded-md px-3 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50 hover:text-gray-900"
-                        >
-                          <span className="truncate">{community.name}</span>
-                        </a>
-                      ))}
-                    </div>
-                  </div>
-                )}
-              </nav>
             </div>
             <ThemeSelector />
             <div className="flex flex-shrink-0 bg-gray-700 p-4">

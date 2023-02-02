@@ -6,6 +6,7 @@ module.exports = {
     extend: {
       colors: {
         rose: colors.rose,
+        'quester': '#2563EB'
       },
     },
   },

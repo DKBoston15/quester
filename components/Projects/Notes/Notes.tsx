@@ -5,20 +5,22 @@ import { useCreateNote } from 'hooks/notes/useCreateNote';
 
 import Note from './Note';
 
-export default function Notes({ projectItemId }: any) {
+export default function Notes({ projectItemId, itemId, itemType }: any) {
   const createNote = useCreateNote();
 
   const {
     data: notes,
     isLoading,
     isError
-  } = useGetNotesQuery({ projectItemId });
+  } = useGetNotesQuery({ projectItemId, itemId, itemType });
   const [body, setBody] = useState('');
 
   const createNewNote = async () => {
     await createNote.mutateAsync({
       body,
-      projectItemId
+      projectItemId,
+      itemId,
+      itemType
     });
 
     setBody('');
@@ -64,7 +66,7 @@ export default function Notes({ projectItemId }: any) {
                       id="comment"
                       name="comment"
                       rows={3}
-                      className="block w-full p-2 rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm"
+                      className="block w-full p-2 rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm text-black"
                       placeholder="Add a note"
                       value={body}
                       onChange={(e) => setBody(e.target.value)}

@@ -6,6 +6,8 @@ export const useUpdateArticle = () => {
   const { user } = useUser();
   const queryClient = useQueryClient();
 
+  if (!user) return;
+
   return useMutation(
     ({
       id,
@@ -23,6 +25,7 @@ export const useUpdateArticle = () => {
       startPage,
       endPage,
       link,
+      read,
       literatureType
     }: any) => {
       return updateArticle(
@@ -42,6 +45,7 @@ export const useUpdateArticle = () => {
         endPage,
         link,
         literatureType,
+        read,
         user.id
       ).then((result) => result.data);
     },

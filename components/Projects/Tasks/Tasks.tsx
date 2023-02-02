@@ -1,6 +1,6 @@
 import useGetTasksQuery from 'hooks/tasks/useTasks';
 import React, { useEffect, useState } from 'react';
-import CreateTaskModal from '../Tasks/CreateTaskModal';
+import CreateTaskModal from '@/components/Tasks/CreateTaskModal';
 import Task from './Task';
 
 export default function Tasks({ projectItemId }: any) {

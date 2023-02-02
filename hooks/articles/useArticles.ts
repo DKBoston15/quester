@@ -1,10 +1,10 @@
-import { getArticlesById } from './../../queries/articles/get-articles';
 import { useQuery } from 'react-query';
+import { getArticles } from 'queries/articles/get-articles';
 
-function useGetArticlesQuery({ projectItemId }: any) {
+function useGetArticles() {
   return useQuery('articles', async () => {
-    return getArticlesById({ projectItemId }).then((result) => result.data);
+    return getArticles().then((result) => result.data);
   });
 }
 
-export default useGetArticlesQuery;
+export default useGetArticles;
