@@ -6,7 +6,7 @@ export default function HomePageTItle({ setOpen }: any) {
   const [sidebarOpen, toggleSidebar] = useSidebar();
 
   return (
-    <div className="border-b border-gray-200 pr-4 sm:flex sm:items-center sm:justify-between flex py-1 items-center">
+    <div className="border-b border-gray-200 dark:border-gray-700 pr-4 sm:flex sm:items-center sm:justify-between flex py-1 items-center dark:bg-[#1f242b]">
       <div className="flex h-16 flex-shrink-0 border-gray-200 bg-white lg:border-none">
         <button
           type="button"
@@ -18,14 +18,14 @@ export default function HomePageTItle({ setOpen }: any) {
         </button>
       </div>
       <div className="min-w-0 flex-1 pl-4">
-        <h1 className="text-lg font-medium leading-6 text-gray-900 sm:truncate">
+        <h1 className="text-lg font-medium leading-6 text-gray-900 sm:truncate dark:text-white">
           Home
         </h1>
       </div>
       <div className="mt-4 flex sm:mt-0 sm:ml-4">
         <button
           type="button"
-          className="sm:order-0 order-1 ml-3 inline-flex items-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 sm:ml-0"
+          className="sm:order-0 order-1 ml-3 inline-flex items-center rounded-md border border-gray-300 dark:bg-gray-700 dark:text-white dark:border-gray-700 bg-white px-4 py-2 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 sm:ml-0"
         >
           Share
         </button>

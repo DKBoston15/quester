@@ -52,26 +52,24 @@ export default function Tasks({ projectItemId }: any) {
     if (e.target.value === 'Oldest') {
       const newTasks = sortByCreatedAt(filteredTasks, 'asc');
       setFilteredTasks(newTasks);
-      console.log(newTasks);
     } else {
       const newTasks = sortByCreatedAt(filteredTasks, 'desc');
       setFilteredTasks(newTasks);
-      console.log(newTasks);
     }
   };
 
   return (
-    <div className="w-full">
+    <div className="w-full dark:bg-gray-700 dark:text-white dark:border-gray-700">
       <CreateTaskModal open={open} setOpen={setOpen} />
       <div className="p-4">
         <div className="flex items-center justify-between">
           <p
             tabIndex="0"
-            className="focus:outline-none text-base sm:text-lg md:text-xl lg:text-2xl font-bold leading-normal text-gray-800"
+            className="focus:outline-none text-base sm:text-lg md:text-xl lg:text-2xl font-bold leading-normal text-gray-800 dark:text-white"
           >
             Tasks
           </p>
-          <div className="py-3 px-4 flex items-center text-sm font-medium leading-none text-gray-600 bg-gray-200 hover:bg-gray-300 cursor-pointer rounded">
+          <div className="py-3 px-4 flex items-center text-sm font-medium leading-none text-gray-600 bg-gray-200 dark:bg-[#1f242b] dark:text-white hover:bg-gray-300 cursor-pointer rounded">
             <p>Sort By:</p>
             <select
               aria-label="select"
@@ -84,7 +82,7 @@ export default function Tasks({ projectItemId }: any) {
           </div>
         </div>
       </div>
-      <div className="bg-white px-4 max-h-[29rem] h-[29rem]">
+      <div className="bg-white dark:bg-gray-700 dark:text-white dark:border-gray-700 px-4 max-h-[29rem] h-[29rem]">
         <div className="sm:flex items-center justify-between">
           <div className="flex items-center">
             <div
@@ -94,8 +92,8 @@ export default function Tasks({ projectItemId }: any) {
               <div
                 className={`py-2 px-8 ${
                   currentFilter === 'all'
-                    ? 'bg-indigo-100 text-indigo-700'
-                    : 'text-gray-700'
+                    ? 'bg-indigo-100 text-indigo-700 dark:bg-blue-600 dark:text-white'
+                    : 'text-gray-700 dark:bg-[#1f242b] dark:text-white'
                 } rounded-full cursor-pointer`}
               >
                 <p>All</p>
@@ -108,8 +106,8 @@ export default function Tasks({ projectItemId }: any) {
               <div
                 className={`py-2 px-8 ${
                   currentFilter === 'done'
-                    ? 'bg-indigo-100 text-indigo-700'
-                    : 'text-gray-700'
+                    ? 'bg-indigo-100 text-indigo-700 dark:bg-blue-600 dark:text-white'
+                    : 'text-gray-700 dark:bg-[#1f242b] dark:text-white'
                 } rounded-full cursor-pointer`}
               >
                 <p>Done</p>
@@ -122,8 +120,8 @@ export default function Tasks({ projectItemId }: any) {
               <div
                 className={`py-2 px-8 ${
                   currentFilter === 'pending'
-                    ? 'bg-indigo-100 text-indigo-700'
-                    : 'text-gray-700'
+                    ? 'bg-indigo-100 text-indigo-700 dark:bg-blue-600 dark:text-white'
+                    : 'text-gray-700 dark:bg-[#1f242b] dark:text-white'
                 } rounded-full cursor-pointer`}
               >
                 <p>Pending</p>

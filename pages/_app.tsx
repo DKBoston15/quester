@@ -14,7 +14,7 @@ import { MyUserContextProvider } from 'utils/useUser';
 import type { Database } from 'types_db';
 import { SidebarProvider } from 'context/SidebarContext';
 import { QueryClient, QueryClientProvider } from 'react-query';
-import { ReactQueryDevtools } from 'react-query/devtools';
+// import { ReactQueryDevtools } from 'react-query/devtools';
 import { ThemeProvider } from 'next-themes';
 
 const queryClient = new QueryClient({
@@ -65,7 +65,7 @@ export default function MyApp({ Component, pageProps }: AppProps) {
             >
               <Component {...pageProps} />
             </ThemeProvider>
-            <ReactQueryDevtools initialIsOpen={false} />
+            {/* <ReactQueryDevtools initialIsOpen={false} /> */}
           </SidebarProvider>
         </MyUserContextProvider>
       </SessionContextProvider>

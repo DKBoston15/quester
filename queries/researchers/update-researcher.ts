@@ -2,7 +2,6 @@ import { supabase } from '../../utils/supabase-client';
 
 export async function updateResearcher(
   id: number,
-  title: string,
   firstName: string,
   lastName: string,
   email: string,
@@ -22,7 +21,6 @@ export async function updateResearcher(
   return supabase
     .from('researchers')
     .update({
-      title,
       first_name: firstName,
       last_name: lastName,
       email,

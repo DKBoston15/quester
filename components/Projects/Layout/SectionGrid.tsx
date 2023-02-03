@@ -131,7 +131,7 @@ export default function SectionGrid({ projectItemId }: any) {
       {sections.map((section) => (
         <li
           key={section.id}
-          className="col-span-1 divide-y divide-gray-200 rounded-lg bg-white shadow cursor-pointer"
+          className="col-span-1 divide-y divide-gray-200 rounded-lg bg-white dark:bg-gray-700 shadow cursor-pointer"
           onClick={() =>
             router.push(`/app/projects/${projectItemId}/${section.href}`)
           }
@@ -139,7 +139,7 @@ export default function SectionGrid({ projectItemId }: any) {
           <div className="flex w-full items-center justify-between space-x-6 p-6">
             <div className="flex-1 truncate">
               <div className="flex items-center space-x-3">
-                <h3 className="truncate text-sm font-medium text-gray-900">
+                <h3 className="truncate text-sm font-medium text-gray-900 dark:text-white">
                   {section.name}
                 </h3>
                 <span
@@ -148,7 +148,7 @@ export default function SectionGrid({ projectItemId }: any) {
                   {section.section}
                 </span>
               </div>
-              <p className="mt-1 truncate text-sm text-gray-500">
+              <p className="mt-1 truncate text-sm text-gray-500 dark:text-gray-400">
                 {section.title}
               </p>
             </div>

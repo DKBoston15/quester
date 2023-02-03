@@ -76,7 +76,7 @@ export default function NavigationSideBar() {
               leaveFrom="translate-x-0"
               leaveTo="-translate-x-full"
             >
-              <Dialog.Panel className="relative flex w-full max-w-xs flex-1 flex-col bg-blue-700 pt-5 pb-4">
+              <Dialog.Panel className="relative flex w-full max-w-xs flex-1 flex-col bg-blue-700 dark:bg-gray-700 pt-5 pb-4">
                 <Transition.Child
                   as={Fragment}
                   enter="ease-in-out duration-300"
@@ -102,13 +102,13 @@ export default function NavigationSideBar() {
                 </Transition.Child>
                 <div className="flex flex-shrink-0 items-center px-4">
                   <img
-                    className="h-8 w-auto"
-                    src="https://tailwindui.com/img/logos/mark.svg?color=white&shade=300"
-                    alt="Easywire logo"
+                    className="w-[3rem] h-[6rem] mt-[-1rem] w-auto object-cover"
+                    src="/nav_logo.png"
+                    alt="Quester logo"
                   />
                 </div>
                 <nav
-                  className="mt-5 h-full flex-shrink-0 overflow-y-auto"
+                  className="mt-2 h-full flex-shrink-0 overflow-y-auto"
                   aria-label="Sidebar"
                 >
                   <div className="space-y-1 px-2">
@@ -166,16 +166,16 @@ export default function NavigationSideBar() {
       {/* Static sidebar for desktop */}
       <div className="hidden lg:fixed lg:inset-y-0 lg:flex lg:w-64 lg:flex-col">
         {/* Sidebar component, swap this element with another sidebar if you like */}
-        <div className="flex flex-grow flex-col overflow-y-auto bg-blue-700 pt-5">
+        <div className="flex flex-grow flex-col overflow-y-auto bg-blue-700 dark:bg-gray-700 pt-5">
           <div className="flex flex-shrink-0 items-center px-4">
             <img
-              className="h-8 w-auto"
-              src="https://tailwindui.com/img/logos/mark.svg?color=white&shade=300"
-              alt="Easywire logo"
+              className="w-[3rem] h-[6rem] mt-[-1rem] w-auto object-cover"
+              src="/nav_logo.png"
+              alt="Quester logo"
             />
           </div>
           <nav
-            className="mt-5 flex flex-1 flex-col overflow-y-auto justify-between"
+            className="mt-2 flex flex-1 flex-col overflow-y-auto justify-between"
             aria-label="Sidebar"
           >
             <div>
@@ -222,23 +222,25 @@ export default function NavigationSideBar() {
                 </div>
               </div>
             </div>
-            <ThemeSelector />
-            <div className="flex flex-shrink-0 bg-gray-700 p-4">
+            <div className="flex flex-shrink-0 bg-gray-700 p-4 justify-between">
               <a href="#" className="group block w-full flex-shrink-0">
-                <div className="flex items-center">
-                  <div>
-                    <img
-                      className="inline-block h-9 w-9 rounded-full"
-                      src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-                      alt=""
-                    />
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center">
+                    <div>
+                      <img
+                        className="inline-block h-9 w-9 rounded-full"
+                        src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+                        alt=""
+                      />
+                    </div>
+                    <div className="ml-3">
+                      <p className="text-sm font-medium text-white">Tom Cook</p>
+                      <p className="text-xs font-medium text-gray-300 group-hover:text-gray-200">
+                        View profile
+                      </p>
+                    </div>
                   </div>
-                  <div className="ml-3">
-                    <p className="text-sm font-medium text-white">Tom Cook</p>
-                    <p className="text-xs font-medium text-gray-300 group-hover:text-gray-200">
-                      View profile
-                    </p>
-                  </div>
+                  <ThemeSelector />
                 </div>
               </a>
             </div>

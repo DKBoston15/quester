@@ -14,7 +14,7 @@ export const Tabs = ({ color }: any) => {
 
   return (
     <>
-      <div className="flex flex-wrap">
+      <div className="flex flex-wrap dark:bg-[#1f242b]">
         <div className="w-full">
           <ul
             className="flex mb-0 list-none flex-wrap pt-3 pb-4 flex-row"
@@ -25,8 +25,11 @@ export const Tabs = ({ color }: any) => {
                 className={
                   'text-xs font-bold uppercase px-5 py-3 shadow-lg rounded block leading-normal ' +
                   (openTab === 1
-                    ? 'text-white bg-' + color + '-600'
-                    : 'text-' + color + '-600 bg-white')
+                    ? 'text-white bg-' + color + '-600 '
+                    : 'text-' + color + '-600 bg-white ') +
+                  (openTab === 1
+                    ? 'dark:bg-blue-600 dark:text-white dark:border-blue-600'
+                    : 'dark:bg-gray-700 dark:text-white dark:border-gray-700')
                 }
                 onClick={(e) => {
                   e.preventDefault();
@@ -44,8 +47,11 @@ export const Tabs = ({ color }: any) => {
                 className={
                   'text-xs font-bold uppercase px-5 py-3 shadow-lg rounded block leading-normal ' +
                   (openTab === 2
-                    ? 'text-white bg-' + color + '-600'
-                    : 'text-' + color + '-600 bg-white')
+                    ? 'text-white bg-' + color + '-600 '
+                    : 'text-' + color + '-600 bg-white ') +
+                  (openTab === 2
+                    ? 'dark:bg-blue-600 dark:text-white dark:border-blue-600'
+                    : 'dark:bg-gray-700 dark:text-white dark:border-gray-700')
                 }
                 onClick={(e) => {
                   e.preventDefault();
@@ -63,8 +69,11 @@ export const Tabs = ({ color }: any) => {
                 className={
                   'text-xs font-bold uppercase px-5 py-3 shadow-lg rounded block leading-normal ' +
                   (openTab === 3
-                    ? 'text-white bg-' + color + '-600'
-                    : 'text-' + color + '-600 bg-white')
+                    ? 'text-white bg-' + color + '-600 '
+                    : 'text-' + color + '-600 bg-white ') +
+                  (openTab === 3
+                    ? 'dark:bg-blue-600 dark:text-white dark:border-blue-600'
+                    : 'dark:bg-gray-700 dark:text-white dark:border-gray-700')
                 }
                 onClick={(e) => {
                   e.preventDefault();
@@ -82,8 +91,11 @@ export const Tabs = ({ color }: any) => {
                 className={
                   'text-xs font-bold uppercase px-5 py-3 shadow-lg rounded block leading-normal ' +
                   (openTab === 4
-                    ? 'text-white bg-' + color + '-600'
-                    : 'text-' + color + '-600 bg-white')
+                    ? 'text-white bg-' + color + '-600 '
+                    : 'text-' + color + '-600 bg-white ') +
+                  (openTab === 4
+                    ? 'dark:bg-blue-600 dark:text-white dark:border-blue-600'
+                    : 'dark:bg-gray-700 dark:text-white dark:border-gray-700')
                 }
                 onClick={(e) => {
                   e.preventDefault();
@@ -97,7 +109,7 @@ export const Tabs = ({ color }: any) => {
               </a>
             </li>
           </ul>
-          <div className="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded overflow-y-scroll">
+          <div className="relative flex flex-col min-w-0 break-words bg-white dark:bg-gray-700 dark:text-white dark:border-gray-700 w-full mb-6 shadow-lg rounded overflow-y-scroll">
             <div className="">
               <div className="tab-content tab-space">
                 <div

@@ -59,12 +59,12 @@ export default function ProjectTypeSelectionDropdown({
       onChange={setSelectedType}
       className="w-full mt-4 text-black"
     >
-      <Combobox.Label className="block text-sm font-medium text-gray-700">
+      <Combobox.Label className="block text-sm font-medium text-gray-700 dark:text-white">
         Project Type
       </Combobox.Label>
       <div className="relative mt-1">
         <Combobox.Input
-          className="w-full rounded-md border border-gray-300 bg-white py-2 pl-3 pr-10 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500 sm:text-sm"
+          className="w-full rounded-md border border-gray-300 bg-white dark:bg-gray-700 dark:text-white dark:border-gray-700 py-2 pl-3 pr-10 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500 sm:text-sm h-12"
           onChange={(event) => setQuery(event.target.value)}
           displayValue={(projectType) => projectType?.name}
         />
@@ -76,7 +76,7 @@ export default function ProjectTypeSelectionDropdown({
         </Combobox.Button>
 
         {filteredProjectTypes.length > 0 && (
-          <Combobox.Options className="absolute z-10 mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
+          <Combobox.Options className="absolute z-10 mt-1 max-h-60 w-full overflow-auto rounded-md bg-white dark:bg-gray-700 dark:border-gray-700 py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
             {filteredProjectTypes.map((projectType) => (
               <Combobox.Option
                 key={projectType.id}
@@ -84,7 +84,9 @@ export default function ProjectTypeSelectionDropdown({
                 className={({ active }) =>
                   classNames(
                     'relative cursor-default select-none py-2 pl-3 pr-9',
-                    active ? 'bg-indigo-600 text-white' : 'text-gray-900'
+                    active
+                      ? 'dark:bg-[#1f242b] bg-blue-500 text-white'
+                      : 'text-gray-900 dark:text-white'
                   )
                 }
               >

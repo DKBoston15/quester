@@ -7,7 +7,9 @@ export default function Layout({ children }: any) {
         <NavigationSideBar />
 
         <div className="flex flex-1 flex-col lg:pl-64 h-full">
-          <main className="flex-1">{children}</main>
+          <main className="flex-1 dark:text-white dark:bg-[#1f242b]">
+            {children}
+          </main>
         </div>
       </div>
     </>

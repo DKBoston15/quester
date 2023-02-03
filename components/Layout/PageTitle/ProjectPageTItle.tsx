@@ -6,7 +6,7 @@ export default function ProjectPageTitle({ selectedProject }: any) {
   const [sidebarOpen, toggleSidebar] = useSidebar();
 
   return (
-    <div className="border-b border-gray-200 pr-4 sm:flex sm:items-center sm:justify-between flex py-1 items-center">
+    <div className="border-b border-gray-200 dark:border-gray-700 pr-4 sm:flex sm:items-center sm:justify-between flex py-1 items-center">
       <div className="flex h-16 flex-shrink-0 border-gray-200 bg-white lg:border-none">
         <button
           type="button"
@@ -19,7 +19,9 @@ export default function ProjectPageTitle({ selectedProject }: any) {
       </div>
       <div className="min-w-0 flex-1 pl-4">
         <h1 className="text-lg font-medium leading-6 text-gray-900 sm:truncate">
-          {selectedProject && <span> {selectedProject.title}</span>}
+          {selectedProject && (
+            <span className="dark:text-white"> {selectedProject.title}</span>
+          )}
         </h1>
       </div>
     </div>

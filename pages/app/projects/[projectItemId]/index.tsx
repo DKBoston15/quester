@@ -31,7 +31,7 @@ export default function Project() {
     <Layout>
       <ProjectPageTitle selectedProject={selectedProject} />
       <>
-        <div className="min-h-full">
+        <div className="">
           <div className="py-10">
             <div className="mx-auto sm:px-6 lg:grid lg:grid-cols-12 lg:gap-8 lg:px-8">
               <main className="lg:col-span-12 xl:col-span-7">
@@ -40,20 +40,20 @@ export default function Project() {
                 </div>
               </main>
               <aside className="hidden xl:col-span-5 xl:block">
-                <div className="sticky top-4 space-y-4">
+                <div className="top-4 space-y-4">
                   <section aria-labelledby="who-to-follow-heading">
-                    <div className="rounded-lg bg-white shadow">
+                    <div className="rounded-lg bg-white dark:bg-gray-700 dark:border-gray-700 shadow">
                       <div className="p-6">
                         <h2
                           id="who-to-follow-heading"
-                          className="text-base font-medium text-gray-900"
+                          className="text-base font-medium text-gray-900 dark:text-white"
                         >
                           Documents
                         </h2>
                         <div className="mt-6 flow-root">
                           <ul
                             role="list"
-                            className="-my-4 divide-y divide-gray-200"
+                            className="-my-4 divide-y divide-gray-200 dark:divide-gray-700"
                           >
                             {documents.map((document) => (
                               <li
@@ -61,7 +61,7 @@ export default function Project() {
                                 className="flex items-center space-x-3 py-4"
                               >
                                 <div className="min-w-0 flex-1">
-                                  <p className="text-sm font-medium text-gray-900">
+                                  <p className="text-sm font-medium text-gray-900 dark:text-white">
                                     <a href={document.href}>{document.title}</a>
                                   </p>
                                 </div>
@@ -72,7 +72,7 @@ export default function Project() {
                         <div className="mt-6">
                           <a
                             href="#"
-                            className="block w-full rounded-md border border-gray-300 bg-white px-4 py-2 text-center text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50"
+                            className="block w-full rounded-md border border-gray-300 bg-white dark:bg-[#1f242b] dark:text-white dark:border-[#1f242b] px-4 py-2 text-center text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50"
                           >
                             View all
                           </a>
@@ -88,7 +88,7 @@ export default function Project() {
                 </div>
               </aside>
             </div>
-            <hr className="mb-4 mx-8 cursor-default" />
+            <hr className="mb-4 mx-8 cursor-default border-0 dark:bg-gray-700 content-none" />
             <SectionGrid projectItemId={projectItemId} />
           </div>
         </div>

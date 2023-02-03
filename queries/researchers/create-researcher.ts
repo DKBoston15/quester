@@ -1,7 +1,6 @@
 import { supabase } from '../../utils/supabase-client';
 
 export async function createResearcher(
-  title: string,
   firstName: string,
   lastName: string,
   email: string,
@@ -21,7 +20,6 @@ export async function createResearcher(
 ) {
   return supabase.from('researchers').insert([
     {
-      title,
       first_name: firstName,
       last_name: lastName,
       email,

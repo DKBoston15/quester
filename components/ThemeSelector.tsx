@@ -21,7 +21,7 @@ const ThemeSelector = () => {
         </button>
       ) : (
         <button
-          className="p-2 bg-gray-700 rounded-md hover:bg-gray-800 w-10"
+          className="p-2 bg-[#1f242b] rounded-md hover:bg-gray-800 w-10"
           onClick={() => setTheme('light')}
         >
           <SunIcon className="w-6 h-6 text-yellow-500" />

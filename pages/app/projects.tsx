@@ -125,8 +125,8 @@ export default function Home() {
       {/* Pinned projects */}
       {!isLoading && (
         <>
-          <div className="mt-6 px-4 sm:px-6 lg:px-8 dark:bg-slate-800">
-            <h2 className="text-sm font-medium text-gray-900">
+          <div className="mt-6 px-4 sm:px-6 lg:px-8">
+            <h2 className="text-sm font-medium text-gray-900 dark:text-white">
               Pinned Projects
             </h2>
             <ul
@@ -136,7 +136,7 @@ export default function Home() {
               {pinnedProjects.map((project) => (
                 <li
                   key={project.id}
-                  className="relative col-span-1 flex rounded-md shadow-sm h-12"
+                  className="relative col-span-1 flex rounded-md shadow-sm h-12 "
                 >
                   <div
                     className={classNames(
@@ -146,17 +146,17 @@ export default function Home() {
                   >
                     {project.title.slice(0, 2)}
                   </div>
-                  <div className="flex flex-1 items-center justify-between truncate rounded-r-md border-t border-r border-b border-gray-200 bg-white">
+                  <div className="flex flex-1 items-center justify-between truncate rounded-r-md bg-white dark:bg-gray-700">
                     <div className="flex-1 truncate px-4 py-2 text-sm">
                       <a
                         href={`/app/projects/${project.id}`}
-                        className="font-medium text-gray-900 hover:text-gray-600"
+                        className="font-medium text-gray-900 hover:text-gray-600 dark:text-white"
                       >
                         {project.title}
                       </a>
                     </div>
                     <Menu as="div" className="flex-shrink-0 pr-2">
-                      <Menu.Button className="inline-flex h-8 w-8 items-center justify-center rounded-full bg-white text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2">
+                      <Menu.Button className="inline-flex h-8 w-8 items-center justify-center rounded-full bg-white dark:bg-[#1f242b] dark:text-white text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2">
                         <span className="sr-only">Open options</span>
                         <EllipsisVerticalIcon
                           className="h-5 w-5"
@@ -172,7 +172,7 @@ export default function Home() {
                         leaveFrom="transform opacity-100 scale-100"
                         leaveTo="transform opacity-0 scale-95"
                       >
-                        <Menu.Items className="absolute right-10 top-3 z-10 mx-3 mt-1 w-48 origin-top-right divide-y divide-gray-200 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+                        <Menu.Items className="absolute right-10 top-3 z-10 mx-3 mt-1 w-48 origin-top-right divide-y divide-gray-200 dark:divide-gray-700 rounded-md bg-white dark:bg-[#1f242b] shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
                           <div className="py-1">
                             <Menu.Item>
                               {({ active }) => (
@@ -180,8 +180,8 @@ export default function Home() {
                                   href={`/app/projects/${project.id}`}
                                   className={classNames(
                                     active
-                                      ? 'bg-gray-100 text-gray-900'
-                                      : 'text-gray-700',
+                                      ? 'bg-gray-100 text-gray-900 dark:bg-gray-700 dark:text-white'
+                                      : 'text-gray-700 dark:text-white',
                                     'block px-4 py-2 text-sm'
                                   )}
                                 >
@@ -197,8 +197,8 @@ export default function Home() {
                                   onClick={() => togglePin(project.id)}
                                   className={classNames(
                                     active
-                                      ? 'bg-gray-100 text-gray-900'
-                                      : 'text-gray-700',
+                                      ? 'bg-gray-100 text-gray-900 dark:bg-gray-700 dark:text-white'
+                                      : 'text-gray-700 dark:text-white',
                                     'block px-4 py-2 text-sm'
                                   )}
                                 >
@@ -234,11 +234,13 @@ export default function Home() {
           {/* Projects list (only on smallest breakpoint) */}
           <div className="mt-10 sm:hidden">
             <div className="px-4 sm:px-6">
-              <h2 className="text-sm font-medium text-gray-900">Projects</h2>
+              <h2 className="text-sm font-medium text-gray-900 dark:text-white">
+                Projects
+              </h2>
             </div>
             <ul
               role="list"
-              className="mt-3 divide-y divide-gray-100 border-t border-gray-200"
+              className="mt-3 divide-y divide-gray-100 dark:divide-gray-700 border-t border-gray-200 dark:border-gray-700"
             >
               {projects.map((project) => (
                 <li key={project.id}>
@@ -256,7 +258,7 @@ export default function Home() {
                       />
                       <span className="truncate text-sm font-medium leading-6">
                         {project.title}{' '}
-                        <span className="truncate font-normal text-gray-500">
+                        <span className="truncate font-normal text-gray-500 dark:text-white">
                           as {project.type}
                         </span>
                       </span>
@@ -273,34 +275,34 @@ export default function Home() {
 
           {/* Projects table (small breakpoint and up) */}
           <div className="mt-8 hidden sm:block">
-            <div className="inline-block min-w-full border-b border-gray-200 align-middle">
+            <div className="inline-block min-w-full border-b border-gray-200 dark:border-gray-700 align-middle">
               <table className="min-w-full">
                 <thead>
-                  <tr className="border-t border-gray-200">
+                  <tr className="border-t border-gray-200 dark:border-gray-700">
                     <th
-                      className="border-b border-gray-200 bg-gray-50 px-6 py-3 text-left text-sm font-semibold text-gray-900"
+                      className="border-b border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-700 dark:text-white px-6 py-3 text-left text-sm font-semibold text-gray-900"
                       scope="col"
                     >
                       <span className="lg:pl-2">Project</span>
                     </th>
                     <th
-                      className="border-b border-gray-200 bg-gray-50 py-3 pr-6 text-right text-sm font-semibold text-gray-900"
+                      className="border-b border-gray-200 dark:border-gray-700 bg-gray-50 py-3 pr-6 text-right text-sm font-semibold text-gray-900 dark:bg-gray-700"
                       scope="col"
                     />
                     <th
-                      className="border-b border-gray-200 bg-gray-50 py-3 pr-6 text-right text-sm font-semibold text-gray-900"
+                      className="border-b border-gray-200 dark:border-gray-700 bg-gray-50 py-3 pr-6 text-right text-sm font-semibold text-gray-900 dark:bg-gray-700"
                       scope="col"
                     />
                     <th
-                      className="border-b border-gray-200 bg-gray-50 py-3 pr-6 text-right text-sm font-semibold text-gray-900"
+                      className="border-b border-gray-200 dark:border-gray-700 bg-gray-50 py-3 pr-6 text-right text-sm font-semibold text-gray-900 dark:bg-gray-700"
                       scope="col"
                     />
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-gray-100 bg-white">
+                <tbody className="divide-y divide-gray-100 dark:divide-gray-700 dark:bg-[#1f242b] bg-white dark:bg-gray-700">
                   {projects.map((project) => (
                     <tr key={project.id}>
-                      <td className="w-full max-w-0 whitespace-nowrap px-6 py-3 text-sm font-medium text-gray-900">
+                      <td className="w-full max-w-0 whitespace-nowrap px-6 py-3 text-sm font-medium text-gray-900 dark:text-white">
                         <div className="flex items-center space-x-3 lg:pl-2">
                           <div
                             className={classNames(
@@ -315,7 +317,7 @@ export default function Home() {
                           >
                             <span>
                               {project.title}{' '}
-                              <span className="font-normal text-gray-500">
+                              <span className="font-normal text-gray-500 dark:text-gray-400">
                                 as {project.type}
                               </span>
                             </span>
@@ -325,7 +327,7 @@ export default function Home() {
                       <td className="whitespace-nowrap px-6 py-3 text-right text-sm font-medium">
                         <a
                           href={`/app/projects/${project.id}`}
-                          className="text-indigo-600 hover:text-indigo-900"
+                          className="text-indigo-600 hover:text-indigo-900 dark:text-blue-500 dark:hover:text-blue-700"
                         >
                           Edit
                         </a>
@@ -333,7 +335,7 @@ export default function Home() {
                       <td className="whitespace-nowrap px-6 py-3 text-right text-sm font-medium">
                         <div
                           onClick={() => togglePin(project.id)}
-                          className="text-indigo-600 hover:text-indigo-900 cursor-pointer"
+                          className="text-indigo-600 hover:text-indigo-900 cursor-pointer dark:text-blue-500 dark:hover:text-blue-700"
                         >
                           {project.pinned ? 'Unpin' : 'Pin'}
                         </div>

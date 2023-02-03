@@ -39,7 +39,7 @@ export default function Task({ task }: any) {
   return (
     <tr
       tabIndex={0}
-      className="focus:outline-none h-16 border border-gray-100 rounded"
+      className="focus:outline-none h-16 border border-gray-100 dark:border-[#1f242b] rounded"
     >
       <EditTaskModal task={task} open={editingTask} setOpen={setEditingTask} />
       {task && (
@@ -56,7 +56,7 @@ export default function Task({ task }: any) {
                     setStatus(e.target.checked);
                     updateExistingTask(e.target.checked);
                   }}
-                  className="h-6 w-6 cursor-pointer rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
+                  className="h-6 w-6 cursor-pointer rounded border-gray-300 text-indigo-600 focus:ring-indigo-500 dark:text-white dark:bg-[#1f242b]"
                 />
                 <div className="check-icon hidden bg-indigo-700 text-white rounded-sm">
                   <svg
@@ -80,38 +80,14 @@ export default function Task({ task }: any) {
           </td>
           <td className="">
             <div className="flex items-center pl-5">
-              <p className="text-base font-medium leading-none text-gray-700 mr-2">
+              <p className="text-base font-medium leading-none text-gray-700 mr-2 dark:text-white">
                 {task.title}
               </p>
             </div>
           </td>
           <td className="pl-24">
             <div className="flex items-center">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="20"
-                height="20"
-                viewBox="0 0 20 20"
-                fill="none"
-              >
-                <path
-                  d="M9.16667 2.5L16.6667 10C17.0911 10.4745 17.0911 11.1922 16.6667 11.6667L11.6667 16.6667C11.1922 17.0911 10.4745 17.0911 10 16.6667L2.5 9.16667V5.83333C2.5 3.99238 3.99238 2.5 5.83333 2.5H9.16667"
-                  stroke="#52525B"
-                  strokeWidth="1.25"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                ></path>
-                <circle
-                  cx="7.50004"
-                  cy="7.49967"
-                  r="1.66667"
-                  stroke="#52525B"
-                  strokeWidth="1.25"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                ></circle>
-              </svg>
-              <p className="text-sm leading-none text-gray-600 ml-2">
+              <p className="text-sm leading-none text-gray-600 ml-2 dark:text-gray-200">
                 {task.urgency}
               </p>
             </div>
@@ -127,7 +103,7 @@ export default function Task({ task }: any) {
           <td>
             <div className="relative px-5 pt-2 overflow-visible">
               <Menu as="div" className="flex-shrink-0 pr-2">
-                <Menu.Button className="inline-flex h-8 w-8 items-center justify-center rounded-full bg-white text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2">
+                <Menu.Button className="inline-flex h-8 w-8 items-center justify-center rounded-full bg-white dark:bg-[#1f242b] dark:text-white text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2">
                   <span className="sr-only">Open options</span>
                   <EllipsisVerticalIcon className="h-5 w-5" />
                 </Menu.Button>
