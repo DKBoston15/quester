@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { CheckIcon, ChevronUpDownIcon } from '@heroicons/react/20/solid';
 import { Combobox } from '@headlessui/react';
+import Tooltip from '@/components/Tooltip';
 
 const articleTypes = [
   { id: 1, name: 'None' },
@@ -91,15 +92,27 @@ export default function InputTypeSelectionDropdown({
                 }
               >
                 {({ active, selected }) => (
-                  <>
+                  <div className="flex justify-between group relative">
+                    <Tooltip name={'hello'} />
                     <span
                       className={classNames(
-                        'block truncate',
+                        'block truncate w-64',
                         selected && 'font-semibold'
                       )}
                     >
                       {list.name}
                     </span>
+                    {list.source_table && (
+                      <span
+                        className={classNames(
+                          'block capitalize bg-gray-300 rounded-xl p-2',
+                          selected && 'font-semibold',
+                          active ? 'bg-indigo-600 text-black' : 'text-gray-900'
+                        )}
+                      >
+                        {list.source_table}
+                      </span>
+                    )}
 
                     {selected && (
                       <span
@@ -111,7 +124,7 @@ export default function InputTypeSelectionDropdown({
                         <CheckIcon className="h-5 w-5" aria-hidden="true" />
                       </span>
                     )}
-                  </>
+                  </div>
                 )}
               </Combobox.Option>
             ))}

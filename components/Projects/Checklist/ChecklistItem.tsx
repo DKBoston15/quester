@@ -32,7 +32,9 @@ export default function ChecklistItem({ checklistItem, updateChecklist }: any) {
         </div>
         <div className="ml-3 text-sm">
           <span className="text-gray-500">
-            <div className="text-black">{checklistItem.text}</div>
+            <div className="text-black dark:text-whitee">
+              {checklistItem.text}
+            </div>
           </span>
         </div>
       </div>

@@ -1,18 +1,18 @@
 import { useUser } from '@/utils/useUser';
-import { deleteNote } from 'queries/notes/delete-note';
+import { deleteConnection } from 'queries/connections/delete-connection';
 import { useMutation, useQueryClient } from 'react-query';
 
-export const useDeleteNote = () => {
+export const useDeleteConnection = () => {
   const { user } = useUser();
   const queryClient = useQueryClient();
 
   return useMutation(
     ({ id }: any) => {
-      return deleteNote(id, user.id).then((result) => result.data);
+      return deleteConnection(id, user.id).then((result) => result.data);
     },
     {
       onSuccess: () => {
-        queryClient.invalidateQueries('notes');
+        queryClient.invalidateQueries('connections');
       }
     }
   );

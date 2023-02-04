@@ -13,10 +13,14 @@ import {
   UserIcon,
   PuzzlePieceIcon,
   TableCellsIcon,
-  AcademicCapIcon
+  AcademicCapIcon,
+  MinusCircleIcon
 } from '@heroicons/react/24/outline';
 import { supabase } from '@/utils/supabase-client';
 import CreateConnectionModal from '../CreateModals/CreateConnectionModal';
+import useAllOptionsQuery from 'hooks/connections/useAllOptions';
+import { useUser } from '@/utils/useUser';
+import { useDeleteConnection } from 'hooks/connections/useDeleteConnection';
 
 const navigation = [
   {
@@ -99,6 +103,17 @@ const navigation = [
   }
 ];
 
+function removeObjects(sourceArray, removeArray) {
+  return sourceArray.filter((sourceItem) => {
+    return !removeArray.some((removeItem) => {
+      return (
+        sourceItem.source_table === removeItem.connected_item_type &&
+        sourceItem.item_id === removeItem.connected_item_id
+      );
+    });
+  });
+}
+
 const getTitle = (key: string) => {
   switch (key) {
     case 'Articles':
@@ -130,49 +145,100 @@ const getTitle = (key: string) => {
   }
 };
 
+const formatOptions = (options: any[]) => {
+  const optionArr = [];
+  options.forEach((option, index) => {
+    if (option.source_table === 'researchers') {
+      optionArr.push({
+        ...option,
+        id: index,
+        name: `${option.first_name} ${option.last_name}`
+      });
+    } else {
+      optionArr.push({
+        ...option,
+        id: index,
+        name: option.title
+      });
+    }
+  });
+  return optionArr;
+};
+
 export default function Connection({ projectItemId, itemId, itemType }: any) {
   function classNames(...classes) {
     return classes.filter(Boolean).join(' ');
   }
+  const deleteConnection = useDeleteConnection();
+  const { user } = useUser();
 
   const [navData, setNavData] = useState(navigation);
   const [open, setOpen] = useState(false);
+  const [options, setOptions] = useState([]);
+
+  const deleteExistingConnection = async (id: string) => {
+    await deleteConnection.mutateAsync({
+      id
+    });
+    getData();
+  };
 
   const getData = async () => {
+    let newNavArr = navigation;
+    let connections = [];
     if (projectItemId) {
       let { data, error } = await supabase.rpc('getconnections', {
         projectitemid: projectItemId,
         itemid: itemId
       });
+      connections = data;
 
       if (!error && data) {
+        newNavArr = [...navigation]; // create a new array from the navigation data
         data.forEach((connection) => {
-          const navIndex = navData.findIndex(
+          const navIndex = newNavArr.findIndex(
             (nav) => nav.name.toLowerCase() === connection.connected_item_type
           );
-          navData[navIndex].children.push({
-            name: connection[`${getTitle(navData[navIndex].name)}`],
+
+          newNavArr[navIndex] = { ...newNavArr[navIndex] }; // create a new object
+          newNavArr[navIndex].children = [...newNavArr[navIndex].children]; // create a new children array
+          newNavArr[navIndex].children.push({
+            id: connection.id,
+            name: connection[`${getTitle(newNavArr[navIndex].name)}`],
             href: `/app/projects/${connection.connected_project_item_id}/${connection.connected_item_type}/${connection.connected_item_id}`
           });
         });
-        setNavData([...navData]);
+        setNavData(newNavArr);
+      }
+
+      if (user) {
+        let { data, error } = await supabase.rpc('getalloptions', {
+          userid: user.id
+        });
+        const formattedOptions = formatOptions(
+          removeObjects(data, connections)
+        );
+        setOptions(formattedOptions);
       }
     }
   };
 
   useEffect(() => {
     getData();
-  }, [projectItemId]);
+  }, [projectItemId, open]);
 
   return (
     <>
-      <CreateConnectionModal
-        open={open}
-        setOpen={setOpen}
-        projectItemId={projectItemId}
-        itemId={itemId}
-        itemType={itemType}
-      />
+      {options && (
+        <CreateConnectionModal
+          open={open}
+          setOpen={setOpen}
+          projectItemId={projectItemId}
+          itemId={itemId}
+          itemType={itemType}
+          options={options}
+        />
+      )}
 
       <section
         aria-labelledby="timeline-title"
@@ -184,13 +250,15 @@ export default function Connection({ projectItemId, itemId, itemType }: any) {
             className="text-lg font-medium text-gray-900 flex justify-between items-center"
           >
             Connections
-            <button
-              type="button"
-              className="inline-flex items-center justify-center rounded-md border border-transparent bg-blue-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-100"
-              onClick={() => setOpen(true)}
-            >
-              Add Connection
-            </button>
+            {options && (
+              <button
+                type="button"
+                className="inline-flex items-center justify-center rounded-md border border-transparent bg-blue-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-100"
+                onClick={() => setOpen(true)}
+              >
+                Add Connection
+              </button>
+            )}
           </h2>
 
           {/* Activity Feed */}
@@ -199,7 +267,7 @@ export default function Connection({ projectItemId, itemId, itemType }: any) {
               className="flex-1 space-y-1 bg-white px-2"
               aria-label="Sidebar"
             >
-              {navigation.map((item) =>
+              {navData.map((item) =>
                 !item.children ? (
                   <div key={item.name}>
                     <a
@@ -261,7 +329,17 @@ export default function Connection({ projectItemId, itemId, itemType }: any) {
                               href={subItem.href}
                               className="group flex w-full items-center rounded-md py-2 pl-11 pr-2 text-sm font-medium text-gray-600 hover:bg-gray-50 hover:text-gray-900"
                             >
-                              {subItem.name}
+                              <div className="flex justify-between w-full">
+                                <span>{subItem.name}</span>
+                                <MinusCircleIcon
+                                  width={24}
+                                  className="hover:scale-110 hover:text-red-400"
+                                  onClick={(e: any) => {
+                                    e.preventDefault();
+                                    deleteExistingConnection(subItem.id);
+                                  }}
+                                />
+                              </div>
                             </Disclosure.Button>
                           ))}
                         </Disclosure.Panel>

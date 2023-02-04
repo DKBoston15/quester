@@ -1,26 +1,31 @@
-import { Fragment, useState } from 'react';
+import { Fragment, useEffect, useState } from 'react';
 import { Dialog, Transition } from '@headlessui/react';
 import { XMarkIcon } from '@heroicons/react/24/outline';
 import { useCreateConnection } from 'hooks/connections/useCreateConnection';
+import { getDataURL } from '@excalidraw/excalidraw/types/data/blob';
+import useAllOptionsQuery from 'hooks/connections/useAllOptions';
+import { useUser } from '@/utils/useUser';
+import InputTypeSelectionDropdown from '../InputFields/InputTypeSelectionDropdown';
 
 export default function CreateConnectionModal({
   open,
   setOpen,
   projectItemId,
   itemId,
-  itemType
+  itemType,
+  options
 }: any) {
-  const [selectedConnection, setSelectedConnection] = useState('');
   const createConnection = useCreateConnection();
+  const [option, setSelectedOption] = useState('');
 
   const createNewConnection = async () => {
     await createConnection.mutateAsync({
       projectItemId,
       itemId,
-      itemType
-      // connectedProjectItemId,
-      // connectedItemId,
-      // connectedItemType
+      itemType,
+      connectedProjectItemId: option.project_item_id,
+      connectedItemId: option.item_id,
+      connectedItemType: option.source_table
     });
 
     setOpen(false);
@@ -40,7 +45,6 @@ export default function CreateConnectionModal({
         >
           <div className="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" />
         </Transition.Child>
-
         <div className="fixed inset-0 z-10 overflow-y-auto">
           <div className="flex min-h-full items-center justify-center p-4 text-center sm:items-center sm:p-0">
             <Transition.Child
@@ -69,12 +73,12 @@ export default function CreateConnectionModal({
                       Create a new connection
                     </h3>
                     <form className="mt-5 sm:flex sm:items-center w-full flex-col flex">
-                      {/* <InputTypeSelectionDropdown
-                        selectedType={type}
-                        setSelectedType={setType}
-                        title=" Type"
-                        list={articleTypes}
-                      /> */}
+                      <InputTypeSelectionDropdown
+                        selectedType={option}
+                        setSelectedType={setSelectedOption}
+                        title="Connections"
+                        list={options}
+                      />
                     </form>
                   </div>
                 </div>

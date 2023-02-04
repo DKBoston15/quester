@@ -19,7 +19,6 @@ export const useCreateTask = () => {
     },
     {
       onSuccess: () => {
-        console.log('success');
         queryClient.invalidateQueries('tasks');
       }
     }
