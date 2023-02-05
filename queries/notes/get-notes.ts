@@ -5,14 +5,6 @@ export const getNotesById = async ({
   itemId,
   itemType
 }: any) => {
-  if (!itemId && !itemType) {
-    return supabase
-      .from('notes')
-      .select(`*`)
-      .eq('project_item_id', parseInt(projectItemId))
-      .order('created_at', { ascending: false });
-  }
-
   return supabase
     .from('notes')
     .select(`*`)

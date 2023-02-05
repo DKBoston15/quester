@@ -2,11 +2,11 @@ import { supabase } from '../../utils/supabase-client';
 
 export async function createDesign(
   title: string,
-  link: string,
   technique: string,
   option: boolean,
   startDate: string,
   endDate: string,
+  link: string,
   projectItemId: number,
   userId: string
 ) {

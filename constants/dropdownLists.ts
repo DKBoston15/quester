@@ -30,3 +30,18 @@ export const articleTypes = [
   { id: 29, name: 'Private Report Other' },
   { id: 30, name: 'Other' }
 ];
+
+export const designTechniques = [
+  { id: 1, name: 'Experimental' },
+  { id: 2, name: 'Observational' },
+  { id: 3, name: 'Other' }
+];
+
+export const designOptions = [
+  { id: 1, name: 'Lab Trials' },
+  { id: 2, name: 'Field Trials' },
+  { id: 3, name: 'Cross-sectional' },
+  { id: 4, name: 'Case-control' },
+  { id: 5, name: 'Cohort' },
+  { id: 6, name: 'Other' }
+];

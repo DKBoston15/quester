@@ -18,7 +18,6 @@ import {
 } from '@heroicons/react/24/outline';
 import { supabase } from '@/utils/supabase-client';
 import CreateConnectionModal from '../CreateModals/CreateConnectionModal';
-import useAllOptionsQuery from 'hooks/connections/useAllOptions';
 import { useUser } from '@/utils/useUser';
 import { useDeleteConnection } from 'hooks/connections/useDeleteConnection';
 
@@ -103,8 +102,8 @@ const navigation = [
   }
 ];
 
-function removeObjects(sourceArray, removeArray) {
-  return sourceArray.filter((sourceItem) => {
+function removeObjects(sourceArray, removeArray, itemId, itemType) {
+  let data = sourceArray.filter((sourceItem) => {
     return !removeArray.some((removeItem) => {
       return (
         sourceItem.source_table === removeItem.connected_item_type &&
@@ -112,6 +111,10 @@ function removeObjects(sourceArray, removeArray) {
       );
     });
   });
+  data = data.filter(
+    (item) => item.item_id != itemId || item.source_table !== itemType
+  );
+  return data;
 }
 
 const getTitle = (key: string) => {
@@ -216,7 +219,7 @@ export default function Connection({ projectItemId, itemId, itemType }: any) {
           userid: user.id
         });
         const formattedOptions = formatOptions(
-          removeObjects(data, connections)
+          removeObjects(data, connections, itemId, itemType)
         );
         setOptions(formattedOptions);
       }

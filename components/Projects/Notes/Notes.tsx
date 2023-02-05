@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import useGetNotesQuery from 'hooks/notes/useNotes';
 
 import { useCreateNote } from 'hooks/notes/useCreateNote';
@@ -7,12 +7,28 @@ import Note from './Note';
 
 export default function Notes({ projectItemId, itemId, itemType }: any) {
   const createNote = useCreateNote();
+  const [notes, setNotes] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
+  const [isError, setIsError] = useState(false);
 
-  const {
-    data: notes,
-    isLoading,
-    isError
-  } = useGetNotesQuery({ projectItemId, itemId, itemType });
+  const fetchData = async () => {
+    try {
+      const data = await useGetNotesQuery({
+        projectItemId,
+        itemId,
+        itemType
+      });
+      setNotes(data);
+      setIsLoading(false);
+    } catch (error) {
+      setIsError(true);
+    }
+  };
+
+  useEffect(() => {
+    fetchData();
+  }, [projectItemId]);
+
   const [body, setBody] = useState('');
 
   const createNewNote = async () => {
@@ -22,7 +38,7 @@ export default function Notes({ projectItemId, itemId, itemType }: any) {
       itemId,
       itemType
     });
-
+    fetchData();
     setBody('');
   };
 
@@ -30,6 +46,7 @@ export default function Notes({ projectItemId, itemId, itemType }: any) {
     <section aria-labelledby="notes-title">
       {!isLoading && (
         <div className="sm:overflow-hidden sm:rounded-lg">
+          {console.log(notes)}
           <div className="divide-y divide-gray-200">
             <div className="px-4 py-5 sm:px-6">
               <h2

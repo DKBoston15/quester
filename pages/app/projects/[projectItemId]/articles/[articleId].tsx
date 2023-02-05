@@ -1,18 +1,7 @@
 import Layout from '@/components/Layout/Layout';
 import ProjectItemPageTitle from '@/components/Layout/PageTitle/ProjectItemPageTitle';
-import TestContentCard from '@/components/Projects/ContentCards/ProjectContentCard';
 import React from 'react';
-import { Disclosure } from '@headlessui/react';
-import {
-  PaperClipIcon,
-  QuestionMarkCircleIcon,
-  CalendarIcon,
-  ChartBarIcon,
-  FolderIcon,
-  HomeIcon,
-  InboxIcon,
-  UsersIcon
-} from '@heroicons/react/24/outline';
+import { PaperClipIcon } from '@heroicons/react/24/outline';
 import { useRouter } from 'next/router';
 import Notes from '@/components/Projects/Notes/Notes';
 import Connection from '@/components/Projects/Connection/Connection';
