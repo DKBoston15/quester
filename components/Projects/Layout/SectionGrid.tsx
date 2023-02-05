@@ -137,7 +137,7 @@ export default function SectionGrid({ projectItemId }: any) {
           }
         >
           <div className="flex w-full items-center justify-between space-x-6 p-6">
-            <div className="flex-1 truncate">
+            <div className="flex-1 whitespace-none">
               <div className="flex items-center space-x-3">
                 <h3 className="truncate text-sm font-medium text-gray-900 dark:text-white">
                   {section.name}
@@ -148,7 +148,7 @@ export default function SectionGrid({ projectItemId }: any) {
                   {section.section}
                 </span>
               </div>
-              <p className="mt-1 truncate text-sm text-gray-500 dark:text-gray-400">
+              <p className="mt-1 text-sm text-gray-500 dark:text-gray-400">
                 {section.title}
               </p>
             </div>

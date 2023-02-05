@@ -1,34 +1,29 @@
-import { Fragment, useEffect, useState } from 'react';
+import { Fragment, useState } from 'react';
 import { Dialog, Transition } from '@headlessui/react';
 import { XMarkIcon } from '@heroicons/react/24/outline';
-import { useCreateConnection } from 'hooks/connections/useCreateConnection';
-import { getDataURL } from '@excalidraw/excalidraw/types/data/blob';
-import useAllOptionsQuery from 'hooks/connections/useAllOptions';
-import { useUser } from '@/utils/useUser';
-import InputTypeSelectionDropdown from '../InputFields/InputTypeSelectionDropdown';
+import { useCreateResearcher } from 'hooks/researchers/useCreateResearcher';
 
-export default function CreateConnectionModal({
+export default function CreateResearcherModal({
   open,
   setOpen,
-  projectItemId,
-  itemId,
-  itemType,
-  options
+  projectItemId
 }: any) {
-  const createConnection = useCreateConnection();
-  const [option, setSelectedOption] = useState('');
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
+  const [email, setEmail] = useState('');
+  const createResearcher = useCreateResearcher();
 
-  const createNewConnection = async () => {
-    await createConnection.mutateAsync({
-      projectItemId,
-      itemId,
-      itemType,
-      connectedProjectItemId: option.project_item_id,
-      connectedItemId: option.item_id,
-      connectedItemType:
-        option.source_table === 'Key Terms' ? 'key_terms' : option.source_table
+  const createNewResearcher = async () => {
+    await createResearcher.mutateAsync({
+      firstName,
+      lastName,
+      email,
+      projectItemId
     });
 
+    setFirstName('');
+    setLastName('');
+    setEmail('');
     setOpen(false);
   };
 
@@ -46,6 +41,7 @@ export default function CreateConnectionModal({
         >
           <div className="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" />
         </Transition.Child>
+
         <div className="fixed inset-0 z-10 overflow-y-auto">
           <div className="flex min-h-full items-center justify-center p-4 text-center sm:items-center sm:p-0">
             <Transition.Child
@@ -57,7 +53,7 @@ export default function CreateConnectionModal({
               leaveFrom="opacity-100 translate-y-0 sm:scale-100"
               leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
             >
-              <Dialog.Panel className="relative transform rounded-lg sm:h-80 h-96 bg-white px-4 pt-5 pb-4 text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg sm:p-6">
+              <Dialog.Panel className="relative transform rounded-lg sm:h-[26rem] h-[26rem] bg-white px-4 pt-5 pb-4 text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg sm:p-6">
                 <div className="absolute top-0 right-0 hidden pt-4 pr-4 sm:block">
                   <button
                     type="button"
@@ -71,15 +67,49 @@ export default function CreateConnectionModal({
                 <div className="sm:flex sm:items-start w-full">
                   <div className="px-2 py-5 sm:p-6 w-full h-full">
                     <h3 className="text-lg font-medium leading-6 text-gray-900">
-                      Create a new connection
+                      Create a new researcher
                     </h3>
                     <form className="mt-5 sm:flex sm:items-center w-full flex-col flex">
-                      <InputTypeSelectionDropdown
-                        selectedType={option}
-                        setSelectedType={setSelectedOption}
-                        title="Connections"
-                        list={options}
-                      />
+                      <div className="w-full">
+                        <label htmlFor="firstName" className="sr-only">
+                          First Name
+                        </label>
+                        <input
+                          name="firstName"
+                          id="firstName"
+                          className="block w-full rounded-md border border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm text-black h-12 pl-2"
+                          placeholder="First Name"
+                          value={firstName}
+                          onChange={(e) => setFirstName(e.target.value)}
+                        />
+                      </div>
+                      <div className="w-full mt-6">
+                        <label htmlFor="lastName" className="sr-only">
+                          Last Name
+                        </label>
+                        <input
+                          name="lastName"
+                          id="lastName"
+                          className="block w-full rounded-md border border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm text-black h-12 pl-2"
+                          placeholder="Last Name"
+                          value={lastName}
+                          onChange={(e) => setLastName(e.target.value)}
+                        />
+                      </div>
+                      <div className="w-full mt-6">
+                        <label htmlFor="email" className="sr-only">
+                          Email
+                        </label>
+                        <input
+                          name="email"
+                          id="email"
+                          type="email"
+                          className="block w-full rounded-md border border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm text-black h-12 pl-2"
+                          placeholder="Email"
+                          value={email}
+                          onChange={(e) => setEmail(e.target.value)}
+                        />
+                      </div>
                     </form>
                   </div>
                 </div>
@@ -87,7 +117,7 @@ export default function CreateConnectionModal({
                   <button
                     className="inline-flex w-full justify-center rounded-md border border-transparent bg-green-600 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 sm:ml-3 sm:w-auto sm:text-sm"
                     type="submit"
-                    onClick={() => createNewConnection()}
+                    onClick={() => createNewResearcher()}
                   >
                     Create
                   </button>

@@ -3,8 +3,8 @@ import { supabase } from '../../utils/supabase-client';
 export async function createTechnique(
   title: string,
   link: string,
-  method: string,
   technique: string,
+  method: string,
   projectItemId: number,
   userId: string
 ) {

@@ -22,7 +22,7 @@ export default function Figures() {
                   {projectItemId && (
                     <FigureTable
                       projectItemId={projectItemId}
-                      setSelectedArticle={setSelectedFigure}
+                      setSelectedFigure={setSelectedFigure}
                     />
                   )}
                 </div>

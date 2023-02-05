@@ -22,7 +22,7 @@ export default function Designs() {
                   {projectItemId && (
                     <DesignTable
                       projectItemId={projectItemId}
-                      setSelectedArticle={setSelectedDesign}
+                      setSelectedDesign={setSelectedDesign}
                     />
                   )}
                 </div>

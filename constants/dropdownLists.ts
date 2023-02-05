@@ -56,3 +56,44 @@ export const figureTypes = [
   { id: 7, name: 'Photograph' },
   { id: 8, name: 'Other' }
 ];
+
+export const modelTypes = [
+  { id: 1, name: 'Empirical' },
+  { id: 2, name: 'Conceptual' },
+  { id: 3, name: 'Theoretical' },
+  { id: 4, name: 'Other' }
+];
+
+export const paradigmTypes = [
+  { id: 1, name: 'Qualitative' },
+  { id: 2, name: 'Quantitative' },
+  { id: 3, name: 'Mixed Methods' },
+  { id: 4, name: 'Other' }
+];
+
+export const sampleDesigns = [
+  { id: 1, name: 'Probability' },
+  { id: 2, name: 'Non-Probability' },
+  { id: 3, name: 'Other' }
+];
+
+export const sampleTechniques = [
+  { id: 1, name: 'Simple Random' },
+  { id: 2, name: 'Cluster' },
+  { id: 3, name: 'Stratified' },
+  { id: 4, name: 'Convenience' },
+  { id: 5, name: 'Snowball' },
+  { id: 6, name: 'Purposive' },
+  { id: 7, name: 'Other' }
+];
+
+export const techniqueTechniques = [
+  { id: 1, name: 'Qualitative' },
+  { id: 2, name: 'Quantitative' },
+  { id: 3, name: 'Textual' },
+  { id: 4, name: 'Statistical' },
+  { id: 5, name: 'Diagnostic' },
+  { id: 6, name: 'Predictive' },
+  { id: 7, name: 'Prescriptive' },
+  { id: 8, name: 'Other' }
+];

@@ -151,11 +151,19 @@ const getTitle = (key: string) => {
 const formatOptions = (options: any[]) => {
   const optionArr = [];
   options.forEach((option, index) => {
+    console.log(option);
     if (option.source_table === 'researchers') {
       optionArr.push({
         ...option,
         id: index,
         name: `${option.first_name} ${option.last_name}`
+      });
+    } else if (option.source_table === 'key_terms') {
+      optionArr.push({
+        ...option,
+        source_table: 'Key Terms',
+        id: index,
+        name: option.title
       });
     } else {
       optionArr.push({
@@ -199,9 +207,16 @@ export default function Connection({ projectItemId, itemId, itemType }: any) {
       if (!error && data) {
         newNavArr = [...navigation]; // create a new array from the navigation data
         data.forEach((connection) => {
-          const navIndex = newNavArr.findIndex(
-            (nav) => nav.name.toLowerCase() === connection.connected_item_type
-          );
+          let navIndex;
+          if (connection.connected_item_type === 'key_terms') {
+            navIndex = newNavArr.findIndex((nav) => nav.name === 'Key Terms');
+          } else {
+            navIndex = newNavArr.findIndex(
+              (nav) => nav.name.toLowerCase() === connection.connected_item_type
+            );
+          }
+
+          console.log(connection, navIndex);
 
           newNavArr[navIndex] = { ...newNavArr[navIndex] }; // create a new object
           newNavArr[navIndex].children = [...newNavArr[navIndex].children]; // create a new children array
