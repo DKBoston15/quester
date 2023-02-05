@@ -45,3 +45,14 @@ export const designOptions = [
   { id: 5, name: 'Cohort' },
   { id: 6, name: 'Other' }
 ];
+
+export const figureTypes = [
+  { id: 1, name: 'Line Graph' },
+  { id: 2, name: 'Bar Graph' },
+  { id: 3, name: 'Chart' },
+  { id: 4, name: 'Drawing' },
+  { id: 5, name: 'Map' },
+  { id: 6, name: 'Plot' },
+  { id: 7, name: 'Photograph' },
+  { id: 8, name: 'Other' }
+];

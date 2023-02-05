@@ -1,31 +1,31 @@
 import { Fragment, useState } from 'react';
 import { Dialog, Transition } from '@headlessui/react';
 import { XMarkIcon } from '@heroicons/react/24/outline';
-import { designOptions, designTechniques } from 'constants/dropdownLists';
+import { figureTypes } from 'constants/dropdownLists';
 import InputTypeSelectionDropdown from '../InputFields/InputTypeSelectionDropdown';
-import { useCreateDesign } from 'hooks/designs/useCreateDesign';
+import { useCreateFigure } from 'hooks/figures/useCreateFigure';
 
-export default function CreateDesignModal({
+export default function CreateFigureModal({
   open,
   setOpen,
   projectItemId
 }: any) {
   const [title, setTitle] = useState('');
-  const [technique, setTechnique] = useState('');
-  const [option, setOption] = useState('');
-  const createDesign = useCreateDesign();
+  const [type, setType] = useState('');
+  const [number, setNumber] = useState('');
+  const createFigure = useCreateFigure();
 
-  const createNewDesign = async () => {
-    await createDesign.mutateAsync({
+  const createNewFigure = async () => {
+    await createFigure.mutateAsync({
       title,
-      technique: technique.name,
-      option: option.name,
+      type: type.name,
+      number,
       projectItemId
     });
 
     setTitle('');
-    setTechnique('');
-    setOption('');
+    setType('');
+    setNumber('');
     setOpen(false);
   };
 
@@ -69,34 +69,41 @@ export default function CreateDesignModal({
                 <div className="sm:flex sm:items-start w-full">
                   <div className="px-2 py-5 sm:p-6 w-full h-full">
                     <h3 className="text-lg font-medium leading-6 text-gray-900">
-                      Create a new design
+                      Create a new figure
                     </h3>
                     <form className="mt-5 sm:flex sm:items-center w-full flex-col flex">
                       <div className="w-full">
-                        <label htmlFor="designName" className="sr-only">
-                          Design
+                        <label htmlFor="figureName" className="sr-only">
+                          Figure
                         </label>
                         <input
-                          name="designName"
-                          id="designName"
+                          name="figureName"
+                          id="figureName"
                           className="block w-full rounded-md border border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm text-black h-12 pl-2"
-                          placeholder="Design Name"
+                          placeholder="Figure Name"
                           value={title}
                           onChange={(e) => setTitle(e.target.value)}
                         />
                       </div>
                       <InputTypeSelectionDropdown
-                        selectedType={technique}
-                        setSelectedType={setTechnique}
-                        title="Design Technique"
-                        list={designTechniques}
+                        selectedType={type}
+                        setSelectedType={setType}
+                        title="Figure Technique"
+                        list={figureTypes}
                       />
-                      <InputTypeSelectionDropdown
-                        selectedType={option}
-                        setSelectedType={setOption}
-                        title="Design Option"
-                        list={designOptions}
-                      />
+                      <div className="w-full mt-6">
+                        <label htmlFor="number" className="sr-only">
+                          Number
+                        </label>
+                        <input
+                          name="number"
+                          id="number"
+                          className="block w-full rounded-md border border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm text-black h-12 pl-2"
+                          placeholder="Number"
+                          value={number}
+                          onChange={(e) => setNumber(e.target.value)}
+                        />
+                      </div>
                     </form>
                   </div>
                 </div>
@@ -104,7 +111,7 @@ export default function CreateDesignModal({
                   <button
                     className="inline-flex w-full justify-center rounded-md border border-transparent bg-green-600 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 sm:ml-3 sm:w-auto sm:text-sm"
                     type="submit"
-                    onClick={() => createNewDesign()}
+                    onClick={() => createNewFigure()}
                   >
                     Create
                   </button>

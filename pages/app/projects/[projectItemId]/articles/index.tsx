@@ -3,7 +3,6 @@ import ProjectItemPageTitle from '@/components/Layout/PageTitle/ProjectItemPageT
 import React, { useState } from 'react';
 import ArticleTable from '@/components/Projects/Tables/ArticleTable';
 import { useRouter } from 'next/router';
-import ArticleSideBar from '@/components/Projects/ProjectItemSideBars/ArticleSideBar';
 
 export default function Articles() {
   const router = useRouter();

@@ -1,9 +1,7 @@
 import Layout from '@/components/Layout/Layout';
 import ProjectItemPageTitle from '@/components/Layout/PageTitle/ProjectItemPageTitle';
 import React, { useState } from 'react';
-import ArticleTable from '@/components/Projects/Tables/ArticleTable';
 import { useRouter } from 'next/router';
-import ArticleSideBar from '@/components/Projects/ProjectItemSideBars/ArticleSideBar';
 import DesignTable from '@/components/Projects/Tables/DesignTable';
 
 export default function Designs() {
