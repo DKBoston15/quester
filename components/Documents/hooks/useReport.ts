@@ -6,7 +6,7 @@
  *
  */
 
-import {useCallback, useEffect, useRef} from 'react';
+import { useCallback, useEffect, useRef } from 'react';
 
 const getElement = (): HTMLElement => {
   let element = document.getElementById('report-container');
@@ -32,7 +32,7 @@ const getElement = (): HTMLElement => {
 };
 
 export default function useReport(): (
-  arg0: string,
+  arg0: string
 ) => ReturnType<typeof setTimeout> {
   const timer = useRef<ReturnType<typeof setTimeout> | null>(null);
   const cleanup = useCallback(() => {
@@ -52,13 +52,12 @@ export default function useReport(): (
   return useCallback(
     (content) => {
       // eslint-disable-next-line no-console
-      console.log(content);
       const element = getElement();
       clearTimeout(timer.current as ReturnType<typeof setTimeout>);
       element.innerHTML = content;
       timer.current = setTimeout(cleanup, 1000);
       return timer.current;
     },
-    [cleanup],
+    [cleanup]
   );
 }

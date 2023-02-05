@@ -151,7 +151,6 @@ const getTitle = (key: string) => {
 const formatOptions = (options: any[]) => {
   const optionArr = [];
   options.forEach((option, index) => {
-    console.log(option);
     if (option.source_table === 'researchers') {
       optionArr.push({
         ...option,
@@ -215,8 +214,6 @@ export default function Connection({ projectItemId, itemId, itemType }: any) {
               (nav) => nav.name.toLowerCase() === connection.connected_item_type
             );
           }
-
-          console.log(connection, navIndex);
 
           newNavArr[navIndex] = { ...newNavArr[navIndex] }; // create a new object
           newNavArr[navIndex].children = [...newNavArr[navIndex].children]; // create a new children array

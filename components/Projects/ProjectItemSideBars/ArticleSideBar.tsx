@@ -6,7 +6,6 @@ export default function ArticleSideBar({
   selectedArticle
 }: any) {
   const router = useRouter();
-  console.log(selectedArticle);
   return (
     <div className="flex flex-col">
       <div className=" flex flex-col">

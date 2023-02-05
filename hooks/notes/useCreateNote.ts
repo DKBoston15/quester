@@ -8,7 +8,6 @@ export const useCreateNote = () => {
 
   return useMutation(
     ({ body, projectItemId, itemId, itemType }: any) => {
-      console.log(user);
       return createNote(body, projectItemId, user.id, itemId, itemType).then(
         (result) => result.data
       );

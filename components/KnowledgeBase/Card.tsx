@@ -1,7 +1,6 @@
 import React from 'react';
 
 export default function Card({ item }: any) {
-  console.log(item.paradigm.link);
   return (
     <div className="relative flex items-center space-x-3 rounded-lg border border-gray-300 bg-white px-6 pb-5 shadow-sm hover:border-gray-400">
       <div className="min-w-0 flex-1">

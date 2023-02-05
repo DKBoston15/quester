@@ -27,7 +27,6 @@ export const useCreateConnection = () => {
     },
     {
       onSuccess: () => {
-        console.log('invalidating');
         queryClient.invalidateQueries('connections');
       }
     }

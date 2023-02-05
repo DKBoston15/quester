@@ -20,7 +20,6 @@ export async function createArticle(
   projectItemId: number,
   userId: string
 ) {
-  console.log(projectItemId);
   return supabase.from('articles').insert([
     {
       title,

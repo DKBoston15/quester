@@ -9,7 +9,6 @@ async function useGetNotesQuery({ projectItemId, itemId, itemType }: any) {
       (result) => result.data
     )
   };
-  console.log(await query.queryFn);
   return await query.queryFn;
 }
 
