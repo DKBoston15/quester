@@ -1394,6 +1394,11 @@
   "resolved" "https://registry.npmjs.org/function-bind/-/function-bind-1.1.1.tgz"
   "version" "1.1.1"
 
+"fuzzy-search@^3.2.1":
+  "integrity" "sha512-vAcPiyomt1ioKAsAL2uxSABHJ4Ju/e4UeDM+g1OlR0vV4YhLGMNsdLNvZTpEDY4JCSt0E4hASCNM5t2ETtsbyg=="
+  "resolved" "https://registry.npmjs.org/fuzzy-search/-/fuzzy-search-3.2.1.tgz"
+  "version" "3.2.1"
+
 "gauge@^4.0.3":
   "integrity" "sha512-f9m+BEN5jkg6a0fZjleidjN51VE1X+mPFQ2DJ0uv1V39oCLCbsGe6yjbBnp7eK7z/+GAon99a3nHuqbuuthyPg=="
   "resolved" "https://registry.npmjs.org/gauge/-/gauge-4.0.4.tgz"

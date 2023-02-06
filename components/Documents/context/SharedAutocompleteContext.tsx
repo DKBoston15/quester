@@ -1,11 +1,3 @@
-/**
- * Copyright (c) Meta Platforms, Inc. and affiliates.
- *
- * This source code is licensed under the MIT license found in the
- * LICENSE file in the root directory of this source tree.
- *
- */
-
 import * as React from 'react';
 import {
   createContext,
@@ -13,7 +5,7 @@ import {
   useContext,
   useEffect,
   useMemo,
-  useState,
+  useState
 } from 'react';
 
 type Suggestion = null | string;
@@ -29,11 +21,11 @@ const Context: React.Context<ContextShape> = createContext([
   },
   (_newSuggestion: Suggestion) => {
     return;
-  },
+  }
 ]);
 
 export const SharedAutocompleteContext = ({
-  children,
+  children
 }: {
   children: ReactNode;
 }): JSX.Element => {
@@ -53,7 +45,7 @@ export const SharedAutocompleteContext = ({
         for (const listener of listeners) {
           listener(newSuggestion);
         }
-      },
+      }
     ];
   }, []);
   return <Context.Provider value={context}>{children}</Context.Provider>;

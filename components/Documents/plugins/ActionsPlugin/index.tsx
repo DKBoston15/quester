@@ -209,7 +209,7 @@ export default function ActionsPlugin({
       >
         <i className="clear" />
       </button>
-      <button
+      {/* <button
         className={`action-button ${!isEditable ? 'unlock' : 'lock'}`}
         onClick={() => {
           // Send latest editor state to commenting validation server
@@ -222,7 +222,7 @@ export default function ActionsPlugin({
         aria-label={`${!isEditable ? 'Unlock' : 'Lock'} read-only mode`}
       >
         <i className={!isEditable ? 'unlock' : 'lock'} />
-      </button>
+      </button> */}
       <button
         className="action-button"
         onClick={handleMarkdownToggle}

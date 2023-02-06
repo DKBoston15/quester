@@ -1,15 +1,14 @@
-/**
- * Copyright (c) Meta Platforms, Inc. and affiliates.
- *
- * This source code is licensed under the MIT license found in the
- * LICENSE file in the root directory of this source tree.
- *
- */
-
 import type { SettingName } from '../appSettings';
 
 import * as React from 'react';
-import { createContext, ReactNode, useCallback, useContext, useMemo, useState } from 'react';
+import {
+  createContext,
+  ReactNode,
+  useCallback,
+  useContext,
+  useMemo,
+  useState
+} from 'react';
 
 import { DEFAULT_SETTINGS } from '../appSettings';
 
@@ -22,16 +21,20 @@ const Context: React.Context<SettingsContextShape> = createContext({
   setOption: (name: SettingName, value: boolean) => {
     return;
   },
-  settings: DEFAULT_SETTINGS,
+  settings: DEFAULT_SETTINGS
 });
 
-export const SettingsContext = ({ children }: { children: ReactNode }): JSX.Element => {
+export const SettingsContext = ({
+  children
+}: {
+  children: ReactNode;
+}): JSX.Element => {
   const [settings, setSettings] = useState(DEFAULT_SETTINGS);
 
   const setOption = useCallback((setting: SettingName, value: boolean) => {
     setSettings((options) => ({
       ...options,
-      [setting as string]: value,
+      [setting as string]: value
     }));
     if (DEFAULT_SETTINGS[setting] === value) {
       setURLParam(setting, null);

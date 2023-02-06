@@ -1,12 +1,9 @@
-/**
- * Copyright (c) Meta Platforms, Inc. and affiliates.
- *
- * This source code is licensed under the MIT license found in the
- * LICENSE file in the root directory of this source tree.
- *
- */
-
-import type { LexicalEditor, NodeKey } from 'lexical';
+import {
+  $isParagraphNode,
+  CLEAR_EDITOR_COMMAND,
+  LexicalEditor,
+  NodeKey
+} from 'lexical';
 
 import {
   $createCodeNode,
@@ -89,6 +86,7 @@ import {
 } from '../ImagesPlugin';
 import { InsertPollDialog } from '../PollPlugin';
 import { InsertNewTableDialog, InsertTableDialog } from '../TablePlugin';
+import Button from '../../ui/Button';
 
 const blockTypeToBlockName = {
   bullet: 'Bulleted List',
@@ -409,6 +407,7 @@ export default function ToolbarPlugin(): JSX.Element {
   const [isRTL, setIsRTL] = useState(false);
   const [codeLanguage, setCodeLanguage] = useState<string>('');
   const [isEditable, setIsEditable] = useState(() => editor.isEditable());
+  const [isEditorEmpty, setIsEditorEmpty] = useState(true);
 
   const updateToolbar = useCallback(() => {
     const selection = $getSelection();
@@ -568,6 +567,39 @@ export default function ToolbarPlugin(): JSX.Element {
     });
   }, [activeEditor]);
 
+  function ShowClearDialog({
+    editor,
+    onClose
+  }: {
+    editor: LexicalEditor;
+    onClose: () => void;
+  }): JSX.Element {
+    return (
+      <>
+        Are you sure you want to clear the editor?
+        <div className="Modal__content">
+          <Button
+            onClick={() => {
+              editor.dispatchCommand(CLEAR_EDITOR_COMMAND, undefined);
+              editor.focus();
+              onClose();
+            }}
+          >
+            Clear
+          </Button>{' '}
+          <Button
+            onClick={() => {
+              editor.focus();
+              onClose();
+            }}
+          >
+            Cancel
+          </Button>
+        </div>
+      </>
+    );
+  }
+
   const onFontColorSelect = useCallback(
     (value: string) => {
       applyStyleText({ color: value });
@@ -607,8 +639,62 @@ export default function ToolbarPlugin(): JSX.Element {
     activeEditor.dispatchCommand(INSERT_IMAGE_COMMAND, payload);
   };
 
+  async function validateEditorState(editor: LexicalEditor): Promise<void> {
+    const stringifiedEditorState = JSON.stringify(editor.getEditorState());
+    let response = null;
+    try {
+      response = await fetch('http://localhost:1235/validateEditorState', {
+        body: stringifiedEditorState,
+        headers: {
+          Accept: 'application/json',
+          'Content-type': 'application/json'
+        },
+        method: 'POST'
+      });
+    } catch {
+      // NO-OP
+    }
+    if (response !== null && response.status === 403) {
+      throw new Error(
+        'Editor state validation failed! Server did not accept changes.'
+      );
+    }
+  }
+
+  useEffect(() => {
+    return editor.registerUpdateListener(
+      ({ dirtyElements, prevEditorState, tags }) => {
+        // If we are in read only mode, send the editor state
+        // to server and ask for validation if possible.
+        if (
+          !isEditable &&
+          dirtyElements.size > 0 &&
+          !tags.has('historic') &&
+          !tags.has('collaboration')
+        ) {
+          validateEditorState(editor);
+        }
+        editor.getEditorState().read(() => {
+          const root = $getRoot();
+          const children = root.getChildren();
+
+          if (children.length > 1) {
+            setIsEditorEmpty(false);
+          } else {
+            if ($isParagraphNode(children[0])) {
+              const paragraphChildren = children[0].getChildren();
+              setIsEditorEmpty(paragraphChildren.length === 0);
+            } else {
+              setIsEditorEmpty(false);
+            }
+          }
+        });
+      }
+    );
+  }, [editor, isEditable]);
+
   return (
-    <div className="toolbar">
+    <div className="toolbar border-b border-1-black flex justify-center">
       <button
         disabled={!canUndo || !isEditable}
         onClick={() => {
@@ -1039,7 +1125,19 @@ export default function ToolbarPlugin(): JSX.Element {
           <span className="text">Indent</span>
         </DropDownItem>
       </DropDown>
-
+      <button
+        className="toolbar-item spaced"
+        disabled={isEditorEmpty}
+        onClick={() => {
+          showModal('Clear editor', (onClose) => (
+            <ShowClearDialog editor={editor} onClose={onClose} />
+          ));
+        }}
+        title="Clear"
+        aria-label="Clear editor contents"
+      >
+        <i className="format clear" />
+      </button>
       {modal}
     </div>
   );

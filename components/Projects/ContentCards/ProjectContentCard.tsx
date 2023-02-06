@@ -56,7 +56,7 @@ export default function ProjectContentCard({ projectItemId }: any) {
                       onChange={(e) => setProjectTitle(e.target.value)}
                       name="title"
                       id="title"
-                      className="block w-full rounded-md border-gray-300 border p-2 w-full focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                      className="block w-full rounded-md border-gray-300 border p-2 w-full focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm text-black"
                       placeholder="Project Title"
                     />
                   </>

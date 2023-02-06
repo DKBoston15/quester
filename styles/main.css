@@ -9,7 +9,7 @@
 }
 
 *:focus {
-  @apply outline-none ring-2 ring-pink-500 ring-opacity-50;
+  /* @apply outline-none ring-2 ring-pink-500 ring-opacity-50; */
 }
 
 html {
@@ -1004,7 +1004,7 @@ i.send {
   box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.3);
   border-radius: 8px;
   transition: opacity 0.5s;
-  height: 35px;
+  height: 45px;
   will-change: transform;
 }
 
@@ -2056,17 +2056,24 @@ i.send {
 
  .editor-shell {
    margin: 20px auto;
-   margin-top: 3rem;
    border-radius: 2px;
    max-width: 1100px;
    color: #000;
    position: relative;
    line-height: 1.7;
    font-weight: 400;
+   height: 100%;
+   padding-bottom: 1.2rem;
+ }
+
+ .editor-border-container {
+  height: 100%;
+    padding-bottom: 3rem;
+    padding-right: 1rem;
+
  }
  
  .editor-shell .editor-container {
-   background: #fff;
    position: relative;
    cursor: text;
    display: block;
@@ -2081,6 +2088,7 @@ i.send {
  .editor-shell .editor-container.plain-text {
    border-top-left-radius: 10px;
    border-top-right-radius: 10px;
+   height: 100%;
  }
  
  .editor-scroller {
@@ -2092,12 +2100,12 @@ i.send {
    position: relative;
    outline: 0;
    overflow: auto;
-   resize: vertical;
+   resize: none;
+   height: 100%;
  }
  
  .editor {
-   height: 50rem;
-   position: relative;
+   height: 100%;
  }
  
  .test-recorder-output {
@@ -3101,11 +3109,11 @@ i.send {
  }
  
  .actions {
-   position: absolute;
+   position: fixed;
    text-align: right;
-   padding: 10px;
-   bottom: 0;
-   right: 0;
+   bottom: 2rem;
+   right: 27rem;
+   
  }
  
  .actions.tree-view {
@@ -3204,6 +3212,8 @@ i.send {
    padding: 8px 12px;
    position: relative;
    margin-left: 5px;
+   margin-top: 5px;
+   margin-bottom: 5px;
    border-radius: 15px;
    color: #222;
    display: inline-block;
@@ -3300,14 +3310,15 @@ i.send {
  
  .toolbar {
    display: flex;
+   flex-wrap: wrap;
    margin-bottom: 1px;
    background: #fff;
    padding: 4px;
    border-top-left-radius: 10px;
    border-top-right-radius: 10px;
    vertical-align: middle;
-   overflow: auto;
-   height: 36px;
+   overflow:auto;
+   min-height: 36px;
  }
  
  .toolbar button.toolbar-item {
@@ -3474,6 +3485,10 @@ i.send {
    );
  }
  
+.note-container {
+  height: 100%;
+}
+
  .sticky-note-container.dragging {
    transition: none !important;
  }
