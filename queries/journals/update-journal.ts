@@ -8,7 +8,6 @@ export async function updateJournal(
   editor: boolean,
   association: string,
   publicationFreq: string,
-  keyLiterature: string,
   primary: boolean,
   userId: string
 ) {
@@ -20,7 +19,6 @@ export async function updateJournal(
       editor,
       association,
       publication_freq: publicationFreq,
-      key_literature: keyLiterature,
       primary,
       link
     })

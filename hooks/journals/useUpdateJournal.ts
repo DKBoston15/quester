@@ -17,7 +17,6 @@ export const useUpdateJournal = () => {
       editor,
       association,
       publicationFreq,
-      keyLiterature,
       primary
     }: any) => {
       return updateJournal(
@@ -28,7 +27,6 @@ export const useUpdateJournal = () => {
         editor,
         association,
         publicationFreq,
-        keyLiterature,
         primary,
         user.id
       ).then((result) => result.data);
