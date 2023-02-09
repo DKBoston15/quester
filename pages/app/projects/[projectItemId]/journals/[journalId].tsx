@@ -5,9 +5,9 @@ import { PencilIcon } from '@heroicons/react/24/outline';
 import { useRouter } from 'next/router';
 import Notes from '@/components/Projects/Notes/Notes';
 import Connection from '@/components/Projects/Connection/Connection';
-import useGetFigureByIdQuery from 'hooks/figures/useFigureById';
 import { getJournalById } from 'queries/journals/get-journal-by-id';
 import JournalContentCard from '@/components/Projects/ContentCards/JournalContentCard';
+import useGetJournalByIdQuery from 'hooks/journals/useJournalById';
 
 export default function Journal() {
   const router = useRouter();
@@ -17,17 +17,17 @@ export default function Journal() {
     data: pulledJournal,
     isLoading,
     isError
-  } = useGetFigureByIdQuery({ id: journalId });
+  } = useGetJournalByIdQuery({ id: journalId });
   const [journal, setJournal] = useState();
 
   useEffect(() => {
-    const getFigure = async () => {
+    const getJournal = async () => {
       if (journalId) {
         const retrievedJournal = await getJournalById({ id: journalId });
         setJournal(retrievedJournal.data[0]);
       }
     };
-    getFigure();
+    getJournal();
   }, [journalId, pulledJournal]);
 
   return (
