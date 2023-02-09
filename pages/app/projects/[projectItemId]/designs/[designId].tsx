@@ -6,7 +6,7 @@ import { useRouter } from 'next/router';
 import Notes from '@/components/Projects/Notes/Notes';
 import Connection from '@/components/Projects/Connection/Connection';
 import DesignContentCard from '@/components/Projects/ContentCards/DesignContentCard';
-import useGetDesignByIdQuery from 'hooks/designs/useCreateDesignById';
+import useGetDesignByIdQuery from 'hooks/designs/useGetDesignById';
 import { getDesignById } from 'queries/designs/get-design-by-id';
 
 export default function Design() {

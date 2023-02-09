@@ -1,6 +1,6 @@
 import { findItemByName } from '@/utils/helpers';
 import { designTechniques } from 'constants/dropdownLists';
-import useGetDesignByIdQuery from 'hooks/designs/useCreateDesignById';
+import useGetDesignByIdQuery from 'hooks/designs/useGetDesignById';
 import { useDeleteDesign } from 'hooks/designs/useDeleteDesign';
 import { useUpdateDesign } from 'hooks/designs/useUpdateDesign';
 import { useRouter } from 'next/router';

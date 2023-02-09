@@ -3,9 +3,9 @@ import { supabase } from '../../utils/supabase-client';
 export async function updateFigure(
   id: number,
   title: string,
+  link: string,
   type: string,
   number: string,
-  link: string,
   userId: string
 ) {
   return supabase

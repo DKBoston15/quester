@@ -1,4 +1,4 @@
-import { getDesignById } from './../../queries/designs/get-design-by-id';
+import { getDesignById } from '../../queries/designs/get-design-by-id';
 import { useQuery } from 'react-query';
 
 function useGetDesignByIdQuery({ id }: any) {
