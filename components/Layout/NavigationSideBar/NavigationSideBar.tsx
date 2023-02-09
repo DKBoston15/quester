@@ -19,7 +19,12 @@ import ThemeSelector from '@/components/ThemeSelector';
 
 const navigation = [
   { name: 'Projects', href: '/app/projects', icon: HomeIcon, current: true },
-  { name: 'Documents', href: '#', icon: ScaleIcon, current: false },
+  {
+    name: 'Documents',
+    href: '/app/documents',
+    icon: ScaleIcon,
+    current: false
+  },
   { name: 'Tasks', href: '/app/tasks', icon: CreditCardIcon, current: false },
   {
     name: 'Knowledge Base',

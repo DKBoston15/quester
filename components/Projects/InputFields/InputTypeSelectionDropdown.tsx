@@ -3,39 +3,6 @@ import { CheckIcon, ChevronUpDownIcon } from '@heroicons/react/20/solid';
 import { Combobox } from '@headlessui/react';
 import Tooltip from '@/components/Tooltip';
 
-const articleTypes = [
-  { id: 1, name: 'None' },
-  { id: 2, name: 'Journal Article' },
-  { id: 3, name: 'Primary Research' },
-  { id: 4, name: 'Secondary Research' },
-  { id: 5, name: 'Meta-analysis' },
-  { id: 6, name: 'Other Primary Research' },
-  { id: 7, name: 'Literature Review' },
-  { id: 8, name: 'Systematic Review' },
-  { id: 9, name: 'Other Literature Review' },
-  { id: 10, name: 'Book' },
-  { id: 11, name: 'Monograph' },
-  { id: 12, name: 'Edited Collection' },
-  { id: 13, name: 'Manual' },
-  { id: 14, name: 'Other Book' },
-  { id: 15, name: 'Book Chapter' },
-  { id: 16, name: 'Chapter in an edited collection' },
-  { id: 17, name: 'Chapter in a manual' },
-  { id: 18, name: 'Other Book Chapter' },
-  { id: 19, name: 'Gray Literature' },
-  { id: 20, name: 'Government Report' },
-  { id: 21, name: 'Government Report Brochure' },
-  { id: 22, name: 'Government Report Fact Sheet' },
-  { id: 23, name: 'Government Report White Paper' },
-  { id: 24, name: 'Government Report Other' },
-  { id: 25, name: 'Private Report' },
-  { id: 26, name: 'Private Report Brochure' },
-  { id: 27, name: 'Private Report Fact Sheet' },
-  { id: 28, name: 'Private Report White Paper' },
-  { id: 29, name: 'Private Report Other' },
-  { id: 30, name: 'Other' }
-];
-
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ');
 }
@@ -44,7 +11,9 @@ export default function InputTypeSelectionDropdown({
   selectedType,
   setSelectedType,
   list,
-  title
+  title,
+  widthLimit,
+  width
 }: any) {
   const [query, setQuery] = useState('');
 
@@ -60,7 +29,9 @@ export default function InputTypeSelectionDropdown({
       as="div"
       value={selectedType}
       onChange={setSelectedType}
-      className="w-full mt-4 text-black"
+      className={`mt-4 text-black ${widthLimit ? 'w-10/12' : 'w-full'} ${
+        width ? width : 'w-full'
+      }`}
     >
       <Combobox.Label className="block text-sm font-medium text-gray-700">
         {title}

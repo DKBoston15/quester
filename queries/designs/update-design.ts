@@ -3,11 +3,10 @@ import { supabase } from '../../utils/supabase-client';
 export async function updateDesign(
   id: number,
   title: string,
-  link: string,
   technique: string,
-  option: boolean,
   startDate: string,
   endDate: string,
+  link: string,
   userId: string
 ) {
   return supabase
@@ -15,7 +14,6 @@ export async function updateDesign(
     .update({
       title,
       technique,
-      option,
       start_date: startDate,
       end_date: endDate,
       link

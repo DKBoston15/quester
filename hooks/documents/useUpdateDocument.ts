@@ -9,8 +9,8 @@ export const useUpdateDocument = () => {
   if (!user) return;
 
   return useMutation(
-    ({ id, title, data }: any) => {
-      return updateDocument(id, title, data, user.id).then(
+    ({ id, title, data, projectItemId }: any) => {
+      return updateDocument(id, title, data, projectItemId, user.id).then(
         (result) => result.data
       );
     },

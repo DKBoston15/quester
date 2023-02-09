@@ -97,3 +97,21 @@ export const techniqueTechniques = [
   { id: 7, name: 'Prescriptive' },
   { id: 8, name: 'Other' }
 ];
+
+export const researchDesigns = [
+  { id: 1, name: 'Experimental' },
+  { id: 2, name: 'Survey' },
+  { id: 3, name: 'Correlational' },
+  { id: 4, name: 'Review' },
+  { id: 5, name: 'Other' }
+];
+
+export const analyticDesigns = [
+  { id: 1, name: 'Descriptive' },
+  { id: 2, name: 'Associative' },
+  { id: 3, name: 'Inferential' },
+  { id: 4, name: 'Emergent' },
+  { id: 5, name: 'Narrative' },
+  { id: 6, name: 'Grounded' },
+  { id: 7, name: 'Other' }
+];

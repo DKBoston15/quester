@@ -6,19 +6,15 @@ import { Tabs } from '@/components/Projects/Layout/Tabs';
 import useGetProjectsQuery from 'hooks/projects/useProjects';
 import { useEffect, useState } from 'react';
 import SectionGrid from '@/components/Projects/Layout/SectionGrid';
-
-const documents = [
-  {
-    title: 'Document #1',
-    href: '#'
-  }
-];
+import useGetDocumentsByIdQuery from 'hooks/documents/useDocumentsById';
+import { getDocumentsById } from 'queries/documents/get-documents-by-id';
 
 export default function Project() {
   const router = useRouter();
   const { projectItemId } = router.query;
   const { data: projects, isLoading, isError } = useGetProjectsQuery();
   const [selectedProject, setSelectedProject] = useState();
+  const [documents, setDocuments] = useState([]);
 
   useEffect(() => {
     if (projects) {
@@ -26,6 +22,16 @@ export default function Project() {
       setSelectedProject(project);
     }
   }, [projects, projectItemId]);
+
+  useEffect(() => {
+    const getDocuments = async () => {
+      const docs = await getDocumentsById({ projectItemId });
+      if (docs.data) {
+        setDocuments(docs.data);
+      }
+    };
+    getDocuments();
+  }, [projectItemId]);
 
   return (
     <Layout>
@@ -44,34 +50,49 @@ export default function Project() {
                   <section aria-labelledby="who-to-follow-heading">
                     <div className="rounded-lg bg-white dark:bg-gray-700 dark:border-gray-700 shadow">
                       <div className="p-6">
-                        <h2
-                          id="who-to-follow-heading"
-                          className="text-base font-medium text-gray-900 dark:text-white"
-                        >
-                          Documents
-                        </h2>
-                        <div className="mt-6 flow-root">
-                          <ul
-                            role="list"
-                            className="-my-4 divide-y divide-gray-200 dark:divide-gray-700"
+                        <div className="flex justify-between">
+                          <h2
+                            id="who-to-follow-heading"
+                            className="text-base font-medium text-gray-900 dark:text-white"
                           >
-                            {documents.map((document) => (
-                              <li
-                                key={document.id}
-                                className="flex items-center space-x-3 py-4"
-                              >
-                                <div className="min-w-0 flex-1">
-                                  <p className="text-sm font-medium text-gray-900 dark:text-white">
-                                    <a href={document.href}>{document.title}</a>
-                                  </p>
-                                </div>
-                              </li>
-                            ))}
-                          </ul>
+                            Documents
+                          </h2>
+                          <button
+                            onClick={() => router.push('/app/documents')}
+                            className="focus:ring-2 focus:ring-offset-2 focus:ring-indigo-600 mt-4 sm:mt-0 inline-flex items-start justify-start px-6 py-3 bg-blue-600 hover:bg-blue-600 focus:outline-none rounded"
+                          >
+                            <p className="text-sm font-medium leading-none text-white">
+                              Create Document
+                            </p>
+                          </button>
                         </div>
+                        {documents.length > 0 && (
+                          <div className="mt-6 flow-root">
+                            <ul
+                              role="list"
+                              className="-my-4 divide-y divide-gray-200 dark:divide-gray-700"
+                            >
+                              {documents.map((document) => (
+                                <li
+                                  key={document.id}
+                                  className="flex items-center space-x-3 py-4"
+                                >
+                                  <div className="min-w-0 flex-1">
+                                    <p className="text-sm font-medium text-gray-900 dark:text-white">
+                                      <a href={`/app/documents/${document.id}`}>
+                                        {document.title}
+                                      </a>
+                                    </p>
+                                  </div>
+                                </li>
+                              ))}
+                            </ul>
+                          </div>
+                        )}
+
                         <div className="mt-6">
                           <a
-                            href="#"
+                            href="/app/documents"
                             className="block w-full rounded-md border border-gray-300 bg-white dark:bg-[#1f242b] dark:text-white dark:border-[#1f242b] px-4 py-2 text-center text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50"
                           >
                             View all

@@ -9,12 +9,11 @@ export const useUpdateDesign = () => {
   if (!user) return;
 
   return useMutation(
-    ({ id, title, technique, option, startDate, endDate, link }: any) => {
+    ({ id, title, technique, startDate, endDate, link }: any) => {
       return updateDesign(
         id,
         title,
         technique,
-        option,
         startDate,
         endDate,
         link,

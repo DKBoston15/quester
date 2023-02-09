@@ -42,3 +42,7 @@ export const toDateTime = (secs: number) => {
   t.setSeconds(secs);
   return t;
 };
+
+export const findItemByName = (items: any, name: string) => {
+  return items.find((item: any) => item.name === name);
+};
