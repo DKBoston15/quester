@@ -1,16 +1,9 @@
 import { findItemByName } from '@/utils/helpers';
 import {
-  paradigmTypes,
   professorialStatuses,
   projectRoles,
   roles
 } from 'constants/dropdownLists';
-import { useDeleteParadigm } from 'hooks/paradigms/useDeleteParadigm';
-import useGetParadigmByIdQuery from 'hooks/paradigms/useParadigmById';
-import { useUpdateParadigm } from 'hooks/paradigms/useUpdateParadigm';
-import { useDeleteQuestion } from 'hooks/questions/useDeleteQuestion';
-import useGetQuestionByIdQuery from 'hooks/questions/useQuestionById';
-import { useUpdateQuestion } from 'hooks/questions/useUpdateQuestion';
 import { useDeleteResearcher } from 'hooks/researchers/useDeleteResearcher';
 import useGetResearcherByIdQuery from 'hooks/researchers/useResearcherById';
 import { useUpdateResearcher } from 'hooks/researchers/useUpdateResearcher';
