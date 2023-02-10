@@ -7,7 +7,7 @@ import Notes from '@/components/Projects/Notes/Notes';
 import Connection from '@/components/Projects/Connection/Connection';
 import useGetKeyTermByIdQuery from 'hooks/key_terms/useKeyTermById';
 import { getKeyTermById } from 'queries/key_terms/get-key-term-by-id';
-import KeyTermContentCard from '@/components/Projects/ContentCards/KeyTermCard';
+import KeyTermContentCard from '@/components/Projects/ContentCards/KeyTermContentCard';
 
 export default function KeyTerm() {
   const router = useRouter();

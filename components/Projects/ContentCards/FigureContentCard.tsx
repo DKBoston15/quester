@@ -71,7 +71,7 @@ export default function FigureContentCard({
     await deleteFigure.mutateAsync({
       id: figure.id
     });
-    router.push(`/app/projects/${figure.project_item_id}/figures`);
+    router.push(`/app/projects/${figure.project_item_id}`);
   };
 
   return (

@@ -9,17 +9,10 @@ export const useUpdateKeyTerm = () => {
   if (!user) return;
 
   return useMutation(
-    ({ id, title, link, citations, keyLiterature, authors, primary }: any) => {
-      return updateKeyTerm(
-        id,
-        title,
-        link,
-        citations,
-        keyLiterature,
-        authors,
-        primary,
-        user.id
-      ).then((result) => result.data);
+    ({ id, title, link, googleScholarLabel }: any) => {
+      return updateKeyTerm(id, title, link, googleScholarLabel, user.id).then(
+        (result) => result.data
+      );
     },
     {
       onSuccess: () => {

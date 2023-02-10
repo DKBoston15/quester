@@ -4,21 +4,15 @@ export async function updateKeyTerm(
   id: number,
   title: string,
   link: string,
-  citations: string,
-  keyLiterature: string,
-  authors: string,
-  primary: boolean,
+  googleScholarLabel: string,
   userId: string
 ) {
   return supabase
     .from('key_terms')
     .update({
       title,
-      citations,
-      key_literature: keyLiterature,
-      authors,
-      primary,
-      link
+      link,
+      google_scholar_label: googleScholarLabel
     })
     .eq('user_id', userId)
     .eq('id', id);

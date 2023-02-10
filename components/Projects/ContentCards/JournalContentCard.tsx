@@ -59,7 +59,7 @@ export default function JournalContentCard({
     await deleteJournal.mutateAsync({
       id: journal.id
     });
-    router.push(`/app/projects/${journal.project_item_id}/journals`);
+    router.push(`/app/projects/${journal.project_item_id}`);
   };
 
   return (

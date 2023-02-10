@@ -1,5 +1,6 @@
 import { BookOpenIcon, UserIcon } from '@heroicons/react/24/outline';
-import React from 'react';
+import React, { useState } from 'react';
+import CreateContentItemModal from '../CreateModals/CreateContentItemModal';
 
 const getIcon = (iconName: string) => {
   switch (iconName) {
@@ -20,20 +21,38 @@ const getIcon = (iconName: string) => {
   }
 };
 
-export default function ContentItemList({ title, iconName, items }: any) {
+export default function ContentItemList({
+  title,
+  iconName,
+  items,
+  createNewItem,
+  modalTitle,
+  type,
+  currentlyUpdating = { currentlyUpdating }
+}: any) {
   const icon = getIcon(iconName);
-
+  const [open, setOpen] = useState(false);
   return (
     <div className="sm:col-span-1">
+      <CreateContentItemModal
+        open={open}
+        setOpen={setOpen}
+        modalTitle={modalTitle}
+        title={title}
+        createNewItem={createNewItem}
+        type={type}
+      />
       <div className="flex justify-between items-center">
         <dt className="text-sm font-medium text-gray-500">{title}</dt>
-        <button
-          type="button"
-          className="inline-flex items-center justify-center rounded-md border border-transparent bg-blue-600 px-2 py-1 text-sm font-medium text-white shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-100"
-          // onClick={() => setOpen(true)}
-        >
-          Add
-        </button>
+        {currentlyUpdating && (
+          <button
+            type="button"
+            className="inline-flex items-center justify-center rounded-md border border-transparent bg-blue-600 px-2 py-1 text-sm font-medium text-white shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-100"
+            onClick={() => setOpen(true)}
+          >
+            Add
+          </button>
+        )}
       </div>
       <dd className="mt-2 text-sm text-gray-900">
         <ul
@@ -48,14 +67,6 @@ export default function ContentItemList({ title, iconName, items }: any) {
               <div className="flex w-0 flex-1 items-center">
                 {icon}
                 <span className="ml-2 w-0 flex-1 truncate">{item.title}</span>
-              </div>
-              <div className="ml-4 flex-shrink-0">
-                <a
-                  href={`/app/projects/${item.projectId}/${item.path}/${item.id}`}
-                  className="font-medium text-blue-600 hover:text-blue-500"
-                >
-                  View
-                </a>
               </div>
             </li>
           ))}

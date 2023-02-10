@@ -135,7 +135,7 @@ export default function ArticleContentCard({
     await deleteArticle.mutateAsync({
       id: article.id
     });
-    router.push(`/app/projects/${article.project_item_id}/articles`);
+    router.push(`/app/projects/${article.project_item_id}`);
   };
 
   return (
