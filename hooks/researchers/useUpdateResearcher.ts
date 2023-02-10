@@ -20,11 +20,8 @@ export const useUpdateResearcher = () => {
       university,
       role,
       link,
-      cvLink,
       professorialStatus,
-      keyLiterature,
-      projectRole,
-      primary
+      projectRole
     }: any) => {
       return updateResearcher(
         id,
@@ -37,11 +34,8 @@ export const useUpdateResearcher = () => {
         university,
         role,
         link,
-        cvLink,
         professorialStatus,
-        keyLiterature,
         projectRole,
-        primary,
         user.id
       ).then((result) => result.data);
     },

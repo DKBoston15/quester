@@ -115,3 +115,49 @@ export const analyticDesigns = [
   { id: 6, name: 'Grounded' },
   { id: 7, name: 'Other' }
 ];
+
+export const professorialStatuses = [
+  { id: 1, name: 'Clinical Instructor' },
+  { id: 2, name: 'Clinical Assistant Professor' },
+  { id: 3, name: 'Clinical Associate Professor' },
+  { id: 4, name: 'Clinical Professor' },
+  { id: 5, name: 'Research Instructor' },
+  { id: 6, name: 'Research Assistant Professor' },
+  { id: 7, name: 'Research Associate Professor' },
+  { id: 8, name: 'Research Professor' },
+  { id: 9, name: 'Adjunct Assistant Professor' },
+  { id: 10, name: 'Adjunct Associate Professor' },
+  { id: 11, name: 'Adjunct Professor' },
+  { id: 12, name: 'Adjunct Clinical Instructor' },
+  { id: 13, name: 'Adjunct Clinical Assistant Professor' },
+  { id: 14, name: 'Adjunct Clinical Associate Professor' },
+  { id: 15, name: 'Adjunct Clinical Professor' },
+  { id: 16, name: 'Visiting Assistant Professor' },
+  { id: 17, name: 'Visiting Associate Professor' },
+  { id: 18, name: 'Visiting Professor' },
+  { id: 19, name: 'Visiting Research Assistant Professor' },
+  { id: 20, name: 'Visiting Research Associate Professor' },
+  { id: 21, name: 'Visiting Research Professor' }
+];
+
+export const roles = [
+  { id: 1, name: 'Author' },
+  { id: 2, name: 'Mentor' },
+  { id: 3, name: 'Colleague' },
+  { id: 4, name: 'Professor' },
+  { id: 5, name: 'Student' },
+  { id: 6, name: 'Chair' },
+  { id: 7, name: 'Committee Member' },
+  { id: 8, name: 'Other' }
+];
+
+export const projectRoles = [
+  { id: 1, name: 'Principal Investigator' },
+  { id: 2, name: 'Co Principal Investigator' },
+  { id: 3, name: 'Data Analysis' },
+  { id: 4, name: 'Data Collection' },
+  { id: 5, name: 'Project Reviewer' },
+  { id: 6, name: 'Research Assistant' },
+  { id: 7, name: 'Writing' },
+  { id: 8, name: 'Other' }
+];

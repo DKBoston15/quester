@@ -12,10 +12,7 @@ export async function updateResearcher(
   role: string,
   link: string,
   professorialStatus: string,
-  keyLiterature: string,
   projectRole: string,
-  primary: boolean,
-  cvLink: string,
   userId: string
 ) {
   return supabase
@@ -31,10 +28,7 @@ export async function updateResearcher(
       role,
       link,
       professorial_status: professorialStatus,
-      key_literature: keyLiterature,
-      project_role: projectRole,
-      primary,
-      cv_link: cvLink
+      project_role: projectRole
     })
     .eq('user_id', userId)
     .eq('id', id);

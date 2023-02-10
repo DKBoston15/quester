@@ -1,16 +1,5 @@
 import { findItemByName } from '@/utils/helpers';
-import {
-  analyticDesigns,
-  articleTypes,
-  figureTypes,
-  paradigmTypes,
-  researchDesigns,
-  sampleDesigns,
-  sampleTechniques
-} from 'constants/dropdownLists';
-import useGetArticleByIdQuery from 'hooks/articles/useArticleById';
-import { useDeleteArticle } from 'hooks/articles/useDeleteArticle';
-import { useUpdateArticle } from 'hooks/articles/useUpdateArticle';
+import { figureTypes } from 'constants/dropdownLists';
 import { useDeleteFigure } from 'hooks/figures/useDeleteFigure';
 import useGetFigureByIdQuery from 'hooks/figures/useFigureById';
 import { useUpdateFigure } from 'hooks/figures/useUpdateFigure';
