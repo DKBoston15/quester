@@ -9,12 +9,11 @@ export const useUpdateTable = () => {
   if (!user) return;
 
   return useMutation(
-    ({ id, title, link, type, number, rowCount, columnCount }: any) => {
+    ({ id, title, link, number, rowCount, columnCount }: any) => {
       return updateTable(
         id,
         title,
         link,
-        type,
         number,
         rowCount,
         columnCount,

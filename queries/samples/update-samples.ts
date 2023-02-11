@@ -5,7 +5,6 @@ export async function updateSample(
   title: string,
   link: string,
   design: string,
-  technique: boolean,
   size: string,
   finalSample: string,
   powerAnalysis: string,
@@ -17,7 +16,6 @@ export async function updateSample(
     .from('samples')
     .update({
       title,
-      technique,
       design,
       size,
       final_sample: finalSample,

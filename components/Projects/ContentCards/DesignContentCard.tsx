@@ -30,7 +30,7 @@ export default function DesignContentCard({
   const [designType, setDesignType] = useState('');
   const [dateRange, setDateRange] = useState({
     startDate: new Date(),
-    endDate: new Date().setMonth(11)
+    endDate: new Date()
   });
   const handleDateRangeChange = (newRange) => {
     setDateRange({

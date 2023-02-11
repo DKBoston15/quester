@@ -1,7 +1,6 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useSidebar } from 'context/SidebarContext';
 import { Bars3CenterLeftIcon } from '@heroicons/react/24/outline';
-
 export default function ProjectItemPageTitle() {
   const [sidebarOpen, toggleSidebar] = useSidebar();
 
@@ -18,8 +17,8 @@ export default function ProjectItemPageTitle() {
         </button>
       </div>
       <div className="min-w-0 flex-1 pl-4">
-        <h1 className="text-lg font-medium leading-6 text-gray-900 dark:text-white sm:truncate">
-          Project
+        <h1 className="text-lg font-medium leading-6 text-gray-900 dark:text-white sm:truncate flex space-x-4">
+          <span>Project</span>
         </h1>
       </div>
     </div>

@@ -4,7 +4,6 @@ export async function updateTable(
   id: number,
   title: string,
   link: string,
-  type: string,
   number: string,
   rowCount: number,
   columnCount: number,
@@ -15,7 +14,6 @@ export async function updateTable(
     .update({
       title,
       link,
-      type,
       number,
       row_count: rowCount,
       column_count: columnCount
