@@ -8,6 +8,7 @@ import Notes from '../Notes/Notes';
 import Tasks from '../Tasks/Tasks';
 
 export const Tabs = ({ color }: any) => {
+  const { user } = useUser();
   const [openTab, setOpenTab] = useState(1);
   const router = useRouter();
   const { projectItemId } = router.query;
@@ -138,14 +139,16 @@ export const Tabs = ({ color }: any) => {
                     <ProjectContentCard projectItemId={projectItemId} />
                   )}
                 </div>
-                <div
-                  className={`${
-                    openTab === 4 ? 'block' : 'hidden'
-                  } px-4 py-5 flex-auto`}
-                  id="link4"
-                >
-                  <Checklist projectItemId={projectItemId} />
-                </div>
+                {user?.id && (
+                  <div
+                    className={`${
+                      openTab === 4 ? 'block' : 'hidden'
+                    } px-4 py-5 flex-auto`}
+                    id="link4"
+                  >
+                    <Checklist projectItemId={projectItemId} />
+                  </div>
+                )}
               </div>
             </div>
           </div>
