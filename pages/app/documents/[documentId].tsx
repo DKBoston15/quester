@@ -59,7 +59,9 @@ export default function Document() {
         const currentProject = projects.filter(
           (project) => project.id == document.data[0].project_item_id
         );
-        setProjectTitle(currentProject[0].title);
+        if (currentProject[0]) {
+          setProjectTitle(currentProject[0].title);
+        }
       }
     };
 
@@ -109,9 +111,11 @@ export default function Document() {
                               <div className="editor-shell">
                                 <h3 className="mt-[-1rem] pb-2 space-x-6 flex items-center">
                                   <div className="text-xl">{title}</div>
-                                  <div className="bg-gray-300 p-2 rounded-lg text-sm">
-                                    {projectTitle}
-                                  </div>
+                                  {projectTitle && (
+                                    <div className="bg-gray-300 p-2 rounded-lg text-sm">
+                                      {projectTitle}
+                                    </div>
+                                  )}
                                 </h3>
                                 <Editor
                                   editorState={editorState}

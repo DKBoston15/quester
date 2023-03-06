@@ -3,9 +3,9 @@ import Link from 'next/link';
 export default function MainNavStack({ items }: any) {
   return (
     <div className="p-2 border border-1-gray rounded-md my-4 mr-0">
-      <ul role="list" className="divide-y divide-gray-200 xl:w-56 w-full">
+      <ul role="list" className="flex w-full">
         {items.map((item: any) => (
-          <div key={item.id}>
+          <div key={item.id} className="w-1/4">
             {item.id === 1 && (
               <>
                 <li className="bg-white py-5 px-4 h-full xl:h-64 flex justify-between flex-col">
@@ -35,7 +35,7 @@ export default function MainNavStack({ items }: any) {
             )}
             {item.id !== 1 && (
               <div key={item.id}>
-                <li className="relative bg-white py-5 px-4 h-full xl:h-64 flex justify-between flex-col">
+                <li className="relative bg-white py-5 px-4 h-full xl:h-64 flex justify-between flex-col w-full">
                   <div className="flex justify-between space-x-3">
                     <div className="min-w-0 flex-1">
                       <p className="truncate text-md font-medium text-gray-900 mb-4">

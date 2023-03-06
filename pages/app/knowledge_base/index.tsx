@@ -153,13 +153,13 @@ export default function index() {
     <Layout>
       <KnowledgeBaseTitle />
       <div className="flex flex-col-reverse 2xl:flex-row pr-8 mr-4 pl-4">
-        <div className="flex xl:flex-row flex-col">
+        <div className="flex flex-col pb-4">
           <MainNavStack items={researchItems} />;
           <MainNavStack items={analysisItems} />;
           <MainNavStack items={professionalismItems} />;
           <MainNavStack items={writingItems} />;
+          <ResourceCard resources={resources} />
         </div>
-        <ResourceCard resources={resources} />
       </div>
     </Layout>
   );

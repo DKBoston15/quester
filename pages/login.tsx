@@ -15,7 +15,7 @@ export default function Login() {
 
   useEffect(() => {
     if (user) {
-      router.replace('/account');
+      router.replace('/app/projects');
     }
   }, [user]);
 
@@ -43,8 +43,8 @@ export default function Login() {
               variables: {
                 default: {
                   colors: {
-                    brand: '#404040',
-                    brandAccent: '#52525b',
+                    brand: '#2381FE',
+                    brandAccent: '#2381FE',
                     messageText: 'black'
                   }
                 }

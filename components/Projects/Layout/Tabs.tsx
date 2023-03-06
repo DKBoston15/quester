@@ -25,6 +25,50 @@ export const Tabs = ({ color }: any) => {
               <a
                 className={
                   'text-xs font-bold uppercase px-5 py-3 shadow-lg rounded block leading-normal ' +
+                  (openTab === 3
+                    ? 'text-white bg-' + color + '-600 '
+                    : 'text-' + color + '-600 bg-white ') +
+                  (openTab === 3
+                    ? 'dark:bg-blue-600 dark:text-white dark:border-blue-600'
+                    : 'dark:bg-gray-700 dark:text-white dark:border-gray-700')
+                }
+                onClick={(e) => {
+                  e.preventDefault();
+                  setOpenTab(3);
+                }}
+                data-toggle="tab"
+                href="#link3"
+                role="tablist"
+              >
+                Overview
+              </a>
+            </li>
+            <li className="-mb-px mr-2 last:mr-0 flex-auto text-center">
+              <a
+                className={
+                  'text-xs font-bold uppercase px-5 py-3 shadow-lg rounded block leading-normal ' +
+                  (openTab === 4
+                    ? 'text-white bg-' + color + '-600 '
+                    : 'text-' + color + '-600 bg-white ') +
+                  (openTab === 4
+                    ? 'dark:bg-blue-600 dark:text-white dark:border-blue-600'
+                    : 'dark:bg-gray-700 dark:text-white dark:border-gray-700')
+                }
+                onClick={(e) => {
+                  e.preventDefault();
+                  setOpenTab(4);
+                }}
+                data-toggle="tab"
+                href="#link4"
+                role="tablist"
+              >
+                Checklist
+              </a>
+            </li>
+            <li className="-mb-px mr-2 last:mr-0 flex-auto text-center">
+              <a
+                className={
+                  'text-xs font-bold uppercase px-5 py-3 shadow-lg rounded block leading-normal ' +
                   (openTab === 1
                     ? 'text-white bg-' + color + '-600 '
                     : 'text-' + color + '-600 bg-white ') +
@@ -63,50 +107,6 @@ export const Tabs = ({ color }: any) => {
                 role="tablist"
               >
                 Notes
-              </a>
-            </li>
-            <li className="-mb-px mr-2 last:mr-0 flex-auto text-center">
-              <a
-                className={
-                  'text-xs font-bold uppercase px-5 py-3 shadow-lg rounded block leading-normal ' +
-                  (openTab === 3
-                    ? 'text-white bg-' + color + '-600 '
-                    : 'text-' + color + '-600 bg-white ') +
-                  (openTab === 3
-                    ? 'dark:bg-blue-600 dark:text-white dark:border-blue-600'
-                    : 'dark:bg-gray-700 dark:text-white dark:border-gray-700')
-                }
-                onClick={(e) => {
-                  e.preventDefault();
-                  setOpenTab(3);
-                }}
-                data-toggle="tab"
-                href="#link3"
-                role="tablist"
-              >
-                Details
-              </a>
-            </li>
-            <li className="-mb-px mr-2 last:mr-0 flex-auto text-center">
-              <a
-                className={
-                  'text-xs font-bold uppercase px-5 py-3 shadow-lg rounded block leading-normal ' +
-                  (openTab === 4
-                    ? 'text-white bg-' + color + '-600 '
-                    : 'text-' + color + '-600 bg-white ') +
-                  (openTab === 4
-                    ? 'dark:bg-blue-600 dark:text-white dark:border-blue-600'
-                    : 'dark:bg-gray-700 dark:text-white dark:border-gray-700')
-                }
-                onClick={(e) => {
-                  e.preventDefault();
-                  setOpenTab(4);
-                }}
-                data-toggle="tab"
-                href="#link4"
-                role="tablist"
-              >
-                Checklist
               </a>
             </li>
           </ul>

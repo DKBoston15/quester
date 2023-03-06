@@ -23,7 +23,6 @@ export default function ChecklistItem({
 
   const handleRightArrowClick = () => {
     const updatedNestedLevels = checklistItem.nestedLevels + 1;
-    console.log(updatedNestedLevels);
     updateChecklist(checklistItem.id, { nestedLevels: updatedNestedLevels });
   };
 

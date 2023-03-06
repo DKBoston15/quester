@@ -2,7 +2,7 @@ import { ChevronRightIcon } from '@heroicons/react/24/outline';
 
 export default function ResourceCard({ resources }: any) {
   return (
-    <div className="bg-white border border-1-gray shadow rounded-md h-full w-full mt-4 xl:ml-4 max-w-[67.5rem]">
+    <div className="bg-white border border-1-gray shadow rounded-md h-full w-full mt-4 max-w-[67.5rem]">
       <div className="border-b border-gray-200 bg-white px-4 py-5 sm:px-6">
         <h3 className="text-lg font-medium leading-6 text-gray-900">
           Resources

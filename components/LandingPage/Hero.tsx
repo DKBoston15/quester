@@ -23,7 +23,7 @@ export function Hero() {
       </h1>
       <p className="mx-auto mt-6 max-w-2xl text-lg tracking-tight text-slate-700">
         Manage tasks, store and take notes on every aspect of your project
-        whether it is a literature review or a dissertation. .
+        whether it is a literature review or a dissertation.
       </p>
       <div className="mt-10 flex justify-center gap-x-6">
         <Button href="/login">Try it today</Button>
