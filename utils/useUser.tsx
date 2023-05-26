@@ -57,7 +57,6 @@ export const MyUserContextProvider = (props: any) => {
 
           if (subscriptionPromise.status === 'fulfilled')
             setSubscription(subscriptionPromise.value.data);
-
           setIsloadingData(false);
         }
       );

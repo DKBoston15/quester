@@ -49,7 +49,6 @@ export default function Settings() {
   const { user, userDetails, isLoading, subscription } = useUser();
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
-
   useEffect(() => {
     if (userDetails) {
       setName(

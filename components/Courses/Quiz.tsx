@@ -33,9 +33,9 @@ export default function Quiz({ quiz }: { quiz: Quiz }) {
   const router = useRouter();
   const { quizId } = router.query;
   const [currentQuestion, setCurrentQuestion] = useState(0);
-  const [userAnswers, setUserAnswers] = useState({});
+  const [userAnswers, setUserAnswers] = useState<Record<string, string>>({});
   const [showResults, setShowResults] = useState(false);
-  const [answerHistory, setAnswerHistory] = useState([]);
+  const [answerHistory, setAnswerHistory] = useState<AnswerHistoryItem[]>([]);
 
   const { data: scores, isLoading, isError } = useGetScores();
   const createScore = useCreateScore();
@@ -88,19 +88,22 @@ export default function Quiz({ quiz }: { quiz: Quiz }) {
     const { id, question: questionText, options } = question;
     const questionAnswer = userAnswers[id];
 
-    const handleAnswerChange = (id, optionText) => {
+    const handleAnswerChange = (id: string, optionText: string) => {
       setUserAnswers({ ...userAnswers, [id]: optionText });
 
       const currentQuestion = quiz.questions.find((q) => q.id === id);
-      const correctAnswer = currentQuestion?.answer;
-      setAnswerHistory((prevState) => [
-        ...prevState,
-        {
-          answer: optionText,
-          correctAnswer: correctAnswer,
-          question: currentQuestion.question
-        }
-      ]);
+
+      if (currentQuestion) {
+        const correctAnswer = currentQuestion.answer;
+        setAnswerHistory((prevState: AnswerHistoryItem[]) => [
+          ...prevState,
+          {
+            answer: optionText,
+            correctAnswer: correctAnswer,
+            question: currentQuestion.question
+          }
+        ]);
+      }
     };
 
     return (
