@@ -5,13 +5,31 @@ import { useCreateScore } from 'hooks/scores/useCreateScore';
 import useGetScores from 'hooks/scores/useScores';
 import { useUpdateScore } from 'hooks/scores/useUpdateScore';
 
-function countCorrectAnswers(answerHistory: any) {
-  return answerHistory.reduce((count, answer) => {
+type Quiz = {
+  id: number;
+  questions: Question[];
+};
+
+type Question = {
+  id: string;
+  question: string;
+  options: Record<string, any>;
+  answer: string;
+};
+
+type AnswerHistoryItem = {
+  answer: string;
+  correctAnswer: string;
+  question: string;
+};
+
+function countCorrectAnswers(answerHistory: AnswerHistoryItem[]) {
+  return answerHistory.reduce((count: any, answer: any) => {
     return answer.answer === answer.correctAnswer ? count + 1 : count;
   }, 0);
 }
 
-export default function Quiz({ quiz }) {
+export default function Quiz({ quiz }: { quiz: Quiz }) {
   const router = useRouter();
   const { quizId } = router.query;
   const [currentQuestion, setCurrentQuestion] = useState(0);
@@ -33,13 +51,13 @@ export default function Quiz({ quiz }) {
   }, [quizId]);
 
   const handleNextQuestion = async () => {
-    if (currentQuestion === quiz.questions.length - 1) {
+    if (currentQuestion === quiz.questions.length - 1 && scores) {
       const selectedScore = scores.findIndex(
         (score) => score.score_id == quiz.id
       );
       const correctAnswers = countCorrectAnswers(answerHistory);
       if (selectedScore != -1) {
-        await updateScore.mutateAsync({
+        await updateScore?.mutateAsync({
           id: scores[selectedScore].id,
           score: correctAnswers,
           totalPossibleScore: scores[selectedScore].total_possible_score,
@@ -47,7 +65,7 @@ export default function Quiz({ quiz }) {
           scoreId: scores[selectedScore].score_id
         });
       } else {
-        await createScore.mutateAsync({
+        await createScore?.mutateAsync({
           score: correctAnswers,
           totalPossibleScore: quiz.questions.length,
           completedAt: new Date(),
@@ -66,7 +84,7 @@ export default function Quiz({ quiz }) {
     setShowResults(false);
   };
 
-  const renderQuestion = (question) => {
+  const renderQuestion = (question: Question) => {
     const { id, question: questionText, options } = question;
     const questionAnswer = userAnswers[id];
 
@@ -74,7 +92,7 @@ export default function Quiz({ quiz }) {
       setUserAnswers({ ...userAnswers, [id]: optionText });
 
       const currentQuestion = quiz.questions.find((q) => q.id === id);
-      const correctAnswer = currentQuestion.answer;
+      const correctAnswer = currentQuestion?.answer;
       setAnswerHistory((prevState) => [
         ...prevState,
         {
