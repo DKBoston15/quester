@@ -1,6 +1,20 @@
+import { useUser } from '@/utils/useUser';
+import router from 'next/router';
+import { useEffect } from 'react';
 import NavigationSideBar from './NavigationSideBar/NavigationSideBar';
 
 export default function Layout({ children }: any) {
+  const { user, subscription, isLoadingData } = useUser();
+
+  useEffect(() => {
+    console.log(isLoadingData);
+    if (!isLoadingData) {
+      if (user && !subscription) {
+        router.replace('/plans');
+      }
+    }
+  }, [isLoadingData]);
+
   return (
     <>
       <div className="min-h-full h-full">

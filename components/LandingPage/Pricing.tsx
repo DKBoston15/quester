@@ -102,7 +102,7 @@ function Plan({
       return router.push('/login');
     }
     if (subscription) {
-      return router.push('/account');
+      return router.push('/app/projects');
     }
 
     try {

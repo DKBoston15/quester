@@ -11,7 +11,8 @@ type UserContextType = {
   accessToken: string | null;
   user: User | null;
   userDetails: UserDetails | null;
-  isLoading: boolean;
+  isLoadingUser: boolean;
+  isLoadingData: boolean;
   subscription: Subscription | null;
 };
 
@@ -70,7 +71,8 @@ export const MyUserContextProvider = (props: any) => {
     accessToken,
     user,
     userDetails,
-    isLoading: isLoadingUser || isLoadingData,
+    isLoadingUser: isLoadingUser,
+    isLoadingData: isLoadingData,
     subscription,
     session
   };

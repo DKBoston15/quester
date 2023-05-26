@@ -35,7 +35,7 @@ export const getServerSideProps = withPageAuth({ redirectTo: '/login' });
 
 export default function Account({ user }: { user: User }) {
   const [loading, setLoading] = useState(false);
-  const { userDetails, isLoading, subscription } = useUser();
+  const { userDetails, subscription } = useUser();
 
   const redirectToCustomerPortal = async () => {
     setLoading(true);

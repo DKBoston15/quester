@@ -4,10 +4,12 @@ import SettingsPageTitle from '@/components/Settings/SettingsPageTitle';
 import { withPageAuth } from '@supabase/auth-helpers-nextjs';
 import { useUser } from '@/utils/useUser';
 import { postData } from '@/utils/helpers';
-import LoadingDots from '@/components/LoadingDots';
-import Link from 'next/link';
 import { supabase, updateUserName } from '@/utils/supabase-client';
 import TextInputField from '@/components/Projects/InputFields/TextInputField';
+import useGetSettings from 'hooks/settings/useSettings';
+import { useCreateSetting } from 'hooks/settings/useCreateSetting';
+import { useUpdateSetting } from 'hooks/settings/useUpdateSetting';
+import { useTheme } from 'next-themes';
 
 const tabs = [
   { name: 'General', href: '#', current: true },
@@ -26,29 +28,78 @@ interface Props {
   children: ReactNode;
 }
 
-function Card({ title, description, footer, children }: Props) {
-  return (
-    <div className="border border-zinc-700	max-w-3xl w-full p rounded-md m-auto my-8">
-      <div className="px-5 py-4">
-        <h3 className="text-2xl mb-1 font-medium">{title}</h3>
-        <p className="text-zinc-300">{description}</p>
-        {children}
-      </div>
-      <div className="border-t border-zinc-700 bg-zinc-900 p-4 text-zinc-500 rounded-b-md">
-        {footer}
-      </div>
-    </div>
-  );
-}
-
 export const getServerSideProps = withPageAuth({ redirectTo: '/login' });
 
 export default function Settings() {
+  const { theme, setTheme } = useTheme();
   const [currentlyUpdating, setCurrentlyUpdating] = useState(false);
   const [loading, setLoading] = useState(false);
-  const { user, userDetails, isLoading, subscription } = useUser();
+  const { user, userDetails, subscription } = useUser();
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
+
+  const { data: settings } = useGetSettings();
+
+  const [fieldOfStudy, setFieldOfStudy] = useState('');
+  const [inGraduateSchool, setInGraduateSchool] = useState(false);
+  const [participatingInCoursework, setParticipatingInCoursework] =
+    useState(false);
+  const [lookingAtGraduateSchools, setLookingAtGraduateSchools] =
+    useState(false);
+  const [degreeSeeking, setDegreeSeeking] = useState(false);
+  const [university, setUniversity] = useState('');
+  const [status, setStatus] = useState('');
+  const [conductingResearch, setConductingResearch] = useState(false);
+  const [writingProposal, setWritingProposal] = useState(false);
+  const [writingDissertation, setWritingDissertation] = useState(false);
+  const [attendingConferences, setAttendingConferences] = useState(false);
+  const [lookingForPositions, setLookingForPositions] = useState(false);
+  const [darkMode, setDarkMode] = useState(false);
+
+  const createSetting = useCreateSetting();
+
+  const createNewSetting = async () => {
+    await createSetting?.mutateAsync({
+      fieldOfStudy,
+      inGraduateSchool,
+      participatingInCoursework,
+      degreeSeeking,
+      university,
+      status,
+      conductingResearch,
+      writingProposal,
+      writingDissertation,
+      attendingConferences,
+      lookingForPositions,
+      darkMode
+    });
+  };
+
+  useEffect(() => {
+    if (settings) {
+      if (settings.length === 0) {
+        createNewSetting();
+      } else {
+        setFieldOfStudy(settings[0].field_of_study || false);
+        setInGraduateSchool(settings[0].in_graduate_school || false);
+        setParticipatingInCoursework(
+          settings[0].participating_in_coursework || false
+        );
+        setLookingAtGraduateSchools(
+          settings[0].looking_at_graduate_schools || false
+        );
+        setDegreeSeeking(settings[0].degree_seeking || false);
+        setUniversity(settings[0].university || '');
+        setConductingResearch(settings[0].conducting_research || false);
+        setWritingProposal(settings[0].writing_proposal || false);
+        setWritingDissertation(settings[0].writing_dissertation || false);
+        setAttendingConferences(settings[0].attending_conferences || false);
+        setLookingForPositions(settings[0].looking_for_positions || false);
+        setDarkMode(settings[0].dark_mode || false);
+      }
+    }
+  }, [settings]);
+
   useEffect(() => {
     if (userDetails) {
       setName(
@@ -94,6 +145,26 @@ export default function Settings() {
       });
     }
     await updateUserName(user, name);
+  };
+
+  const updateSettingsFunc = useUpdateSetting();
+  const updateSettings = async () => {
+    await updateSettingsFunc?.mutateAsync({
+      id: settings[0].id,
+      fieldOfStudy,
+      inGraduateSchool,
+      participatingInCoursework,
+      degreeSeeking,
+      university,
+      status,
+      conductingResearch,
+      writingProposal,
+      writingDissertation,
+      attendingConferences,
+      lookingForPositions,
+      darkMode
+    });
+    setCurrentlyUpdating(false);
   };
 
   return (
@@ -305,7 +376,7 @@ export default function Settings() {
                                   <dd className="mt-1 flex text-sm text-gray-900 sm:col-span-2 sm:mt-0">
                                     <span className="flex-grow">
                                       {subscription
-                                        ? `${subscription?.prices?.products?.name} plan.`
+                                        ? `${subscription?.prices?.products?.name} plan`
                                         : ''}
                                     </span>
                                     <span className="ml-4 flex-shrink-0">
@@ -342,240 +413,810 @@ export default function Settings() {
                             </div>
                             <div className="mt-6">
                               <dl className="divide-y divide-gray-200">
-                                <div className="py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-5">
-                                  <dt className="text-sm font-medium text-gray-500">
-                                    Field of Study
-                                  </dt>
-                                  <dd className="mt-1 flex text-sm text-gray-900 sm:col-span-2 sm:mt-0">
-                                    <span className="flex-grow">
-                                      Chelsea Hagon
-                                    </span>
-                                    <span className="ml-4 flex-shrink-0">
-                                      <button
-                                        type="button"
-                                        className="rounded-md bg-white font-medium text-blue-600 hover:text-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
-                                      >
-                                        Update
-                                      </button>
-                                    </span>
-                                  </dd>
-                                </div>
-                                <div className="py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-5 sm:pt-5">
-                                  <dt className="text-sm font-medium text-gray-500">
-                                    In Graduate School?
-                                  </dt>
-                                  <dd className="mt-1 flex text-sm text-gray-900 sm:col-span-2 sm:mt-0">
-                                    <span className="flex-grow">
-                                      chelsea.hagon@example.com
-                                    </span>
-                                    <span className="ml-4 flex-shrink-0">
-                                      <button
-                                        type="button"
-                                        className="rounded-md bg-white font-medium text-blue-600 hover:text-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
-                                      >
-                                        Update
-                                      </button>
-                                    </span>
-                                  </dd>
-                                </div>
-                                <div className="py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-5 sm:pt-5">
-                                  <dt className="text-sm font-medium text-gray-500">
-                                    Participating in Coursework?
-                                  </dt>
-                                  <dd className="mt-1 flex text-sm text-gray-900 sm:col-span-2 sm:mt-0">
-                                    <span className="flex-grow">
-                                      chelsea.hagon@example.com
-                                    </span>
-                                    <span className="ml-4 flex-shrink-0">
-                                      <button
-                                        type="button"
-                                        className="rounded-md bg-white font-medium text-blue-600 hover:text-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
-                                      >
-                                        Update
-                                      </button>
-                                    </span>
-                                  </dd>
-                                </div>
-                                <div className="py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-5 sm:pt-5">
-                                  <dt className="text-sm font-medium text-gray-500">
-                                    Looking at Graduate Schools?
-                                  </dt>
-                                  <dd className="mt-1 flex text-sm text-gray-900 sm:col-span-2 sm:mt-0">
-                                    <span className="flex-grow">
-                                      chelsea.hagon@example.com
-                                    </span>
-                                    <span className="ml-4 flex-shrink-0">
-                                      <button
-                                        type="button"
-                                        className="rounded-md bg-white font-medium text-blue-600 hover:text-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
-                                      >
-                                        Update
-                                      </button>
-                                    </span>
-                                  </dd>
-                                </div>
-                                <div className="py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-5 sm:pt-5">
-                                  <dt className="text-sm font-medium text-gray-500">
-                                    Degree Seeking
-                                  </dt>
-                                  <dd className="mt-1 flex text-sm text-gray-900 sm:col-span-2 sm:mt-0">
-                                    <span className="flex-grow">
-                                      chelsea.hagon@example.com
-                                    </span>
-                                    <span className="ml-4 flex-shrink-0">
-                                      <button
-                                        type="button"
-                                        className="rounded-md bg-white font-medium text-blue-600 hover:text-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
-                                      >
-                                        Update
-                                      </button>
-                                    </span>
-                                  </dd>
-                                </div>
-                                <div className="py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-5 sm:pt-5">
-                                  <dt className="text-sm font-medium text-gray-500">
-                                    University
-                                  </dt>
-                                  <dd className="mt-1 flex text-sm text-gray-900 sm:col-span-2 sm:mt-0">
-                                    <span className="flex-grow">
-                                      chelsea.hagon@example.com
-                                    </span>
-                                    <span className="ml-4 flex-shrink-0">
-                                      <button
-                                        type="button"
-                                        className="rounded-md bg-white font-medium text-blue-600 hover:text-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
-                                      >
-                                        Update
-                                      </button>
-                                    </span>
-                                  </dd>
-                                </div>
-                                <div className="py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-5 sm:pt-5">
-                                  <dt className="text-sm font-medium text-gray-500">
-                                    Status
-                                  </dt>
-                                  <dd className="mt-1 flex text-sm text-gray-900 sm:col-span-2 sm:mt-0">
-                                    <span className="flex-grow">
-                                      chelsea.hagon@example.com
-                                    </span>
-                                    <span className="ml-4 flex-shrink-0">
-                                      <button
-                                        type="button"
-                                        className="rounded-md bg-white font-medium text-blue-600 hover:text-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
-                                      >
-                                        Update
-                                      </button>
-                                    </span>
-                                  </dd>
-                                </div>
-                                <div className="py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-5 sm:pt-5">
-                                  <dt className="text-sm font-medium text-gray-500">
-                                    Conducting Research?
-                                  </dt>
-                                  <dd className="mt-1 flex text-sm text-gray-900 sm:col-span-2 sm:mt-0">
-                                    <span className="flex-grow">
-                                      chelsea.hagon@example.com
-                                    </span>
-                                    <span className="ml-4 flex-shrink-0">
-                                      <button
-                                        type="button"
-                                        className="rounded-md bg-white font-medium text-blue-600 hover:text-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
-                                      >
-                                        Update
-                                      </button>
-                                    </span>
-                                  </dd>
-                                </div>
-                                <div className="py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-5 sm:pt-5">
-                                  <dt className="text-sm font-medium text-gray-500">
-                                    Writing Proposal?
-                                  </dt>
-                                  <dd className="mt-1 flex text-sm text-gray-900 sm:col-span-2 sm:mt-0">
-                                    <span className="flex-grow">
-                                      chelsea.hagon@example.com
-                                    </span>
-                                    <span className="ml-4 flex-shrink-0">
-                                      <button
-                                        type="button"
-                                        className="rounded-md bg-white font-medium text-blue-600 hover:text-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
-                                      >
-                                        Update
-                                      </button>
-                                    </span>
-                                  </dd>
-                                </div>
-                                <div className="py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-5 sm:pt-5">
-                                  <dt className="text-sm font-medium text-gray-500">
-                                    Writing Dissertation?
-                                  </dt>
-                                  <dd className="mt-1 flex text-sm text-gray-900 sm:col-span-2 sm:mt-0">
-                                    <span className="flex-grow">
-                                      chelsea.hagon@example.com
-                                    </span>
-                                    <span className="ml-4 flex-shrink-0">
-                                      <button
-                                        type="button"
-                                        className="rounded-md bg-white font-medium text-blue-600 hover:text-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
-                                      >
-                                        Update
-                                      </button>
-                                    </span>
-                                  </dd>
-                                </div>
-                                <div className="py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-5 sm:pt-5">
-                                  <dt className="text-sm font-medium text-gray-500">
-                                    Attending Conferences?
-                                  </dt>
-                                  <dd className="mt-1 flex text-sm text-gray-900 sm:col-span-2 sm:mt-0">
-                                    <span className="flex-grow">
-                                      chelsea.hagon@example.com
-                                    </span>
-                                    <span className="ml-4 flex-shrink-0">
-                                      <button
-                                        type="button"
-                                        className="rounded-md bg-white font-medium text-blue-600 hover:text-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
-                                      >
-                                        Update
-                                      </button>
-                                    </span>
-                                  </dd>
-                                </div>
-                                <div className="py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-5 sm:pt-5">
-                                  <dt className="text-sm font-medium text-gray-500">
-                                    Looking for Positions?
-                                  </dt>
-                                  <dd className="mt-1 flex text-sm text-gray-900 sm:col-span-2 sm:mt-0">
-                                    <span className="flex-grow">
-                                      chelsea.hagon@example.com
-                                    </span>
-                                    <span className="ml-4 flex-shrink-0">
-                                      <button
-                                        type="button"
-                                        className="rounded-md bg-white font-medium text-blue-600 hover:text-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
-                                      >
-                                        Update
-                                      </button>
-                                    </span>
-                                  </dd>
-                                </div>
-                                {/* <div className="py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:border-b sm:border-gray-200 sm:py-5">
-                                <dt className="text-sm font-medium text-gray-500">
-                                  Job title
-                                </dt>
-                                <dd className="mt-1 flex text-sm text-gray-900 sm:col-span-2 sm:mt-0">
-                                  <span className="flex-grow">
-                                    Human Resources Manager
-                                  </span>
-                                  <span className="ml-4 flex-shrink-0">
-                                    <button
-                                      type="button"
-                                      className="rounded-md bg-white font-medium text-blue-600 hover:text-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
-                                    >
-                                      Update
-                                    </button>
-                                  </span>
-                                </dd>
-                              </div> */}
+                                {!currentlyUpdating && (
+                                  <div className="py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-5">
+                                    <dt className="text-sm font-medium text-gray-500">
+                                      Field of Study
+                                    </dt>
+                                    <dd className="mt-1 flex text-sm text-gray-900 sm:col-span-2 sm:mt-0">
+                                      <span className="flex-grow">
+                                        {fieldOfStudy}
+                                      </span>
+                                      <span className="ml-4 flex-shrink-0">
+                                        <button
+                                          type="button"
+                                          className="rounded-md bg-white font-medium text-blue-600 hover:text-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+                                          onClick={() =>
+                                            setCurrentlyUpdating(true)
+                                          }
+                                        >
+                                          Update
+                                        </button>
+                                      </span>
+                                    </dd>
+                                  </div>
+                                )}
+                                {currentlyUpdating && (
+                                  <div className="py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-5">
+                                    <dt className="text-sm font-medium text-gray-500">
+                                      Field of Study
+                                    </dt>
+                                    <dd className="mt-1 flex text-sm text-gray-900 sm:col-span-2 sm:mt-0">
+                                      <span className="flex-grow">
+                                        <TextInputField
+                                          value={fieldOfStudy}
+                                          setValue={setFieldOfStudy}
+                                          width="w-[23rem]"
+                                        />
+                                      </span>
+                                      <span className="ml-4 flex-shrink-0">
+                                        <div className="flex space-x-4 justify-end">
+                                          <button
+                                            type="button"
+                                            className="inline-flex h-8 items-center justify-center rounded-md border border-transparent border border-gray-300 bg-white px-2 py-1 text-sm font-medium text-gray-700 shadow-sm focus:outline-none focus:ring-offset-2 focus:ring-offset-gray-100"
+                                            onClick={() =>
+                                              setCurrentlyUpdating(false)
+                                            }
+                                          >
+                                            Cancel
+                                          </button>
+                                          <button
+                                            type="button"
+                                            className="inline-flex h-8 items-center justify-center rounded-md border border-transparent bg-blue-600 px-2 py-1 text-sm font-medium text-white shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-100"
+                                            onClick={() => updateSettings()}
+                                          >
+                                            Save
+                                          </button>
+                                        </div>
+                                      </span>
+                                    </dd>
+                                  </div>
+                                )}
+                                {!currentlyUpdating && (
+                                  <div className="py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-5 sm:pt-5">
+                                    <dt className="text-sm font-medium text-gray-500">
+                                      In Graduate School?
+                                    </dt>
+                                    <dd className="mt-1 flex text-sm text-gray-900 sm:col-span-2 sm:mt-0">
+                                      <span className="flex-grow">
+                                        {JSON.stringify(inGraduateSchool) ==
+                                        'false'
+                                          ? 'No'
+                                          : 'Yes'}
+                                      </span>
+                                      <span className="ml-4 flex-shrink-0">
+                                        <button
+                                          type="button"
+                                          className="rounded-md bg-white font-medium text-blue-600 hover:text-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+                                          onClick={() =>
+                                            setCurrentlyUpdating(true)
+                                          }
+                                        >
+                                          Update
+                                        </button>
+                                      </span>
+                                    </dd>
+                                  </div>
+                                )}
+                                {currentlyUpdating && (
+                                  <div className="py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-5">
+                                    <dt className="text-sm font-medium text-gray-500">
+                                      In Graduate School?
+                                    </dt>
+                                    <dd className="mt-1 flex text-sm text-gray-900 sm:col-span-2 sm:mt-0">
+                                      <span className="flex-grow">
+                                        <input
+                                          id="inGraduateSchool"
+                                          name="inGraduateSchool"
+                                          type="checkbox"
+                                          className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
+                                          checked={inGraduateSchool || false}
+                                          onChange={() => {
+                                            setInGraduateSchool(
+                                              !inGraduateSchool
+                                            );
+                                          }}
+                                        />
+                                      </span>
+                                      <span className="ml-4 flex-shrink-0">
+                                        <div className="flex space-x-4 justify-end">
+                                          <button
+                                            type="button"
+                                            className="inline-flex h-8 items-center justify-center rounded-md border border-transparent border border-gray-300 bg-white px-2 py-1 text-sm font-medium text-gray-700 shadow-sm focus:outline-none focus:ring-offset-2 focus:ring-offset-gray-100"
+                                            onClick={() =>
+                                              setCurrentlyUpdating(false)
+                                            }
+                                          >
+                                            Cancel
+                                          </button>
+                                          <button
+                                            type="button"
+                                            className="inline-flex h-8 items-center justify-center rounded-md border border-transparent bg-blue-600 px-2 py-1 text-sm font-medium text-white shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-100"
+                                            onClick={() => updateSettings()}
+                                          >
+                                            Save
+                                          </button>
+                                        </div>
+                                      </span>
+                                    </dd>
+                                  </div>
+                                )}
+                                {!currentlyUpdating && (
+                                  <div className="py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-5 sm:pt-5">
+                                    <dt className="text-sm font-medium text-gray-500">
+                                      Participating in Coursework?
+                                    </dt>
+                                    <dd className="mt-1 flex text-sm text-gray-900 sm:col-span-2 sm:mt-0">
+                                      <span className="flex-grow">
+                                        {JSON.stringify(
+                                          participatingInCoursework
+                                        ) == 'false'
+                                          ? 'No'
+                                          : 'Yes'}
+                                      </span>
+                                      <span className="ml-4 flex-shrink-0">
+                                        <button
+                                          type="button"
+                                          className="rounded-md bg-white font-medium text-blue-600 hover:text-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+                                          onClick={() =>
+                                            setCurrentlyUpdating(true)
+                                          }
+                                        >
+                                          Update
+                                        </button>
+                                      </span>
+                                    </dd>
+                                  </div>
+                                )}
+                                {currentlyUpdating && (
+                                  <div className="py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-5">
+                                    <dt className="text-sm font-medium text-gray-500">
+                                      Participating in Coursework?
+                                    </dt>
+                                    <dd className="mt-1 flex text-sm text-gray-900 sm:col-span-2 sm:mt-0">
+                                      <span className="flex-grow">
+                                        <input
+                                          id="participatingInCoursework"
+                                          name="participatingInCoursework"
+                                          type="checkbox"
+                                          className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
+                                          checked={
+                                            participatingInCoursework || false
+                                          }
+                                          onChange={() => {
+                                            setParticipatingInCoursework(
+                                              !participatingInCoursework
+                                            );
+                                          }}
+                                        />
+                                      </span>
+                                      <span className="ml-4 flex-shrink-0">
+                                        <div className="flex space-x-4 justify-end">
+                                          <button
+                                            type="button"
+                                            className="inline-flex h-8 items-center justify-center rounded-md border border-transparent border border-gray-300 bg-white px-2 py-1 text-sm font-medium text-gray-700 shadow-sm focus:outline-none focus:ring-offset-2 focus:ring-offset-gray-100"
+                                            onClick={() =>
+                                              setCurrentlyUpdating(false)
+                                            }
+                                          >
+                                            Cancel
+                                          </button>
+                                          <button
+                                            type="button"
+                                            className="inline-flex h-8 items-center justify-center rounded-md border border-transparent bg-blue-600 px-2 py-1 text-sm font-medium text-white shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-100"
+                                            onClick={() => updateSettings()}
+                                          >
+                                            Save
+                                          </button>
+                                        </div>
+                                      </span>
+                                    </dd>
+                                  </div>
+                                )}
+                                {!currentlyUpdating && (
+                                  <div className="py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-5 sm:pt-5">
+                                    <dt className="text-sm font-medium text-gray-500">
+                                      Looking at Graduate Schools?
+                                    </dt>
+                                    <dd className="mt-1 flex text-sm text-gray-900 sm:col-span-2 sm:mt-0">
+                                      <span className="flex-grow">
+                                        {JSON.stringify(
+                                          lookingAtGraduateSchools
+                                        ) == 'false'
+                                          ? 'No'
+                                          : 'Yes'}
+                                      </span>
+                                      <span className="ml-4 flex-shrink-0">
+                                        <button
+                                          type="button"
+                                          className="rounded-md bg-white font-medium text-blue-600 hover:text-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+                                          onClick={() =>
+                                            setCurrentlyUpdating(true)
+                                          }
+                                        >
+                                          Update
+                                        </button>
+                                      </span>
+                                    </dd>
+                                  </div>
+                                )}
+                                {currentlyUpdating && (
+                                  <div className="py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-5">
+                                    <dt className="text-sm font-medium text-gray-500">
+                                      Looking at Graduate Schools?
+                                    </dt>
+                                    <dd className="mt-1 flex text-sm text-gray-900 sm:col-span-2 sm:mt-0">
+                                      <span className="flex-grow">
+                                        <input
+                                          id="lookingAtGraduateSchools"
+                                          name="lookingAtGraduateSchools"
+                                          type="checkbox"
+                                          className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
+                                          checked={
+                                            lookingAtGraduateSchools || false
+                                          }
+                                          onChange={() => {
+                                            setLookingAtGraduateSchools(
+                                              !lookingAtGraduateSchools
+                                            );
+                                          }}
+                                        />
+                                      </span>
+                                      <span className="ml-4 flex-shrink-0">
+                                        <div className="flex space-x-4 justify-end">
+                                          <button
+                                            type="button"
+                                            className="inline-flex h-8 items-center justify-center rounded-md border border-transparent border border-gray-300 bg-white px-2 py-1 text-sm font-medium text-gray-700 shadow-sm focus:outline-none focus:ring-offset-2 focus:ring-offset-gray-100"
+                                            onClick={() =>
+                                              setCurrentlyUpdating(false)
+                                            }
+                                          >
+                                            Cancel
+                                          </button>
+                                          <button
+                                            type="button"
+                                            className="inline-flex h-8 items-center justify-center rounded-md border border-transparent bg-blue-600 px-2 py-1 text-sm font-medium text-white shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-100"
+                                            onClick={() => updateSettings()}
+                                          >
+                                            Save
+                                          </button>
+                                        </div>
+                                      </span>
+                                    </dd>
+                                  </div>
+                                )}
+                                {!currentlyUpdating && (
+                                  <div className="py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-5 sm:pt-5">
+                                    <dt className="text-sm font-medium text-gray-500">
+                                      Degree Seeking?
+                                    </dt>
+                                    <dd className="mt-1 flex text-sm text-gray-900 sm:col-span-2 sm:mt-0">
+                                      <span className="flex-grow">
+                                        {JSON.stringify(degreeSeeking) ==
+                                        'false'
+                                          ? 'No'
+                                          : 'Yes'}
+                                      </span>
+                                      <span className="ml-4 flex-shrink-0">
+                                        <button
+                                          type="button"
+                                          className="rounded-md bg-white font-medium text-blue-600 hover:text-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+                                          onClick={() =>
+                                            setCurrentlyUpdating(true)
+                                          }
+                                        >
+                                          Update
+                                        </button>
+                                      </span>
+                                    </dd>
+                                  </div>
+                                )}
+                                {currentlyUpdating && (
+                                  <div className="py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-5">
+                                    <dt className="text-sm font-medium text-gray-500">
+                                      Degree Seeking?
+                                    </dt>
+                                    <dd className="mt-1 flex text-sm text-gray-900 sm:col-span-2 sm:mt-0">
+                                      <span className="flex-grow">
+                                        <input
+                                          id="degreeSeeking"
+                                          name="degreeSeeking"
+                                          type="checkbox"
+                                          className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
+                                          checked={degreeSeeking || false}
+                                          onChange={() => {
+                                            setDegreeSeeking(!degreeSeeking);
+                                          }}
+                                        />
+                                      </span>
+                                      <span className="ml-4 flex-shrink-0">
+                                        <div className="flex space-x-4 justify-end">
+                                          <button
+                                            type="button"
+                                            className="inline-flex h-8 items-center justify-center rounded-md border border-transparent border border-gray-300 bg-white px-2 py-1 text-sm font-medium text-gray-700 shadow-sm focus:outline-none focus:ring-offset-2 focus:ring-offset-gray-100"
+                                            onClick={() =>
+                                              setCurrentlyUpdating(false)
+                                            }
+                                          >
+                                            Cancel
+                                          </button>
+                                          <button
+                                            type="button"
+                                            className="inline-flex h-8 items-center justify-center rounded-md border border-transparent bg-blue-600 px-2 py-1 text-sm font-medium text-white shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-100"
+                                            onClick={() => updateSettings()}
+                                          >
+                                            Save
+                                          </button>
+                                        </div>
+                                      </span>
+                                    </dd>
+                                  </div>
+                                )}
+                                {!currentlyUpdating && (
+                                  <div className="py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-5 sm:pt-5">
+                                    <dt className="text-sm font-medium text-gray-500">
+                                      University
+                                    </dt>
+                                    <dd className="mt-1 flex text-sm text-gray-900 sm:col-span-2 sm:mt-0">
+                                      <span className="flex-grow">
+                                        {university}
+                                      </span>
+                                      <span className="ml-4 flex-shrink-0">
+                                        <button
+                                          type="button"
+                                          className="rounded-md bg-white font-medium text-blue-600 hover:text-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+                                          onClick={() =>
+                                            setCurrentlyUpdating(true)
+                                          }
+                                        >
+                                          Update
+                                        </button>
+                                      </span>
+                                    </dd>
+                                  </div>
+                                )}
+                                {currentlyUpdating && (
+                                  <div className="py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-5">
+                                    <dt className="text-sm font-medium text-gray-500">
+                                      University
+                                    </dt>
+                                    <dd className="mt-1 flex text-sm text-gray-900 sm:col-span-2 sm:mt-0">
+                                      <span className="flex-grow">
+                                        <TextInputField
+                                          value={university}
+                                          setValue={setUniversity}
+                                          width="w-[23rem]"
+                                        />
+                                      </span>
+                                      <span className="ml-4 flex-shrink-0">
+                                        <div className="flex space-x-4 justify-end">
+                                          <button
+                                            type="button"
+                                            className="inline-flex h-8 items-center justify-center rounded-md border border-transparent border border-gray-300 bg-white px-2 py-1 text-sm font-medium text-gray-700 shadow-sm focus:outline-none focus:ring-offset-2 focus:ring-offset-gray-100"
+                                            onClick={() =>
+                                              setCurrentlyUpdating(false)
+                                            }
+                                          >
+                                            Cancel
+                                          </button>
+                                          <button
+                                            type="button"
+                                            className="inline-flex h-8 items-center justify-center rounded-md border border-transparent bg-blue-600 px-2 py-1 text-sm font-medium text-white shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-100"
+                                            onClick={() => updateSettings()}
+                                          >
+                                            Save
+                                          </button>
+                                        </div>
+                                      </span>
+                                    </dd>
+                                  </div>
+                                )}
+                                {!currentlyUpdating && (
+                                  <div className="py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-5 sm:pt-5">
+                                    <dt className="text-sm font-medium text-gray-500">
+                                      Status
+                                    </dt>
+                                    <dd className="mt-1 flex text-sm text-gray-900 sm:col-span-2 sm:mt-0">
+                                      <span className="flex-grow">
+                                        {status}
+                                      </span>
+                                      <span className="ml-4 flex-shrink-0">
+                                        <button
+                                          type="button"
+                                          className="rounded-md bg-white font-medium text-blue-600 hover:text-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+                                          onClick={() =>
+                                            setCurrentlyUpdating(true)
+                                          }
+                                        >
+                                          Update
+                                        </button>
+                                      </span>
+                                    </dd>
+                                  </div>
+                                )}
+                                {currentlyUpdating && (
+                                  <div className="py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-5">
+                                    <dt className="text-sm font-medium text-gray-500">
+                                      Status
+                                    </dt>
+                                    <dd className="mt-1 flex text-sm text-gray-900 sm:col-span-2 sm:mt-0">
+                                      <span className="flex-grow">
+                                        <TextInputField
+                                          value={status}
+                                          setValue={setStatus}
+                                          width="w-[23rem]"
+                                        />
+                                      </span>
+                                      <span className="ml-4 flex-shrink-0">
+                                        <div className="flex space-x-4 justify-end">
+                                          <button
+                                            type="button"
+                                            className="inline-flex h-8 items-center justify-center rounded-md border border-transparent border border-gray-300 bg-white px-2 py-1 text-sm font-medium text-gray-700 shadow-sm focus:outline-none focus:ring-offset-2 focus:ring-offset-gray-100"
+                                            onClick={() =>
+                                              setCurrentlyUpdating(false)
+                                            }
+                                          >
+                                            Cancel
+                                          </button>
+                                          <button
+                                            type="button"
+                                            className="inline-flex h-8 items-center justify-center rounded-md border border-transparent bg-blue-600 px-2 py-1 text-sm font-medium text-white shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-100"
+                                            onClick={() => updateSettings()}
+                                          >
+                                            Save
+                                          </button>
+                                        </div>
+                                      </span>
+                                    </dd>
+                                  </div>
+                                )}
+                                {!currentlyUpdating && (
+                                  <div className="py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-5 sm:pt-5">
+                                    <dt className="text-sm font-medium text-gray-500">
+                                      Conducting Research?
+                                    </dt>
+                                    <dd className="mt-1 flex text-sm text-gray-900 sm:col-span-2 sm:mt-0">
+                                      <span className="flex-grow">
+                                        {JSON.stringify(conductingResearch) ==
+                                        'false'
+                                          ? 'No'
+                                          : 'Yes'}
+                                      </span>
+                                      <span className="ml-4 flex-shrink-0">
+                                        <button
+                                          type="button"
+                                          className="rounded-md bg-white font-medium text-blue-600 hover:text-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+                                          onClick={() =>
+                                            setCurrentlyUpdating(true)
+                                          }
+                                        >
+                                          Update
+                                        </button>
+                                      </span>
+                                    </dd>
+                                  </div>
+                                )}
+                                {currentlyUpdating && (
+                                  <div className="py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-5">
+                                    <dt className="text-sm font-medium text-gray-500">
+                                      Conducting Research?
+                                    </dt>
+                                    <dd className="mt-1 flex text-sm text-gray-900 sm:col-span-2 sm:mt-0">
+                                      <span className="flex-grow">
+                                        <input
+                                          id="conductingResearch"
+                                          name="conductingResearch"
+                                          type="checkbox"
+                                          className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
+                                          checked={conductingResearch || false}
+                                          onChange={() => {
+                                            setConductingResearch(
+                                              !conductingResearch
+                                            );
+                                          }}
+                                        />
+                                      </span>
+                                      <span className="ml-4 flex-shrink-0">
+                                        <div className="flex space-x-4 justify-end">
+                                          <button
+                                            type="button"
+                                            className="inline-flex h-8 items-center justify-center rounded-md border border-transparent border border-gray-300 bg-white px-2 py-1 text-sm font-medium text-gray-700 shadow-sm focus:outline-none focus:ring-offset-2 focus:ring-offset-gray-100"
+                                            onClick={() =>
+                                              setCurrentlyUpdating(false)
+                                            }
+                                          >
+                                            Cancel
+                                          </button>
+                                          <button
+                                            type="button"
+                                            className="inline-flex h-8 items-center justify-center rounded-md border border-transparent bg-blue-600 px-2 py-1 text-sm font-medium text-white shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-100"
+                                            onClick={() => updateSettings()}
+                                          >
+                                            Save
+                                          </button>
+                                        </div>
+                                      </span>
+                                    </dd>
+                                  </div>
+                                )}
+                                {!currentlyUpdating && (
+                                  <div className="py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-5 sm:pt-5">
+                                    <dt className="text-sm font-medium text-gray-500">
+                                      Writing Proposal?
+                                    </dt>
+                                    <dd className="mt-1 flex text-sm text-gray-900 sm:col-span-2 sm:mt-0">
+                                      <span className="flex-grow">
+                                        {JSON.stringify(writingProposal) ==
+                                        'false'
+                                          ? 'No'
+                                          : 'Yes'}
+                                      </span>
+                                      <span className="ml-4 flex-shrink-0">
+                                        <button
+                                          type="button"
+                                          className="rounded-md bg-white font-medium text-blue-600 hover:text-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+                                          onClick={() =>
+                                            setCurrentlyUpdating(true)
+                                          }
+                                        >
+                                          Update
+                                        </button>
+                                      </span>
+                                    </dd>
+                                  </div>
+                                )}
+                                {currentlyUpdating && (
+                                  <div className="py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-5">
+                                    <dt className="text-sm font-medium text-gray-500">
+                                      Writing Proposal?
+                                    </dt>
+                                    <dd className="mt-1 flex text-sm text-gray-900 sm:col-span-2 sm:mt-0">
+                                      <span className="flex-grow">
+                                        <input
+                                          id="writingProposal"
+                                          name="writingProposal"
+                                          type="checkbox"
+                                          className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
+                                          checked={writingProposal || false}
+                                          onChange={() => {
+                                            setWritingProposal(
+                                              !writingProposal
+                                            );
+                                          }}
+                                        />
+                                      </span>
+                                      <span className="ml-4 flex-shrink-0">
+                                        <div className="flex space-x-4 justify-end">
+                                          <button
+                                            type="button"
+                                            className="inline-flex h-8 items-center justify-center rounded-md border border-transparent border border-gray-300 bg-white px-2 py-1 text-sm font-medium text-gray-700 shadow-sm focus:outline-none focus:ring-offset-2 focus:ring-offset-gray-100"
+                                            onClick={() =>
+                                              setCurrentlyUpdating(false)
+                                            }
+                                          >
+                                            Cancel
+                                          </button>
+                                          <button
+                                            type="button"
+                                            className="inline-flex h-8 items-center justify-center rounded-md border border-transparent bg-blue-600 px-2 py-1 text-sm font-medium text-white shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-100"
+                                            onClick={() => updateSettings()}
+                                          >
+                                            Save
+                                          </button>
+                                        </div>
+                                      </span>
+                                    </dd>
+                                  </div>
+                                )}
+                                {!currentlyUpdating && (
+                                  <div className="py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-5 sm:pt-5">
+                                    <dt className="text-sm font-medium text-gray-500">
+                                      Writing Dissertation?
+                                    </dt>
+                                    <dd className="mt-1 flex text-sm text-gray-900 sm:col-span-2 sm:mt-0">
+                                      <span className="flex-grow">
+                                        {JSON.stringify(writingDissertation) ==
+                                        'false'
+                                          ? 'No'
+                                          : 'Yes'}
+                                      </span>
+                                      <span className="ml-4 flex-shrink-0">
+                                        <button
+                                          type="button"
+                                          className="rounded-md bg-white font-medium text-blue-600 hover:text-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+                                          onClick={() =>
+                                            setCurrentlyUpdating(true)
+                                          }
+                                        >
+                                          Update
+                                        </button>
+                                      </span>
+                                    </dd>
+                                  </div>
+                                )}
+                                {currentlyUpdating && (
+                                  <div className="py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-5">
+                                    <dt className="text-sm font-medium text-gray-500">
+                                      Writing Dissertation?
+                                    </dt>
+                                    <dd className="mt-1 flex text-sm text-gray-900 sm:col-span-2 sm:mt-0">
+                                      <span className="flex-grow">
+                                        <input
+                                          id="writingDissertation"
+                                          name="writingDissertation"
+                                          type="checkbox"
+                                          className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
+                                          checked={writingDissertation || false}
+                                          onChange={() => {
+                                            setWritingDissertation(
+                                              !writingDissertation
+                                            );
+                                          }}
+                                        />
+                                      </span>
+                                      <span className="ml-4 flex-shrink-0">
+                                        <div className="flex space-x-4 justify-end">
+                                          <button
+                                            type="button"
+                                            className="inline-flex h-8 items-center justify-center rounded-md border border-transparent border border-gray-300 bg-white px-2 py-1 text-sm font-medium text-gray-700 shadow-sm focus:outline-none focus:ring-offset-2 focus:ring-offset-gray-100"
+                                            onClick={() =>
+                                              setCurrentlyUpdating(false)
+                                            }
+                                          >
+                                            Cancel
+                                          </button>
+                                          <button
+                                            type="button"
+                                            className="inline-flex h-8 items-center justify-center rounded-md border border-transparent bg-blue-600 px-2 py-1 text-sm font-medium text-white shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-100"
+                                            onClick={() => updateSettings()}
+                                          >
+                                            Save
+                                          </button>
+                                        </div>
+                                      </span>
+                                    </dd>
+                                  </div>
+                                )}
+                                {!currentlyUpdating && (
+                                  <div className="py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-5 sm:pt-5">
+                                    <dt className="text-sm font-medium text-gray-500">
+                                      Attending Conferences?
+                                    </dt>
+                                    <dd className="mt-1 flex text-sm text-gray-900 sm:col-span-2 sm:mt-0">
+                                      <span className="flex-grow">
+                                        {JSON.stringify(attendingConferences) ==
+                                        'false'
+                                          ? 'No'
+                                          : 'Yes'}
+                                      </span>
+                                      <span className="ml-4 flex-shrink-0">
+                                        <button
+                                          type="button"
+                                          className="rounded-md bg-white font-medium text-blue-600 hover:text-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+                                          onClick={() =>
+                                            setCurrentlyUpdating(true)
+                                          }
+                                        >
+                                          Update
+                                        </button>
+                                      </span>
+                                    </dd>
+                                  </div>
+                                )}
+                                {currentlyUpdating && (
+                                  <div className="py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-5">
+                                    <dt className="text-sm font-medium text-gray-500">
+                                      Attending Conferences?
+                                    </dt>
+                                    <dd className="mt-1 flex text-sm text-gray-900 sm:col-span-2 sm:mt-0">
+                                      <span className="flex-grow">
+                                        <input
+                                          id="attendingConferences"
+                                          name="attendingConferences"
+                                          type="checkbox"
+                                          className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
+                                          checked={
+                                            attendingConferences || false
+                                          }
+                                          onChange={() => {
+                                            setAttendingConferences(
+                                              !attendingConferences
+                                            );
+                                          }}
+                                        />
+                                      </span>
+                                      <span className="ml-4 flex-shrink-0">
+                                        <div className="flex space-x-4 justify-end">
+                                          <button
+                                            type="button"
+                                            className="inline-flex h-8 items-center justify-center rounded-md border border-transparent border border-gray-300 bg-white px-2 py-1 text-sm font-medium text-gray-700 shadow-sm focus:outline-none focus:ring-offset-2 focus:ring-offset-gray-100"
+                                            onClick={() =>
+                                              setCurrentlyUpdating(false)
+                                            }
+                                          >
+                                            Cancel
+                                          </button>
+                                          <button
+                                            type="button"
+                                            className="inline-flex h-8 items-center justify-center rounded-md border border-transparent bg-blue-600 px-2 py-1 text-sm font-medium text-white shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-100"
+                                            onClick={() => updateSettings()}
+                                          >
+                                            Save
+                                          </button>
+                                        </div>
+                                      </span>
+                                    </dd>
+                                  </div>
+                                )}
+                                {!currentlyUpdating && (
+                                  <div className="py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-5 sm:pt-5">
+                                    <dt className="text-sm font-medium text-gray-500">
+                                      Looking for Positions?
+                                    </dt>
+                                    <dd className="mt-1 flex text-sm text-gray-900 sm:col-span-2 sm:mt-0">
+                                      <span className="flex-grow">
+                                        {JSON.stringify(lookingForPositions) ==
+                                        'false'
+                                          ? 'No'
+                                          : 'Yes'}
+                                      </span>
+                                      <span className="ml-4 flex-shrink-0">
+                                        <button
+                                          type="button"
+                                          className="rounded-md bg-white font-medium text-blue-600 hover:text-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+                                          onClick={() =>
+                                            setCurrentlyUpdating(true)
+                                          }
+                                        >
+                                          Update
+                                        </button>
+                                      </span>
+                                    </dd>
+                                  </div>
+                                )}
+                                {currentlyUpdating && (
+                                  <div className="py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-5">
+                                    <dt className="text-sm font-medium text-gray-500">
+                                      Looking for Positions?
+                                    </dt>
+                                    <dd className="mt-1 flex text-sm text-gray-900 sm:col-span-2 sm:mt-0">
+                                      <span className="flex-grow">
+                                        <input
+                                          id="lookingForPositions"
+                                          name="lookingForPositions"
+                                          type="checkbox"
+                                          className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
+                                          checked={lookingForPositions || false}
+                                          onChange={() => {
+                                            setLookingForPositions(
+                                              !lookingForPositions
+                                            );
+                                          }}
+                                        />
+                                      </span>
+                                      <span className="ml-4 flex-shrink-0">
+                                        <div className="flex space-x-4 justify-end">
+                                          <button
+                                            type="button"
+                                            className="inline-flex h-8 items-center justify-center rounded-md border border-transparent border border-gray-300 bg-white px-2 py-1 text-sm font-medium text-gray-700 shadow-sm focus:outline-none focus:ring-offset-2 focus:ring-offset-gray-100"
+                                            onClick={() =>
+                                              setCurrentlyUpdating(false)
+                                            }
+                                          >
+                                            Cancel
+                                          </button>
+                                          <button
+                                            type="button"
+                                            className="inline-flex h-8 items-center justify-center rounded-md border border-transparent bg-blue-600 px-2 py-1 text-sm font-medium text-white shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-100"
+                                            onClick={() => updateSettings()}
+                                          >
+                                            Save
+                                          </button>
+                                        </div>
+                                      </span>
+                                    </dd>
+                                  </div>
+                                )}
                               </dl>
                             </div>
                           </div>
@@ -597,24 +1238,75 @@ export default function Settings() {
                             </div>
                             <div className="mt-6">
                               <dl className="divide-y divide-gray-200">
-                                <div className="py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-5">
-                                  <dt className="text-sm font-medium text-gray-500">
-                                    Dark Mode
-                                  </dt>
-                                  <dd className="mt-1 flex text-sm text-gray-900 sm:col-span-2 sm:mt-0">
-                                    <span className="flex-grow">
-                                      Chelsea Hagon
-                                    </span>
-                                    <span className="ml-4 flex-shrink-0">
-                                      <button
-                                        type="button"
-                                        className="rounded-md bg-white font-medium text-blue-600 hover:text-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
-                                      >
-                                        Update
-                                      </button>
-                                    </span>
-                                  </dd>
-                                </div>
+                                {!currentlyUpdating && (
+                                  <div className="py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-5">
+                                    <dt className="text-sm font-medium text-gray-500">
+                                      Dark Mode
+                                    </dt>
+                                    <dd className="mt-1 flex text-sm text-gray-900 sm:col-span-2 sm:mt-0">
+                                      <span className="flex-grow">
+                                        {darkMode ? 'Yes' : 'No'}
+                                      </span>
+                                      <span className="ml-4 flex-shrink-0">
+                                        <button
+                                          type="button"
+                                          className="rounded-md bg-white font-medium text-blue-600 hover:text-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+                                          onClick={() =>
+                                            setCurrentlyUpdating(true)
+                                          }
+                                        >
+                                          Update
+                                        </button>
+                                      </span>
+                                    </dd>
+                                  </div>
+                                )}
+                                {currentlyUpdating && (
+                                  <div className="py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-5">
+                                    <dt className="text-sm font-medium text-gray-500">
+                                      Dark Mode?
+                                    </dt>
+                                    <dd className="mt-1 flex text-sm text-gray-900 sm:col-span-2 sm:mt-0">
+                                      <span className="flex-grow">
+                                        <input
+                                          id="darkMode"
+                                          name="darkMode"
+                                          type="checkbox"
+                                          className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
+                                          checked={darkMode || false}
+                                          onChange={() => {
+                                            if (!darkMode) {
+                                              setTheme('dark');
+                                            } else {
+                                              setTheme('light');
+                                            }
+                                            setDarkMode(!darkMode);
+                                          }}
+                                        />
+                                      </span>
+                                      <span className="ml-4 flex-shrink-0">
+                                        <div className="flex space-x-4 justify-end">
+                                          <button
+                                            type="button"
+                                            className="inline-flex h-8 items-center justify-center rounded-md border border-transparent border border-gray-300 bg-white px-2 py-1 text-sm font-medium text-gray-700 shadow-sm focus:outline-none focus:ring-offset-2 focus:ring-offset-gray-100"
+                                            onClick={() =>
+                                              setCurrentlyUpdating(false)
+                                            }
+                                          >
+                                            Cancel
+                                          </button>
+                                          <button
+                                            type="button"
+                                            className="inline-flex h-8 items-center justify-center rounded-md border border-transparent bg-blue-600 px-2 py-1 text-sm font-medium text-white shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-100"
+                                            onClick={() => updateSettings()}
+                                          >
+                                            Save
+                                          </button>
+                                        </div>
+                                      </span>
+                                    </dd>
+                                  </div>
+                                )}
                               </dl>
                             </div>
                           </div>

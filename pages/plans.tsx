@@ -1,6 +1,5 @@
 import { Pricing } from '@/components/LandingPage/Pricing';
 import { getActiveProductsWithPrices } from '@/utils/supabase-client';
-import { useUser } from '@/utils/useUser';
 import React, { useEffect, useState } from 'react';
 import { ProductWithPrice } from 'types';
 
