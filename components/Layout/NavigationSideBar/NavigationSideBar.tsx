@@ -39,7 +39,9 @@ const navigation = [
     current: false
   }
 ];
-const secondaryNavigation = [{ name: 'Settings', href: '#', icon: CogIcon }];
+const secondaryNavigation = [
+  { name: 'Settings', href: '/app/settings', icon: CogIcon }
+];
 
 function classNames(...classes: any) {
   return classes.filter(Boolean).join(' ');
