@@ -1,9 +1,6 @@
 import { Fragment, useEffect, useState } from 'react';
 import { Dialog, Transition } from '@headlessui/react';
-import { useCreateArticle } from 'hooks/articles/useCreateArticle';
 import { XMarkIcon } from '@heroicons/react/24/outline';
-import ArticleTypeSelectionDropdown from '../InputFields/ArticleTypeSelectionDropdown';
-import { articleTypes } from 'constants/dropdownLists';
 import InputTypeSelectionDropdown from '@/components/Projects/InputFields/InputTypeSelectionDropdown';
 import { useUpdateDocument } from 'hooks/documents/useUpdateDocument';
 import useGetProjectsQuery from 'hooks/projects/useProjects';
@@ -36,11 +33,18 @@ export default function EditDocumentModal({
   }, [selectedDocument]);
 
   const updateExistingDocument = async () => {
-    await updateDocument.mutateAsync({
-      id: selectedDocument.id,
-      title: newTitle,
-      projectItemId: selectedProject.id
-    });
+    if (!selectedProject) {
+      await updateDocument.mutateAsync({
+        id: selectedDocument.id,
+        title: newTitle
+      });
+    } else {
+      await updateDocument.mutateAsync({
+        id: selectedDocument.id,
+        title: newTitle,
+        projectItemId: selectedProject.id
+      });
+    }
 
     setNewTitle('');
     setSelectedDocument();
@@ -50,13 +54,10 @@ export default function EditDocumentModal({
 
   useEffect(() => {
     if (projects) {
-      console.log(selectedDocument);
       const formattedProjects = formatOptions(projects);
-      console.log('Selected Project');
       const filteredProject = formattedProjects.filter(
         (project) => project.id == selectedDocument.projectItemId
       );
-      console.log('Filtered Project', filteredProject[0]);
       setSelectedProject(filteredProject[0]);
       setProjectOptions(formattedProjects);
     }

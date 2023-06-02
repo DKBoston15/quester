@@ -2,14 +2,11 @@ import React, { Fragment, useState } from 'react';
 import { useSidebar } from 'context/SidebarContext';
 import { Dialog, Transition } from '@headlessui/react';
 import {
-  ClockIcon,
   CogIcon,
   CreditCardIcon,
   DocumentChartBarIcon,
   HomeIcon,
-  QuestionMarkCircleIcon,
   ScaleIcon,
-  ShieldCheckIcon,
   UserGroupIcon,
   XMarkIcon
 } from '@heroicons/react/24/outline';
@@ -25,7 +22,7 @@ const navigation = [
     icon: ScaleIcon,
     current: false
   },
-  { name: 'Tasks', href: '/app/tasks', icon: CreditCardIcon, current: false },
+  // { name: 'Tasks', href: '/app/tasks', icon: CreditCardIcon, current: false },
   {
     name: 'Knowledge Base',
     href: '/app/knowledge_base',
