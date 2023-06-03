@@ -54,20 +54,17 @@ import YouTubePlugin from './plugins/YouTubePlugin';
 import PlaygroundEditorTheme from './themes/PlaygroundEditorTheme';
 import ContentEditable from './ui/ContentEditable';
 import Placeholder from './ui/Placeholder';
-import { createPortal } from 'react-dom';
-import Button from './ui/Button';
 import { useLexicalComposerContext } from '@lexical/react/LexicalComposerContext';
 import { useDebouncedCallback } from 'use-debounce';
-import { $generateNodesFromDOM } from '@lexical/html';
 import { CAN_USE_DOM } from './shared/canUseDOM';
-import { useUpdateDocument } from 'hooks/documents/useUpdateDocument';
 import { updateDocument } from 'queries/documents/update-document';
 import { useUser } from '@/utils/useUser';
 
 export default function Editor({
   editorState,
   documentId,
-  title
+  title,
+  projectItemId
 }: any): JSX.Element {
   const { user } = useUser();
   const [floatingAnchorElem, setFloatingAnchorElem] =
@@ -120,7 +117,8 @@ export default function Editor({
       data !=
       '{"root":{"children":[{"children":[{"detail":0,"format":0,"mode":"normal","style":"","text":"","type":"text","version":1}],"direction":"ltr","format":"","indent":0,"type":"paragraph","version":1}],"direction":"ltr","format":"","indent":0,"type":"root","version":1}}'
     ) {
-      await updateDocument(documentId, title, data, user.id);
+      //@ts-ignore
+      await updateDocument(documentId, title, data, projectItemId, user.id);
     }
   }, 1000);
 

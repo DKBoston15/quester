@@ -109,6 +109,7 @@ function CodeActionMenuContainer({
 
   editor.registerMutationListener(CodeNode, (mutations) => {
     editor.getEditorState().read(() => {
+      //@ts-ignore
       for (const [key, type] of mutations) {
         switch (type) {
           case 'created':

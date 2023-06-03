@@ -16,7 +16,7 @@ import {
   $isRangeSelection,
   COMMAND_PRIORITY_CRITICAL,
   ElementNode,
-  INDENT_CONTENT_COMMAND,
+  INDENT_CONTENT_COMMAND
 } from 'lexical';
 import { useEffect } from 'react';
 
@@ -24,17 +24,21 @@ type Props = Readonly<{
   maxDepth: number | null | undefined;
 }>;
 
-function getElementNodesInSelection(selection: RangeSelection): Set<ElementNode> {
+function getElementNodesInSelection(
+  selection: RangeSelection
+): Set<ElementNode> {
   const nodesInSelection = selection.getNodes();
 
   if (nodesInSelection.length === 0) {
     return new Set([
       selection.anchor.getNode().getParentOrThrow(),
-      selection.focus.getNode().getParentOrThrow(),
+      selection.focus.getNode().getParentOrThrow()
     ]);
   }
 
-  return new Set(nodesInSelection.map((n) => ($isElementNode(n) ? n : n.getParentOrThrow())));
+  return new Set(
+    nodesInSelection.map((n) => ($isElementNode(n) ? n : n.getParentOrThrow()))
+  );
 }
 
 function isIndentPermitted(maxDepth: number): boolean {
@@ -44,10 +48,12 @@ function isIndentPermitted(maxDepth: number): boolean {
     return false;
   }
 
-  const elementNodesInSelection: Set<ElementNode> = getElementNodesInSelection(selection);
+  const elementNodesInSelection: Set<ElementNode> =
+    getElementNodesInSelection(selection);
 
   let totalDepth = 0;
 
+  //@ts-ignore
   for (const elementNode of elementNodesInSelection) {
     if ($isListNode(elementNode)) {
       totalDepth = Math.max($getListDepth(elementNode) + 1, totalDepth);
@@ -56,7 +62,7 @@ function isIndentPermitted(maxDepth: number): boolean {
 
       if (!$isListNode(parent)) {
         throw new Error(
-          'ListMaxIndentLevelPlugin: A ListItemNode must have a ListNode for a parent.',
+          'ListMaxIndentLevelPlugin: A ListItemNode must have a ListNode for a parent.'
         );
       }
 
@@ -74,7 +80,7 @@ export default function ListMaxIndentLevelPlugin({ maxDepth }: Props): null {
     return editor.registerCommand(
       INDENT_CONTENT_COMMAND,
       () => !isIndentPermitted(maxDepth ?? 7),
-      COMMAND_PRIORITY_CRITICAL,
+      COMMAND_PRIORITY_CRITICAL
     );
   }, [editor, maxDepth]);
   return null;

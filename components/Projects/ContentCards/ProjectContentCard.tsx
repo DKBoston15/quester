@@ -14,6 +14,7 @@ export default function ProjectContentCard({ projectItemId }: any) {
     if (projects) {
       const project = projects.find((project) => project.id == projectItemId);
       if (project) {
+        //@ts-ignore
         setSelectedProject(project);
         setProjectTitle(project.title);
         setDescription(project.description);
@@ -23,6 +24,7 @@ export default function ProjectContentCard({ projectItemId }: any) {
 
   const saveUpdates = async () => {
     await updateProject.mutateAsync({
+      //@ts-ignore
       id: selectedProject.id,
       title: projectTitle,
       type: undefined,
@@ -42,7 +44,10 @@ export default function ProjectContentCard({ projectItemId }: any) {
               <dd className="flex justify-between items-center w-full">
                 {!currentlyUpdating && (
                   <h3 className="text-lg font-medium leading-6 text-gray-900">
-                    {selectedProject.title}
+                    {
+                      //@ts-ignore
+                      selectedProject.title
+                    }
                   </h3>
                 )}
                 {currentlyUpdating && (
@@ -83,7 +88,10 @@ export default function ProjectContentCard({ projectItemId }: any) {
             </div>
 
             <p className="mt-1 max-w-2xl text-sm text-gray-500">
-              {selectedProject.type}
+              {
+                //@ts-ignore
+                selectedProject.type
+              }
             </p>
           </div>
           <div className="mt-5 border-t border-gray-200">
@@ -110,7 +118,10 @@ export default function ProjectContentCard({ projectItemId }: any) {
                   )}
                   {!currentlyUpdating && (
                     <span className="flex-grow">
-                      {selectedProject.description}
+                      {
+                        //@ts-ignore
+                        selectedProject.description
+                      }
                     </span>
                   )}
                 </dd>

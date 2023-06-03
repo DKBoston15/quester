@@ -102,8 +102,15 @@ const navigation = [
   }
 ];
 
-function removeObjects(sourceArray, removeArray, itemId, itemType) {
+function removeObjects(
+  sourceArray: any,
+  removeArray: any,
+  itemId: any,
+  itemType: any
+) {
+  //@ts-ignore
   let data = sourceArray.filter((sourceItem) => {
+    //@ts-ignore
     return !removeArray.some((removeItem) => {
       return (
         sourceItem.source_table === removeItem.connected_item_type &&
@@ -112,7 +119,7 @@ function removeObjects(sourceArray, removeArray, itemId, itemType) {
     });
   });
   data = data.filter(
-    (item) => item.item_id != itemId || item.source_table !== itemType
+    (item: any) => item.item_id != itemId || item.source_table !== itemType
   );
   return data;
 }
@@ -135,6 +142,8 @@ const getTitle = (key: string) => {
       return 'model_title';
     case 'Paradigms':
       return 'paradigm_title';
+    case 'Researchers':
+      return 'first_name';
     case 'Questions':
       return 'question_title';
     case 'Samples':
@@ -149,6 +158,7 @@ const getTitle = (key: string) => {
 };
 
 const formatOptions = (options: any[]) => {
+  //@ts-ignore
   const optionArr = [];
   options.forEach((option, index) => {
     if (option.source_table === 'researchers') {
@@ -172,11 +182,12 @@ const formatOptions = (options: any[]) => {
       });
     }
   });
+  //@ts-ignore
   return optionArr;
 };
 
 export default function Connection({ projectItemId, itemId, itemType }: any) {
-  function classNames(...classes) {
+  function classNames(...classes: any[]) {
     return classes.filter(Boolean).join(' ');
   }
   const deleteConnection = useDeleteConnection();
@@ -197,15 +208,19 @@ export default function Connection({ projectItemId, itemId, itemType }: any) {
     let newNavArr = navigation;
     let connections = [];
     if (projectItemId) {
+      //@ts-ignore
       let { data, error } = await supabase.rpc('getconnections', {
         projectitemid: projectItemId,
         itemid: itemId
       });
+      //@ts-ignore
       connections = data;
 
       if (!error && data) {
         newNavArr = [...navigation]; // create a new array from the navigation data
+        //@ts-ignore
         data.forEach((connection) => {
+          console.log(connection);
           let navIndex;
           if (connection.connected_item_type === 'key_terms') {
             navIndex = newNavArr.findIndex((nav) => nav.name === 'Key Terms');
@@ -217,6 +232,7 @@ export default function Connection({ projectItemId, itemId, itemType }: any) {
 
           newNavArr[navIndex] = { ...newNavArr[navIndex] }; // create a new object
           newNavArr[navIndex].children = [...newNavArr[navIndex].children]; // create a new children array
+          //@ts-ignore
           newNavArr[navIndex].children.push({
             id: connection.id,
             name: connection[`${getTitle(newNavArr[navIndex].name)}`],
@@ -227,12 +243,14 @@ export default function Connection({ projectItemId, itemId, itemType }: any) {
       }
 
       if (user) {
+        //@ts-ignore
         let { data, error } = await supabase.rpc('getalloptions', {
           userid: user.id
         });
         const formattedOptions = formatOptions(
           removeObjects(data, connections, itemId, itemType)
         );
+        //@ts-ignore
         setOptions(formattedOptions);
       }
     }
@@ -337,10 +355,12 @@ export default function Connection({ projectItemId, itemId, itemType }: any) {
                           </svg>
                         </Disclosure.Button>
                         <Disclosure.Panel className="space-y-1">
-                          {item.children.map((subItem) => (
+                          {item.children.map((subItem: any) => (
                             <Disclosure.Button
+                              //@ts-ignore
                               key={subItem.name}
                               as="a"
+                              //@ts-ignore
                               href={subItem.href}
                               className="group flex w-full items-center rounded-md py-2 pl-11 pr-2 text-sm font-medium text-gray-600 hover:bg-gray-50 hover:text-gray-900"
                             >

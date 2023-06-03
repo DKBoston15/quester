@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 
-function QuizQuestion({ question, onAnswer }) {
+function QuizQuestion({ question, onAnswer }: any) {
   const [selectedAnswer, setSelectedAnswer] = useState('');
 
-  function handleAnswerClick(answer) {
+  function handleAnswerClick(answer: any) {
     setSelectedAnswer(answer);
     onAnswer(answer);
   }
@@ -12,7 +12,7 @@ function QuizQuestion({ question, onAnswer }) {
     <div className="space-y-2">
       <div className="font-medium">{question.text}</div>
       <div className="space-y-2">
-        {question.answers.map((answer, index) => (
+        {question.answers.map((answer: any, index: number) => (
           <button
             key={index}
             className={`w-full py-2 text-left rounded-md ${

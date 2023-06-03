@@ -41,6 +41,7 @@ export default function JournalContentCard({
   }, [journal, pulledJournal]);
 
   const updateExistingJournal = async () => {
+    if (!updateJournal) return;
     await updateJournal.mutateAsync({
       id: journal.id,
       title,
@@ -56,6 +57,7 @@ export default function JournalContentCard({
 
   const deleteCurrentItem = async () => {
     setOpenDeleteModal(false);
+    if (!deleteJournal) return;
     await deleteJournal.mutateAsync({
       id: journal.id
     });

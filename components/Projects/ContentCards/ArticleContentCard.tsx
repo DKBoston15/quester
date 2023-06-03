@@ -1,4 +1,4 @@
-import { findItemByName } from '@/utils/helpers';
+import { findItemByName, getNameOrOriginal } from '@/utils/helpers';
 import {
   analyticDesigns,
   articleTypes,
@@ -85,53 +85,34 @@ export default function ArticleContentCard({
   }, [article, pulledArticle]);
 
   const updateExistingArticle = async (newRead: boolean) => {
-    await updateArticle.mutateAsync({
-      id: article.id,
-      title,
-      researchParadigm:
-        typeof researchParadigm === 'object' &&
-        researchParadigm.hasOwnProperty('name')
-          ? researchParadigm.name
-          : researchParadigm,
-      samplingDesign:
-        typeof sampleDesign === 'object' && sampleDesign.hasOwnProperty('name')
-          ? sampleDesign.name
-          : sampleDesign,
-      samplingTechnique:
-        typeof sampleTechnique === 'object' &&
-        sampleTechnique.hasOwnProperty('name')
-          ? sampleTechnique.name
-          : sampleTechnique,
-      analyticDesign:
-        typeof analyticDesign === 'object' &&
-        analyticDesign.hasOwnProperty('name')
-          ? analyticDesign.name
-          : analyticDesign,
-      researchDesign:
-        typeof researchDesign === 'object' &&
-        researchDesign.hasOwnProperty('name')
-          ? researchDesign.name
-          : researchDesign,
-      authors: null,
-      year: null,
-      journal: null,
-      volume: null,
-      issue: null,
-      startPage,
-      endPage,
-      link,
-      read: newRead,
-      literatureType:
-        typeof articleType === 'object' && articleType.hasOwnProperty('name')
-          ? articleType.name
-          : articleType
-    });
+    if (updateArticle) {
+      await updateArticle.mutateAsync({
+        id: article.id,
+        title,
+        researchParadigm: getNameOrOriginal(researchParadigm),
+        samplingDesign: getNameOrOriginal(sampleDesign),
+        samplingTechnique: getNameOrOriginal(sampleTechnique),
+        analyticDesign: getNameOrOriginal(analyticDesign),
+        researchDesign: getNameOrOriginal(researchDesign),
+        authors: null,
+        year: null,
+        journal: null,
+        volume: null,
+        issue: null,
+        startPage,
+        endPage,
+        link,
+        read: newRead,
+        literatureType: getNameOrOriginal(articleType)
+      });
 
-    setCurrentlyUpdating(false);
+      setCurrentlyUpdating(false);
+    }
   };
 
   const deleteCurrentItem = async () => {
     setOpenDeleteModal(false);
+    if (!deleteArticle) return;
     await deleteArticle.mutateAsync({
       id: article.id
     });
@@ -154,7 +135,7 @@ export default function ArticleContentCard({
                 {title}
               </h3>
               <p className="mt-1 max-w-2xl text-sm text-gray-500">
-                {articleType.name}
+                {getNameOrOriginal(articleType)}
               </p>
               <div className="relative flex items-start mt-2">
                 <div className="flex h-5 items-center">
@@ -254,7 +235,7 @@ export default function ArticleContentCard({
             </dt>
             {!currentlyUpdating && (
               <dd className="mt-1 text-sm text-gray-900">
-                {researchParadigm.name}
+                {getNameOrOriginal(researchParadigm)}
               </dd>
             )}
             {currentlyUpdating && (
@@ -272,7 +253,7 @@ export default function ArticleContentCard({
             </dt>
             {!currentlyUpdating && (
               <dd className="mt-1 text-sm text-gray-900">
-                {researchDesign.name}
+                {getNameOrOriginal(researchDesign)}
               </dd>
             )}
             {currentlyUpdating && (
@@ -290,7 +271,7 @@ export default function ArticleContentCard({
             </dt>
             {!currentlyUpdating && (
               <dd className="mt-1 text-sm text-gray-900">
-                {sampleDesign.name}
+                {getNameOrOriginal(sampleDesign)}
               </dd>
             )}
             {currentlyUpdating && (
@@ -308,7 +289,7 @@ export default function ArticleContentCard({
             </dt>
             {!currentlyUpdating && (
               <dd className="mt-1 text-sm text-gray-900">
-                {sampleTechnique.name}
+                {getNameOrOriginal(sampleTechnique)}
               </dd>
             )}
             {currentlyUpdating && (
@@ -326,7 +307,7 @@ export default function ArticleContentCard({
             </dt>
             {!currentlyUpdating && (
               <dd className="mt-1 text-sm text-gray-900">
-                {analyticDesign.name}
+                {getNameOrOriginal(analyticDesign)}
               </dd>
             )}
             {currentlyUpdating && (

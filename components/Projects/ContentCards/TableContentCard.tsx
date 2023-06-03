@@ -39,6 +39,7 @@ export default function TableContentCard({
   }, [table, pulledTable]);
 
   const updateExistingTable = async () => {
+    if (!updateTable) return;
     await updateTable.mutateAsync({
       id: table.id,
       title,
@@ -53,6 +54,7 @@ export default function TableContentCard({
 
   const deleteCurrentItem = async () => {
     setOpenDeleteModal(false);
+    if (!deleteTable) return;
     await deleteTable.mutateAsync({
       id: table.id
     });

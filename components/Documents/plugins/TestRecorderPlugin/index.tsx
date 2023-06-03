@@ -250,6 +250,7 @@ ${steps.map(formatStep).join(`\n`)}
         pushStep('selectAll', '');
       } else if (keyPresses.has(key)) {
         pushStep('press', event.key);
+        //@ts-ignore
       } else if ([...key].length > 1) {
         pushStep('keydown', event.key);
       } else {

@@ -1,4 +1,4 @@
-import { findItemByName } from '@/utils/helpers';
+import { findItemByName, getNameOrOriginal } from '@/utils/helpers';
 import { designTechniques } from 'constants/dropdownLists';
 import useGetDesignByIdQuery from 'hooks/designs/useGetDesignById';
 import { useDeleteDesign } from 'hooks/designs/useDeleteDesign';
@@ -32,7 +32,7 @@ export default function DesignContentCard({
     startDate: new Date(),
     endDate: new Date()
   });
-  const handleDateRangeChange = (newRange) => {
+  const handleDateRangeChange = (newRange: any) => {
     setDateRange({
       startDate: new Date(newRange.startDate),
       endDate: new Date(newRange.endDate)
@@ -58,16 +58,14 @@ export default function DesignContentCard({
   }, [design, pulledDesign]);
 
   const updateExistingDesign = async () => {
+    if (!updateDesign) return;
     await updateDesign.mutateAsync({
       id: design.id,
       title,
       startDate: dateRange.startDate,
       endDate: dateRange.endDate,
       link,
-      technique:
-        typeof designType === 'object' && designType.hasOwnProperty('name')
-          ? designType.name
-          : designType
+      technique: getNameOrOriginal(designType)
     });
 
     setCurrentlyUpdating(false);
@@ -75,6 +73,7 @@ export default function DesignContentCard({
 
   const deleteCurrentItem = async () => {
     setOpenDeleteModal(false);
+    if (!deleteDesign) return;
     await deleteDesign.mutateAsync({
       id: design.id
     });
@@ -97,7 +96,7 @@ export default function DesignContentCard({
                 {title}
               </h3>
               <p className="mt-1 max-w-2xl text-sm text-gray-500">
-                {designType.name}
+                {getNameOrOriginal(designType)}
               </p>
             </div>
             <div className="flex flex-col space-y-2">

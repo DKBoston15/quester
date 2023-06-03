@@ -7,6 +7,11 @@ import DeleteItemModal from '../DeleteModals/DeleteItemModal';
 import ContentItemList from '../InputFields/ContentItemList';
 import TextInputField from '../InputFields/TextInputField';
 
+type Item = {
+  id: number;
+  title: string;
+};
+
 export default function LabContentCard({
   lab,
   openDeleteModal,
@@ -26,10 +31,10 @@ export default function LabContentCard({
   const [manager, setManager] = useState('');
   const [email, setEmail] = useState('');
   const [phoneNumber, setPhoneNumber] = useState('');
-  const [equipment, setEquipment] = useState([]);
-  const [instruments, setInstruments] = useState([]);
-  const [products, setProducts] = useState([]);
-  const [patents, setPatents] = useState([]);
+  const [equipment, setEquipment] = useState<Item[]>([]);
+  const [instruments, setInstruments] = useState<Item[]>([]);
+  const [products, setProducts] = useState<Item[]>([]);
+  const [patents, setPatents] = useState<Item[]>([]);
 
   useEffect(() => {
     if (pulledLab) {
@@ -48,6 +53,7 @@ export default function LabContentCard({
   }, [lab, pulledLab]);
 
   const updateExistingLab = async () => {
+    if (!updateLab) return;
     await updateLab.mutateAsync({
       id: lab.id,
       title,
@@ -66,6 +72,7 @@ export default function LabContentCard({
 
   const deleteCurrentItem = async () => {
     setOpenDeleteModal(false);
+    if (!deleteLab) return;
     await deleteLab.mutateAsync({
       id: lab.id
     });

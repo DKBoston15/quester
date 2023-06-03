@@ -1,4 +1,4 @@
-import { findItemByName } from '@/utils/helpers';
+import { findItemByName, getNameOrOriginal } from '@/utils/helpers';
 import { sampleDesigns } from 'constants/dropdownLists';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
@@ -35,7 +35,7 @@ export default function SampleContentCard({
     startDate: new Date(),
     endDate: new Date()
   });
-  const handleDateRangeChange = (newRange) => {
+  const handleDateRangeChange = (newRange: any) => {
     setDateRange({
       startDate: new Date(newRange.startDate),
       endDate: new Date(newRange.endDate)
@@ -63,14 +63,12 @@ export default function SampleContentCard({
   }, [sample, pulledSample]);
 
   const updateExistingSample = async () => {
+    if (!updateSample) return;
     await updateSample.mutateAsync({
       id: sample.id,
       title,
       link,
-      design:
-        typeof design === 'object' && design.hasOwnProperty('name')
-          ? design.name
-          : design,
+      design: getNameOrOriginal(design),
       size,
       finalSample,
       powerAnalysis,
@@ -83,6 +81,7 @@ export default function SampleContentCard({
 
   const deleteCurrentItem = async () => {
     setOpenDeleteModal(false);
+    if (!deleteSample) return;
     await deleteSample.mutateAsync({
       id: sample.id
     });
@@ -105,7 +104,7 @@ export default function SampleContentCard({
                 {sample.title}
               </h3>
               <p className="mt-1 max-w-2xl text-sm text-gray-500">
-                {design.name}
+                {getNameOrOriginal(design)}
               </p>
             </div>
             <div className="flex flex-col space-y-2">

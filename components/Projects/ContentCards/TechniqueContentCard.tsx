@@ -1,4 +1,4 @@
-import { findItemByName } from '@/utils/helpers';
+import { findItemByName, getNameOrOriginal } from '@/utils/helpers';
 import { techniqueTechniques } from 'constants/dropdownLists';
 import { useDeleteTechnique } from 'hooks/techniques/useDeleteTechnique';
 import useGetTechniqueByIdQuery from 'hooks/techniques/useTechniqueById';
@@ -44,16 +44,13 @@ export default function TechniqueContentCard({
   }, [technique, pulledTechnique]);
 
   const updateExistingTechnique = async () => {
+    if (!updateTechnique) return;
     await updateTechnique.mutateAsync({
       id: technique.id,
       title,
       link,
       method,
-      type:
-        typeof techniqueType === 'object' &&
-        techniqueType.hasOwnProperty('name')
-          ? techniqueType.name
-          : techniqueType
+      type: getNameOrOriginal(techniqueType)
     });
 
     setCurrentlyUpdating(false);
@@ -61,6 +58,7 @@ export default function TechniqueContentCard({
 
   const deleteCurrentItem = async () => {
     setOpenDeleteModal(false);
+    if (!deleteTechnique) return;
     await deleteTechnique.mutateAsync({
       id: technique.id
     });
@@ -83,7 +81,7 @@ export default function TechniqueContentCard({
                 {title}
               </h3>
               <p className="mt-1 max-w-2xl text-sm text-gray-500">
-                {techniqueType.name}
+                {getNameOrOriginal(techniqueType)}
               </p>
             </div>
             <div className="flex flex-col space-y-2">

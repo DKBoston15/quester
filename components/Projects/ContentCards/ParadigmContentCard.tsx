@@ -1,4 +1,4 @@
-import { findItemByName } from '@/utils/helpers';
+import { findItemByName, getNameOrOriginal } from '@/utils/helpers';
 import { paradigmTypes } from 'constants/dropdownLists';
 import { useDeleteParadigm } from 'hooks/paradigms/useDeleteParadigm';
 import useGetParadigmByIdQuery from 'hooks/paradigms/useParadigmById';
@@ -39,14 +39,12 @@ export default function ParadigmContentCard({
   }, [paradigm, pulledParadigm]);
 
   const updateExistingParadigm = async () => {
+    if (!updateParadigm) return;
     await updateParadigm.mutateAsync({
       id: paradigm.id,
       title,
       link,
-      category:
-        typeof paradigmType === 'object' && paradigmType.hasOwnProperty('name')
-          ? paradigmType.name
-          : paradigmType
+      category: getNameOrOriginal(paradigmType)
     });
 
     setCurrentlyUpdating(false);
@@ -54,6 +52,7 @@ export default function ParadigmContentCard({
 
   const deleteCurrentItem = async () => {
     setOpenDeleteModal(false);
+    if (!deleteParadigm) return;
     await deleteParadigm.mutateAsync({
       id: paradigm.id
     });
@@ -76,7 +75,7 @@ export default function ParadigmContentCard({
                 {title}
               </h3>
               <p className="mt-1 max-w-2xl text-sm text-gray-500">
-                {paradigmType.name}
+                {getNameOrOriginal(paradigmType)}
               </p>
             </div>
             <div className="flex flex-col space-y-2">

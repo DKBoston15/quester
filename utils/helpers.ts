@@ -46,3 +46,9 @@ export const toDateTime = (secs: number) => {
 export const findItemByName = (items: any, name: string) => {
   return items.find((item: any) => item.name === name);
 };
+
+export const getNameOrOriginal = (value: any): string | typeof value => {
+  return typeof value === 'object' && value !== null && 'name' in value
+    ? value.name
+    : value;
+};

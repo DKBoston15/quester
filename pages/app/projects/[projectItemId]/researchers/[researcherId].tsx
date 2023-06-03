@@ -26,6 +26,7 @@ export default function Researcher() {
         const retrievedResearcher = await getResearcherById({
           id: researcherId
         });
+        //@ts-ignore
         setResearcher(retrievedResearcher.data[0]);
       }
     };

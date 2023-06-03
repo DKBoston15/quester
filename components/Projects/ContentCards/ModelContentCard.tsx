@@ -1,4 +1,4 @@
-import { findItemByName } from '@/utils/helpers';
+import { findItemByName, getNameOrOriginal } from '@/utils/helpers';
 import { modelTypes } from 'constants/dropdownLists';
 import { useDeleteModel } from 'hooks/models/useDeleteModel';
 import useGetModelByIdQuery from 'hooks/models/useModelById';
@@ -39,14 +39,12 @@ export default function ModelContentCard({
   }, [model, pulledModel]);
 
   const updateExistingModel = async () => {
+    if (!updateModel) return;
     await updateModel.mutateAsync({
       id: model.id,
       title,
       link,
-      type:
-        typeof modelType === 'object' && modelType.hasOwnProperty('name')
-          ? modelType.name
-          : modelType
+      type: getNameOrOriginal(modelType)
     });
 
     setCurrentlyUpdating(false);
@@ -54,6 +52,7 @@ export default function ModelContentCard({
 
   const deleteCurrentItem = async () => {
     setOpenDeleteModal(false);
+    if (!deleteModel) return;
     await deleteModel.mutateAsync({
       id: model.id
     });
@@ -76,7 +75,7 @@ export default function ModelContentCard({
                 {title}
               </h3>
               <p className="mt-1 max-w-2xl text-sm text-gray-500">
-                {modelType.name}
+                {getNameOrOriginal(modelType)}
               </p>
             </div>
             <div className="flex flex-col space-y-2">

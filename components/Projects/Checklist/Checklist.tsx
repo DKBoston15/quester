@@ -4,7 +4,6 @@ import React, { useEffect, useState } from 'react';
 import ChecklistItem from './ChecklistItem';
 import { ReactSortable } from 'react-sortablejs';
 import CreateChecklistItemModal from '../CreateModals/CreateChecklistItemModal';
-import { useUser } from '@/utils/useUser';
 
 export default function Checklist({ projectItemId }: any) {
   const { data: projects, isLoading, isError } = useGetProjectsQuery();
@@ -25,6 +24,7 @@ export default function Checklist({ projectItemId }: any) {
   const addChecklistItem = async (newItem: { [key: string]: any }) => {
     if (checklist) {
       const updatedArray = [newItem, ...checklist];
+      //@ts-ignore
       setSelectedChecklist(updatedArray);
       await updateProject.mutateAsync({
         id: projectItemId,
@@ -34,6 +34,7 @@ export default function Checklist({ projectItemId }: any) {
   };
 
   const removeChecklistItem = async (id: number) => {
+    //@ts-ignore
     const updatedArray = checklist.filter((item) => item.id !== id);
     setSelectedChecklist(updatedArray);
     await updateProject.mutateAsync({
@@ -125,17 +126,19 @@ export default function Checklist({ projectItemId }: any) {
               Add Item
             </button>
           </div>
-          <ReactSortable list={checklist} setList={updateChecklistDragged}>
-            {checklist.map((checklistItem: any) => (
-              <ChecklistItem
-                key={checklistItem.id}
-                checklistItem={checklistItem}
-                updateChecklist={updateChecklist}
-                updateChecklistValue={updateChecklistValue}
-                removeChecklistItem={removeChecklistItem}
-              />
-            ))}
-          </ReactSortable>
+          {checklist && (
+            <ReactSortable list={checklist} setList={updateChecklistDragged}>
+              {checklist.map((checklistItem: any) => (
+                <ChecklistItem
+                  key={checklistItem.id}
+                  checklistItem={checklistItem}
+                  updateChecklist={updateChecklist}
+                  updateChecklistValue={updateChecklistValue}
+                  removeChecklistItem={removeChecklistItem}
+                />
+              ))}
+            </ReactSortable>
+          )}
         </>
       </div>
     </>

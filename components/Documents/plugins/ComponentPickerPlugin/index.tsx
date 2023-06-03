@@ -39,7 +39,6 @@ import catTypingGif from '../../../../public/images/cat-typing.gif';
 import { EmbedConfigs } from '../AutoEmbedPlugin';
 import { INSERT_COLLAPSIBLE_COMMAND } from '../CollapsiblePlugin';
 import { InsertEquationDialog } from '../EquationsPlugin';
-import { INSERT_EXCALIDRAW_COMMAND } from '../ExcalidrawPlugin';
 import { INSERT_IMAGE_COMMAND, InsertImageDialog } from '../ImagesPlugin';
 import { InsertPollDialog } from '../PollPlugin';
 import { InsertTableDialog } from '../TablePlugin';
@@ -260,12 +259,6 @@ export default function ComponentPickerMenuPlugin(): JSX.Element {
         onSelect: () =>
           editor.dispatchCommand(INSERT_HORIZONTAL_RULE_COMMAND, undefined)
       }),
-      new ComponentPickerOption('Excalidraw', {
-        icon: <i className="icon diagram-2" />,
-        keywords: ['excalidraw', 'diagram', 'drawing'],
-        onSelect: () =>
-          editor.dispatchCommand(INSERT_EXCALIDRAW_COMMAND, undefined)
-      }),
       new ComponentPickerOption('Poll', {
         icon: <i className="icon poll" />,
         keywords: ['poll', 'vote'],
@@ -297,6 +290,7 @@ export default function ComponentPickerMenuPlugin(): JSX.Element {
         onSelect: () =>
           editor.dispatchCommand(INSERT_IMAGE_COMMAND, {
             altText: 'Cat typing on a laptop',
+            //@ts-ignore
             src: catTypingGif
           })
       }),

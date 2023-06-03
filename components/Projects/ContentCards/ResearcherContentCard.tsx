@@ -1,4 +1,4 @@
-import { findItemByName } from '@/utils/helpers';
+import { findItemByName, getNameOrOriginal } from '@/utils/helpers';
 import {
   professorialStatuses,
   projectRoles,
@@ -67,6 +67,7 @@ export default function ResearcherContentCard({
   }, [researcher, pulledResearcher]);
 
   const updateExistingResearcher = async () => {
+    if (!updateResearcher) return;
     await updateResearcher.mutateAsync({
       id: researcher.id,
       firstName,
@@ -76,20 +77,10 @@ export default function ResearcherContentCard({
       linkedin,
       website,
       university,
-      role:
-        typeof role === 'object' && role.hasOwnProperty('name')
-          ? role.name
-          : role,
+      role: getNameOrOriginal(role),
       link,
-      professorialStatus:
-        typeof professorialStatus === 'object' &&
-        professorialStatus.hasOwnProperty('name')
-          ? professorialStatus.name
-          : professorialStatus,
-      projectRole:
-        typeof projectRole === 'object' && projectRole.hasOwnProperty('name')
-          ? projectRole.name
-          : projectRole
+      professorialStatus: getNameOrOriginal(professorialStatus),
+      projectRole: getNameOrOriginal(projectRole)
     });
 
     setCurrentlyUpdating(false);
@@ -97,6 +88,7 @@ export default function ResearcherContentCard({
 
   const deleteCurrentItem = async () => {
     setOpenDeleteModal(false);
+    if (!deleteResearcher) return;
     await deleteResearcher.mutateAsync({
       id: researcher.id
     });
@@ -240,7 +232,7 @@ export default function ResearcherContentCard({
             </dt>
             {!currentlyUpdating && (
               <dd className="mt-1 text-sm text-gray-900">
-                {professorialStatus.name}
+                {getNameOrOriginal(professorialStatus)}
               </dd>
             )}
             {currentlyUpdating && (
@@ -258,7 +250,9 @@ export default function ResearcherContentCard({
           <div className="sm:col-span-1">
             <dt className="text-sm font-medium text-gray-500">Role</dt>
             {!currentlyUpdating && (
-              <dd className="mt-1 text-sm text-gray-900">{role.name}</dd>
+              <dd className="mt-1 text-sm text-gray-900">
+                {getNameOrOriginal(role)}
+              </dd>
             )}
             {currentlyUpdating && (
               <InputTypeSelectionDropdown
@@ -272,7 +266,9 @@ export default function ResearcherContentCard({
           <div className="sm:col-span-1">
             <dt className="text-sm font-medium text-gray-500">Project Role</dt>
             {!currentlyUpdating && (
-              <dd className="mt-1 text-sm text-gray-900">{projectRole.name}</dd>
+              <dd className="mt-1 text-sm text-gray-900">
+                {getNameOrOriginal(projectRole)}
+              </dd>
             )}
             {currentlyUpdating && (
               <InputTypeSelectionDropdown

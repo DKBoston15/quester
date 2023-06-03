@@ -4,6 +4,7 @@ import { WebsocketProvider } from 'y-websocket';
 import { Doc } from 'yjs';
 
 const url = CAN_USE_DOM ? new URL(window.location.href) : '';
+//@ts-ignore
 const params = new URLSearchParams(url.search);
 const WEBSOCKET_ENDPOINT =
   params.get('collabEndpoint') || 'ws://localhost:1234';

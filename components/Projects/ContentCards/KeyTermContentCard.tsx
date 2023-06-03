@@ -35,6 +35,7 @@ export default function KeyTermContentCard({
   }, [keyTerm, pulledKeyTerm]);
 
   const updateExistingKeyTerm = async () => {
+    if (!updateKeyTerm) return;
     await updateKeyTerm.mutateAsync({
       id: keyTerm.id,
       title,
@@ -47,6 +48,7 @@ export default function KeyTermContentCard({
 
   const deleteCurrentItem = async () => {
     setOpenDeleteModal(false);
+    if (!deleteKeyTerm) return;
     await deleteKeyTerm.mutateAsync({
       id: keyTerm.id
     });

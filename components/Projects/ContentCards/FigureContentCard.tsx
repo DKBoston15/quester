@@ -1,4 +1,4 @@
-import { findItemByName } from '@/utils/helpers';
+import { findItemByName, getNameOrOriginal } from '@/utils/helpers';
 import { figureTypes } from 'constants/dropdownLists';
 import { useDeleteFigure } from 'hooks/figures/useDeleteFigure';
 import useGetFigureByIdQuery from 'hooks/figures/useFigureById';
@@ -41,15 +41,13 @@ export default function FigureContentCard({
   }, [figure, pulledFigure]);
 
   const updateExistingFigure = async () => {
+    if (!updateFigure) return;
     await updateFigure.mutateAsync({
       id: figure.id,
       title,
       link,
       number,
-      type:
-        typeof figureType === 'object' && figureType.hasOwnProperty('name')
-          ? figureType.name
-          : figureType
+      type: getNameOrOriginal(figureType)
     });
 
     setCurrentlyUpdating(false);
@@ -57,6 +55,7 @@ export default function FigureContentCard({
 
   const deleteCurrentItem = async () => {
     setOpenDeleteModal(false);
+    if (!deleteFigure) return;
     await deleteFigure.mutateAsync({
       id: figure.id
     });
@@ -79,7 +78,7 @@ export default function FigureContentCard({
                 {title}
               </h3>
               <p className="mt-1 max-w-2xl text-sm text-gray-500">
-                {figureType.name}
+                {getNameOrOriginal(figureType)}
               </p>
             </div>
             <div className="flex flex-col space-y-2">

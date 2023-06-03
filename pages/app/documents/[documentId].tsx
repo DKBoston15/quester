@@ -121,6 +121,7 @@ export default function Document() {
                                   editorState={editorState}
                                   documentId={documentId}
                                   title={title}
+                                  projectItemId={projectItemId}
                                 />
                               </div>
                               <Settings />

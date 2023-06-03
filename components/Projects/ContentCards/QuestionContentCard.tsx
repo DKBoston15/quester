@@ -47,6 +47,7 @@ export default function QuestionContentCard({
   }, [question, pulledQuestion]);
 
   const updateExistingQuestion = async () => {
+    if (!updateQuestion) return;
     await updateQuestion.mutateAsync({
       id: question.id,
       title,
@@ -65,6 +66,7 @@ export default function QuestionContentCard({
 
   const deleteCurrentItem = async () => {
     setOpenDeleteModal(false);
+    if (!deleteQuestion) return;
     await deleteQuestion.mutateAsync({
       id: question.id
     });

@@ -5,6 +5,7 @@ import { XMarkIcon } from '@heroicons/react/24/outline';
 import ArticleTypeSelectionDropdown from '../InputFields/ArticleTypeSelectionDropdown';
 import { articleTypes } from 'constants/dropdownLists';
 import InputTypeSelectionDropdown from '../InputFields/InputTypeSelectionDropdown';
+import { getNameOrOriginal } from '@/utils/helpers';
 
 export default function CreateArticleModal({
   open,
@@ -16,9 +17,10 @@ export default function CreateArticleModal({
   const createArticle = useCreateArticle();
 
   const createNewArticle = async () => {
+    if (!createArticle) return;
     await createArticle.mutateAsync({
       title: title,
-      literatureType: type.name,
+      literatureType: getNameOrOriginal(type),
       projectItemId
     });
 

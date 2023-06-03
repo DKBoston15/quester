@@ -6,7 +6,7 @@ import { useUpdateDocument } from 'hooks/documents/useUpdateDocument';
 import useGetProjectsQuery from 'hooks/projects/useProjects';
 
 const formatOptions = (options: any[]) => {
-  const optionArr = [];
+  const optionArr: any[] = [];
   options.forEach((option) => {
     optionArr.push({
       ...option,
@@ -34,21 +34,26 @@ export default function EditDocumentModal({
 
   const updateExistingDocument = async () => {
     if (!selectedProject) {
-      await updateDocument.mutateAsync({
-        id: selectedDocument.id,
-        title: newTitle
-      });
-    } else {
-      await updateDocument.mutateAsync({
-        id: selectedDocument.id,
-        title: newTitle,
-        projectItemId: selectedProject.id
-      });
+      if (updateDocument) {
+        await updateDocument.mutateAsync({
+          id: selectedDocument.id,
+          title: newTitle
+        });
+      }
+    } else if (selectedProject) {
+      if (updateDocument) {
+        await updateDocument.mutateAsync({
+          id: selectedDocument.id,
+          title: newTitle,
+          //@ts-ignore
+          projectItemId: selectedProject.id
+        });
+      }
     }
 
     setNewTitle('');
     setSelectedDocument();
-    setSelectedProject(null);
+    setSelectedProject(undefined);
     setOpen(false);
   };
 
@@ -59,6 +64,7 @@ export default function EditDocumentModal({
         (project) => project.id == selectedDocument.projectItemId
       );
       setSelectedProject(filteredProject[0]);
+      //@ts-ignore
       setProjectOptions(formattedProjects);
     }
   }, [projects, open]);

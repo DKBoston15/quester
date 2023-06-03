@@ -244,7 +244,7 @@ export default function ImagesPlugin({
 const TRANSPARENT_IMAGE =
   'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7';
 
-let img;
+let img: HTMLImageElement | undefined;
 if (CAN_USE_DOM) {
   img = document.createElement('img');
   img.src = TRANSPARENT_IMAGE;
@@ -259,8 +259,11 @@ function onDragStart(event: DragEvent): boolean {
   if (!dataTransfer) {
     return false;
   }
+  if (img) {
+    // Add null check here
+    dataTransfer.setDragImage(img, 0, 0);
+  }
   dataTransfer.setData('text/plain', '_');
-  dataTransfer.setDragImage(img, 0, 0);
   dataTransfer.setData(
     'application/x-lexical-drag',
     JSON.stringify({
