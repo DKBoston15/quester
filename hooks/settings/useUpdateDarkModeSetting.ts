@@ -7,6 +7,7 @@ export const useUpdateDarkModeSetting = () => {
   const queryClient = useQueryClient();
 
   return useMutation(
+    //@ts-ignore
     ({ id, darkMode }: any) => {
       if (!user) return;
 

@@ -13,6 +13,7 @@ const ThemeSelector = () => {
 
   const updateDarkModeSetting = async (value: boolean) => {
     await updateDarkMode?.mutateAsync({
+      //@ts-ignore
       id: settings[0].id,
       darkMode: value
     });

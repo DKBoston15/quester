@@ -4,6 +4,7 @@ import { XMarkIcon } from '@heroicons/react/24/outline';
 import { figureTypes } from 'constants/dropdownLists';
 import InputTypeSelectionDropdown from '../InputFields/InputTypeSelectionDropdown';
 import { useCreateFigure } from 'hooks/figures/useCreateFigure';
+import { getNameOrOriginal } from '@/utils/helpers';
 
 export default function CreateFigureModal({
   open,
@@ -16,9 +17,10 @@ export default function CreateFigureModal({
   const createFigure = useCreateFigure();
 
   const createNewFigure = async () => {
+    if (!createFigure) return;
     await createFigure.mutateAsync({
       title,
-      type: type.name,
+      type: getNameOrOriginal(type),
       number,
       projectItemId
     });

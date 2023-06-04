@@ -18,6 +18,7 @@ export default function Notes({ projectItemId, itemId, itemType }: any) {
         itemId,
         itemType
       });
+      //@ts-ignore
       setNotes(data);
       setIsLoading(false);
     } catch (error) {
@@ -32,6 +33,7 @@ export default function Notes({ projectItemId, itemId, itemType }: any) {
   const [body, setBody] = useState('');
 
   const createNewNote = async () => {
+    if (!createNote) return;
     await createNote.mutateAsync({
       body,
       projectItemId,
@@ -57,9 +59,12 @@ export default function Notes({ projectItemId, itemId, itemType }: any) {
             </div>
             <div className="px-4 py-6 sm:px-6">
               <ul role="list" className="space-y-8">
-                {notes?.map((note) => (
-                  <Note key={note.id} note={note} />
-                ))}
+                {
+                  //@ts-ignore
+                  notes?.map((note) => (
+                    <Note key={note.id} note={note} />
+                  ))
+                }
               </ul>
             </div>
           </div>

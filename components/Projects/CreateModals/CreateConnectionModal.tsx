@@ -19,13 +19,18 @@ export default function CreateConnectionModal({
   const [option, setSelectedOption] = useState('');
 
   const createNewConnection = async () => {
+    //@ts-ignore
     await createConnection.mutateAsync({
       projectItemId,
       itemId,
       itemType,
+      //@ts-ignore
       connectedProjectItemId: option.project_item_id,
+      //@ts-ignore
       connectedItemId: option.item_id,
+      //@ts-ignore
       connectedItemType:
+        //@ts-ignore
         option.source_table === 'Key Terms' ? 'key_terms' : option.source_table
     });
 

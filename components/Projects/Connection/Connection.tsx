@@ -198,6 +198,7 @@ export default function Connection({ projectItemId, itemId, itemType }: any) {
   const [options, setOptions] = useState([]);
 
   const deleteExistingConnection = async (id: string) => {
+    if (!deleteConnection) return;
     await deleteConnection.mutateAsync({
       id
     });

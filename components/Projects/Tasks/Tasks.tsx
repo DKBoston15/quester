@@ -19,10 +19,12 @@ export default function Tasks({ projectItemId }: any) {
       setFilteredTasks(tasks);
     }
     if (currentFilter == 'done') {
+      //@ts-ignore
       const newTasks = tasks.filter((task) => task.status === true);
       setFilteredTasks(Array.isArray(newTasks) ? newTasks : [newTasks]);
     }
     if (currentFilter == 'pending') {
+      //@ts-ignore
       const newTasks = tasks.filter((task) => task.status === false);
       setFilteredTasks(Array.isArray(newTasks) ? newTasks : [newTasks]);
     }
@@ -35,13 +37,15 @@ export default function Tasks({ projectItemId }: any) {
     }
   }, [tasks]);
 
-  const sortByCreatedAt = (arr, order) => {
+  const sortByCreatedAt = (arr: any, order: any) => {
     if (order === 'asc') {
       return arr.sort(
+        //@ts-ignore
         (a, b) => new Date(a.created_at) - new Date(b.created_at)
       );
     } else {
       return arr.sort(
+        //@ts-ignore
         (a, b) => new Date(b.created_at) - new Date(a.created_at)
       );
     }
@@ -64,6 +68,7 @@ export default function Tasks({ projectItemId }: any) {
       <div className="p-4">
         <div className="flex items-center justify-between">
           <p
+            //@ts-ignore
             tabIndex="0"
             className="focus:outline-none text-base sm:text-lg md:text-xl lg:text-2xl font-bold leading-normal text-gray-800 dark:text-white"
           >

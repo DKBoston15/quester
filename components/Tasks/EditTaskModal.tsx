@@ -1,7 +1,6 @@
 import { Fragment, useEffect, useRef, useState } from 'react';
 import { Dialog, Transition, Listbox } from '@headlessui/react';
 import { CheckIcon, ChevronUpDownIcon } from '@heroicons/react/20/solid';
-import { useRouter } from 'next/router';
 import { useUpdateTask } from 'hooks/tasks/useUpdateTask';
 import DatePicker from 'react-datepicker';
 
@@ -20,7 +19,7 @@ export default function EditTaskModal({ open, setOpen, task }: any) {
   const [dueDate, setDueDate] = useState();
   const updateTask = useUpdateTask();
 
-  function classNames(...classes: any) {
+  function classNames(...classes: any[]) {
     return classes.filter(Boolean).join(' ');
   }
 
@@ -30,13 +29,16 @@ export default function EditTaskModal({ open, setOpen, task }: any) {
 
   useEffect(() => {
     setTitle(task.title);
+    //@ts-ignore
     setUrgency(findItemByName(task.urgency));
     if (task.due_date) {
+      //@ts-ignore
       setDueDate(new Date(task.due_date));
     }
   }, []);
 
   const editCurrentTask = async () => {
+    if (!updateTask) return;
     await updateTask.mutateAsync({
       id: task.id,
       title: title,
@@ -191,6 +193,7 @@ export default function EditTaskModal({ open, setOpen, task }: any) {
                       </label>
                       <DatePicker
                         selected={dueDate}
+                        //@ts-ignore
                         onChange={(date) => setDueDate(date)}
                       />
                     </div>
@@ -208,6 +211,7 @@ export default function EditTaskModal({ open, setOpen, task }: any) {
                     type="button"
                     className="mt-3 inline-flex w-full justify-center rounded-md border border-gray-300 bg-white px-4 py-2 text-base font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 sm:mt-0 sm:w-auto sm:text-sm"
                     onClick={() => {
+                      //@ts-ignore
                       setDueDate(null);
                       setOpen(false);
                     }}

@@ -23,6 +23,7 @@ export default function ProjectContentCard({ projectItemId }: any) {
   }, [projects, projectItemId]);
 
   const saveUpdates = async () => {
+    if (!updateProject) return;
     await updateProject.mutateAsync({
       //@ts-ignore
       id: selectedProject.id,

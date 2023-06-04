@@ -6,7 +6,8 @@ type Quiz = {
     id: number;
     question: string;
     options: Record<string, string>;
-    answer: string;
+    multiAnswer?: string[];
+    answer?: string;
   }[];
 };
 

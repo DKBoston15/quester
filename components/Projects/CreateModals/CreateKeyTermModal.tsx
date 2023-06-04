@@ -12,6 +12,7 @@ export default function CreateKeyTermModal({
   const createKeyTerm = useCreateKeyTerm();
 
   const createNewKeyTerm = async () => {
+    if (!createKeyTerm) return;
     await createKeyTerm.mutateAsync({
       title,
       projectItemId

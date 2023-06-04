@@ -6,6 +6,8 @@ export const useCreateProject = () => {
   const { user } = useUser();
   const queryClient = useQueryClient();
 
+  if (!user) return;
+
   return useMutation(
     ({ title, type, bgColorClass, pinned }: any) => {
       return createProject(title, type, bgColorClass, pinned, user.id).then(

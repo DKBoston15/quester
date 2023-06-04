@@ -6,6 +6,8 @@ export const useCreateConnection = () => {
   const { user } = useUser();
   const queryClient = useQueryClient();
 
+  if (!user) return;
+
   return useMutation(
     ({
       projectItemId,

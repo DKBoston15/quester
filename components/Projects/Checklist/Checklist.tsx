@@ -26,6 +26,7 @@ export default function Checklist({ projectItemId }: any) {
       const updatedArray = [newItem, ...checklist];
       //@ts-ignore
       setSelectedChecklist(updatedArray);
+      if (!updateProject) return;
       await updateProject.mutateAsync({
         id: projectItemId,
         checklist: updatedArray
@@ -37,6 +38,7 @@ export default function Checklist({ projectItemId }: any) {
     //@ts-ignore
     const updatedArray = checklist.filter((item) => item.id !== id);
     setSelectedChecklist(updatedArray);
+    if (!updateProject) return;
     await updateProject.mutateAsync({
       id: projectItemId,
       checklist: updatedArray
@@ -63,6 +65,7 @@ export default function Checklist({ projectItemId }: any) {
     if (checklist) {
       const updatedArray = updateArrayItemByIdValue(checklist, id, update);
       console.log(updatedArray);
+      if (!updateProject) return;
       await updateProject.mutateAsync({
         id: projectItemId,
         checklist: updatedArray
@@ -89,7 +92,7 @@ export default function Checklist({ projectItemId }: any) {
   ) => {
     if (checklist) {
       const updatedArray = updateArrayItemById(checklist, id, update);
-      console.log(updatedArray);
+      if (!updateProject) return;
       await updateProject.mutateAsync({
         id: projectItemId,
         checklist: updatedArray
@@ -100,6 +103,7 @@ export default function Checklist({ projectItemId }: any) {
   const updateChecklistDragged = async (newChecklist: any) => {
     setSelectedChecklist(newChecklist);
     if (checklist) {
+      if (!updateProject) return;
       await updateProject.mutateAsync({
         id: projectItemId,
         checklist: newChecklist

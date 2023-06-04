@@ -1,6 +1,4 @@
 import { useState } from 'react';
-import useGetLabsByIdQuery from 'hooks/labs/useLabsById';
-import CreateLabModal from '../CreateModals/CreateLabModal';
 import useGetModelsByIdQuery from 'hooks/models/useModelsById';
 import CreateModelModal from '../CreateModals/CreateModelModal';
 

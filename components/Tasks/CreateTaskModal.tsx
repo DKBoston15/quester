@@ -25,6 +25,7 @@ export default function CreateTaskModal({ open, setOpen }: any) {
   }
 
   const createNewTask = async () => {
+    if (!createTask) return;
     await createTask.mutateAsync({
       title,
       dueDate: null,

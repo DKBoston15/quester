@@ -28,6 +28,7 @@ export default function ContentItemList({
   createNewItem,
   modalTitle,
   type,
+  //@ts-ignore
   currentlyUpdating = { currentlyUpdating }
 }: any) {
   const icon = getIcon(iconName);
@@ -59,7 +60,7 @@ export default function ContentItemList({
           role="list"
           className="divide-y divide-gray-200 rounded-md border border-gray-200 h-40 overflow-y-scroll"
         >
-          {items.map((item) => (
+          {items.map((item: any) => (
             <li
               key={item.id}
               className="flex items-center justify-between py-3 pl-3 pr-4 text-sm"

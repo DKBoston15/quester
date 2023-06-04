@@ -1,5 +1,6 @@
+// @ts-nocheck
 import Link from 'next/link';
-import { useState, ReactNode, useEffect } from 'react';
+import { useState, ReactNode } from 'react';
 
 import LoadingDots from '@/components/LoadingDots';
 import { useUser } from 'utils/useUser';

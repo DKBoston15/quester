@@ -4,6 +4,7 @@ import { XMarkIcon } from '@heroicons/react/24/outline';
 import { modelTypes } from 'constants/dropdownLists';
 import InputTypeSelectionDropdown from '../InputFields/InputTypeSelectionDropdown';
 import { useCreateModel } from 'hooks/models/useCreateModel';
+import { getNameOrOriginal } from '@/utils/helpers';
 
 export default function CreateModelModal({
   open,
@@ -15,9 +16,10 @@ export default function CreateModelModal({
   const createModel = useCreateModel();
 
   const createNewModel = async () => {
+    if (!createModel) return;
     await createModel.mutateAsync({
       title,
-      type: type.name,
+      type: getNameOrOriginal(type),
       projectItemId
     });
 

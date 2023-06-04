@@ -6,6 +6,8 @@ export const useDeleteTask = () => {
   const { user } = useUser();
   const queryClient = useQueryClient();
 
+  if (!user) return;
+
   return useMutation(
     ({ id }: any) => {
       return deleteTask(id, user.id).then((result) => result.data);

@@ -45,7 +45,7 @@ const activity = [
   }
 ];
 
-function classNames(...classes) {
+function classNames(...classes: any[]) {
   return classes.filter(Boolean).join(' ');
 }
 
@@ -120,10 +120,14 @@ export default function Events() {
                         </a>{' '}
                         assigned{' '}
                         <a
+                          //@ts-ignore
                           href={activityItem.assigned.href}
                           className="font-medium text-gray-900"
                         >
-                          {activityItem.assigned.name}
+                          {
+                            //@ts-ignore
+                            activityItem.assigned.name
+                          }
                         </a>{' '}
                         <span className="whitespace-nowrap">
                           {activityItem.date}
@@ -155,27 +159,30 @@ export default function Events() {
                           added tags
                         </span>{' '}
                         <span className="mr-0.5">
-                          {activityItem.tags.map((tag) => (
-                            <Fragment key={tag.name}>
-                              <a
-                                href={tag.href}
-                                className="relative inline-flex items-center rounded-full border border-gray-300 px-3 py-0.5 text-sm"
-                              >
-                                <span className="absolute flex flex-shrink-0 items-center justify-center">
-                                  <span
-                                    className={classNames(
-                                      tag.color,
-                                      'h-1.5 w-1.5 rounded-full'
-                                    )}
-                                    aria-hidden="true"
-                                  />
-                                </span>
-                                <span className="ml-3.5 font-medium text-gray-900">
-                                  {tag.name}
-                                </span>
-                              </a>{' '}
-                            </Fragment>
-                          ))}
+                          {
+                            //@ts-ignore
+                            activityItem.tags.map((tag) => (
+                              <Fragment key={tag.name}>
+                                <a
+                                  href={tag.href}
+                                  className="relative inline-flex items-center rounded-full border border-gray-300 px-3 py-0.5 text-sm"
+                                >
+                                  <span className="absolute flex flex-shrink-0 items-center justify-center">
+                                    <span
+                                      className={classNames(
+                                        tag.color,
+                                        'h-1.5 w-1.5 rounded-full'
+                                      )}
+                                      aria-hidden="true"
+                                    />
+                                  </span>
+                                  <span className="ml-3.5 font-medium text-gray-900">
+                                    {tag.name}
+                                  </span>
+                                </a>{' '}
+                              </Fragment>
+                            ))
+                          }
                         </span>
                         <span className="whitespace-nowrap">
                           {activityItem.date}

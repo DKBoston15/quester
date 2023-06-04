@@ -22,6 +22,7 @@ export default function Note({ note }: any) {
   const { user } = useUser();
 
   const updateExistingNote = async (id: number) => {
+    if (!updateNote) return;
     await updateNote.mutateAsync({
       id,
       body: editedBody
@@ -30,6 +31,7 @@ export default function Note({ note }: any) {
   };
 
   const deleteExistingNote = async (id: number) => {
+    if (!deleteNote) return;
     await deleteNote.mutateAsync({
       id
     });

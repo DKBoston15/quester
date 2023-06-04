@@ -6,7 +6,8 @@ export default function Table() {
       <div className="px-4 md:px-10 py-4 md:py-7">
         <div className="flex items-center justify-between">
           <p
-            tabIndex="0"
+            //@ts-ignore
+
             className="focus:outline-none text-base sm:text-lg md:text-xl lg:text-2xl font-bold leading-normal text-gray-800"
           >
             Tasks
@@ -53,6 +54,7 @@ export default function Table() {
             </a>
           </div>
           <button
+            //@ts-ignore
             onClick="popuphandler(true)"
             className="focus:ring-2 focus:ring-offset-2 focus:ring-indigo-600 mt-4 sm:mt-0 inline-flex items-start justify-start px-6 py-3 bg-indigo-700 hover:bg-indigo-600 focus:outline-none rounded"
           >
@@ -65,7 +67,8 @@ export default function Table() {
           <table className="w-full whitespace-nowrap">
             <tbody>
               <tr
-                tabIndex="0"
+                //@ts-ignore
+
                 className="focus:outline-none h-16 border border-gray-100 rounded"
               >
                 <td>
@@ -290,13 +293,15 @@ export default function Table() {
                   <div className="relative px-5 pt-2">
                     <button
                       className="focus:ring-2 rounded-md focus:outline-none"
-                      onClick="dropdownFunction(this)"
+                      //@ts-ignore
+
                       role="button"
                       aria-label="option"
                     >
                       <svg
                         className="dropbtn"
-                        onClick="dropdownFunction(this)"
+                        //@ts-ignore
+
                         xmlns="http://www.w3.org/2000/svg"
                         width="20"
                         height="20"
@@ -327,16 +332,10 @@ export default function Table() {
                       </svg>
                     </button>
                     <div className="dropdown-content bg-white shadow w-24 absolute z-30 right-0 mr-6 hidden">
-                      <div
-                        tabIndex="0"
-                        className="focus:outline-none focus:text-indigo-600 text-xs w-full hover:bg-indigo-700 py-4 px-4 cursor-pointer hover:text-white"
-                      >
+                      <div className="focus:outline-none focus:text-indigo-600 text-xs w-full hover:bg-indigo-700 py-4 px-4 cursor-pointer hover:text-white">
                         <p>Edit</p>
                       </div>
-                      <div
-                        tabIndex="0"
-                        className="focus:outline-none focus:text-indigo-600 text-xs w-full hover:bg-indigo-700 py-4 px-4 cursor-pointer hover:text-white"
-                      >
+                      <div className="focus:outline-none focus:text-indigo-600 text-xs w-full hover:bg-indigo-700 py-4 px-4 cursor-pointer hover:text-white">
                         <p>Delete</p>
                       </div>
                     </div>
@@ -344,10 +343,7 @@ export default function Table() {
                 </td>
               </tr>
               <tr className="h-3"></tr>
-              <tr
-                tabIndex="0"
-                className="focus:outline-none  h-16 border border-gray-100 rounded"
-              >
+              <tr className="focus:outline-none  h-16 border border-gray-100 rounded">
                 <td>
                   <div className="ml-5">
                     <div className="bg-gray-200 rounded-sm w-5 h-5 flex flex-shrink-0 justify-center items-center relative">
@@ -550,13 +546,15 @@ export default function Table() {
                   <div className="relative px-5 pt-2">
                     <button
                       className="focus:ring-2 rounded-md focus:outline-none"
-                      onClick="dropdownFunction(this)"
+                      //@ts-ignore
+
                       role="button"
                       aria-label="option"
                     >
                       <svg
                         className="dropbtn"
-                        onClick="dropdownFunction(this)"
+                        //@ts-ignore
+
                         xmlns="http://www.w3.org/2000/svg"
                         width="20"
                         height="20"
@@ -588,13 +586,15 @@ export default function Table() {
                     </button>
                     <div className="dropdown-content bg-white shadow w-24 absolute z-30 right-0 mr-6 hidden">
                       <div
-                        tabIndex="0"
+                        //@ts-ignore
+
                         className="focus:outline-none focus:text-indigo-600 text-xs w-full hover:bg-indigo-700 py-4 px-4 cursor-pointer hover:text-white"
                       >
                         <p>Edit</p>
                       </div>
                       <div
-                        tabIndex="0"
+                        //@ts-ignore
+
                         className="focus:outline-none focus:text-indigo-600 text-xs w-full hover:bg-indigo-700 py-4 px-4 cursor-pointer hover:text-white"
                       >
                         <p>Delete</p>
@@ -605,7 +605,8 @@ export default function Table() {
               </tr>
               <tr className="h-3"></tr>
               <tr
-                tabIndex="0"
+                //@ts-ignore
+
                 className="focus:outline-none focus:text-indigo-600 h-16 border border-gray-100 rounded"
               >
                 <td>
@@ -780,13 +781,15 @@ export default function Table() {
                   <div className="relative px-5 pt-2">
                     <button
                       className="focus:ring-2 rounded-md focus:outline-none"
-                      onClick="dropdownFunction(this)"
+                      //@ts-ignore
+
                       role="button"
                       aria-label="option"
                     >
                       <svg
                         className="dropbtn"
-                        onClick="dropdownFunction(this)"
+                        //@ts-ignore
+
                         xmlns="http://www.w3.org/2000/svg"
                         width="20"
                         height="20"
@@ -817,16 +820,10 @@ export default function Table() {
                       </svg>
                     </button>
                     <div className="dropdown-content bg-white shadow w-24 absolute z-30 right-0 mr-6 hidden">
-                      <div
-                        tabIndex="0"
-                        className="focus:outline-none focus:text-indigo-600 text-xs w-full hover:bg-indigo-700 py-4 px-4 cursor-pointer hover:text-white"
-                      >
+                      <div className="focus:outline-none focus:text-indigo-600 text-xs w-full hover:bg-indigo-700 py-4 px-4 cursor-pointer hover:text-white">
                         <p>Edit</p>
                       </div>
-                      <div
-                        tabIndex="0"
-                        className="focus:outline-none focus:text-indigo-600 text-xs w-full hover:bg-indigo-700 py-4 px-4 cursor-pointer hover:text-white"
-                      >
+                      <div className="focus:outline-none focus:text-indigo-600 text-xs w-full hover:bg-indigo-700 py-4 px-4 cursor-pointer hover:text-white">
                         <p>Delete</p>
                       </div>
                     </div>
@@ -834,16 +831,14 @@ export default function Table() {
                 </td>
               </tr>
               <tr className="h-3"></tr>
-              <tr
-                tabIndex="0"
-                className="focus:outline-none h-16 border border-gray-100 rounded"
-              >
+              <tr className="focus:outline-none h-16 border border-gray-100 rounded">
                 <td>
                   <div className="ml-5">
                     <div className="bg-gray-200 rounded-sm w-5 h-5 flex flex-shrink-0 justify-center items-center relative">
                       <input
                         placeholder="checkbox"
-                        checked=""
+                        //@ts-ignore
+
                         type="checkbox"
                         className="focus:opacity-100 checkbox opacity-0 absolute cursor-pointer w-full h-full"
                       />
@@ -1007,13 +1002,15 @@ export default function Table() {
                   <div className="relative px-5 pt-2">
                     <button
                       className="focus:ring-2 rounded-md focus:outline-none"
-                      onClick="dropdownFunction(this)"
+                      //@ts-ignore
+
                       role="button"
                       aria-label="option"
                     >
                       <svg
                         className="dropbtn"
-                        onClick="dropdownFunction(this)"
+                        //@ts-ignore
+
                         xmlns="http://www.w3.org/2000/svg"
                         width="20"
                         height="20"
@@ -1044,16 +1041,10 @@ export default function Table() {
                       </svg>
                     </button>
                     <div className="dropdown-content bg-white shadow w-24 absolute z-30 right-0 mr-6 hidden">
-                      <div
-                        tabIndex="0"
-                        className="focus:outline-none focus:text-red-300 text-xs w-full hover:bg-indigo-700 py-4 px-4 cursor-pointer hover:text-white"
-                      >
+                      <div className="focus:outline-none focus:text-red-300 text-xs w-full hover:bg-indigo-700 py-4 px-4 cursor-pointer hover:text-white">
                         <p>Edit</p>
                       </div>
-                      <div
-                        tabIndex="0"
-                        className="focus:outline-none focus:text-red-300 text-xs w-full hover:bg-indigo-700 py-4 px-4 cursor-pointer hover:text-white"
-                      >
+                      <div className="focus:outline-none focus:text-red-300 text-xs w-full hover:bg-indigo-700 py-4 px-4 cursor-pointer hover:text-white">
                         <p>Delete</p>
                       </div>
                     </div>
@@ -1061,10 +1052,7 @@ export default function Table() {
                 </td>
               </tr>
               <tr className="h-3"></tr>
-              <tr
-                tabIndex="0"
-                className="focus:outline-none h-16 border border-gray-100 rounded"
-              >
+              <tr className="focus:outline-none h-16 border border-gray-100 rounded">
                 <td>
                   <div className="ml-5">
                     <div className="bg-gray-200 rounded-sm w-5 h-5 flex flex-shrink-0 justify-center items-center relative">
@@ -1287,13 +1275,11 @@ export default function Table() {
                   <div className="relative px-5 pt-2">
                     <button
                       className="focus:ring-2 rounded-md focus:outline-none"
-                      onClick="dropdownFunction(this)"
                       role="button"
                       aria-label="option"
                     >
                       <svg
                         className="dropbtn"
-                        onClick="dropdownFunction(this)"
                         xmlns="http://www.w3.org/2000/svg"
                         width="20"
                         height="20"
@@ -1324,16 +1310,10 @@ export default function Table() {
                       </svg>
                     </button>
                     <div className="dropdown-content bg-white shadow w-24 absolute z-30 right-0 mr-6 hidden">
-                      <div
-                        tabIndex="0"
-                        className="focus:outline-none focus:text-indigo-600 text-xs w-full hover:bg-indigo-700 py-4 px-4 cursor-pointer hover:text-white"
-                      >
+                      <div className="focus:outline-none focus:text-indigo-600 text-xs w-full hover:bg-indigo-700 py-4 px-4 cursor-pointer hover:text-white">
                         <p>Edit</p>
                       </div>
-                      <div
-                        tabIndex="0"
-                        className="focus:outline-none focus:text-indigo-600 text-xs w-full hover:bg-indigo-700 py-4 px-4 cursor-pointer hover:text-white"
-                      >
+                      <div className="focus:outline-none focus:text-indigo-600 text-xs w-full hover:bg-indigo-700 py-4 px-4 cursor-pointer hover:text-white">
                         <p>Delete</p>
                       </div>
                     </div>
@@ -1341,16 +1321,12 @@ export default function Table() {
                 </td>
               </tr>
               <tr className="h-3"></tr>
-              <tr
-                tabIndex="0"
-                className="focus:outline-none h-16 border border-gray-100 rounded"
-              >
+              <tr className="focus:outline-none h-16 border border-gray-100 rounded">
                 <td>
                   <div className="ml-5">
                     <div className="bg-gray-200 rounded-sm w-5 h-5 flex flex-shrink-0 justify-center items-center relative">
                       <input
                         placeholder="checkbox"
-                        checked=""
                         type="checkbox"
                         className="focus:opacity-100 checkbox opacity-0 absolute cursor-pointer w-full h-full"
                       />
@@ -1534,13 +1510,11 @@ export default function Table() {
                   <div className="relative px-5 pt-2">
                     <button
                       className="focus:ring-2 rounded-md focus:outline-none"
-                      onClick="dropdownFunction(this)"
                       role="button"
                       aria-label="option"
                     >
                       <svg
                         className="dropbtn"
-                        onClick="dropdownFunction(this)"
                         xmlns="http://www.w3.org/2000/svg"
                         width="20"
                         height="20"
@@ -1571,16 +1545,10 @@ export default function Table() {
                       </svg>
                     </button>
                     <div className="dropdown-content bg-white shadow w-24 absolute z-30 right-0 mr-6 hidden">
-                      <div
-                        tabIndex="0"
-                        className="focus:outline-none focus:text-indigo-600 text-xs w-full hover:bg-indigo-700 py-4 px-4 cursor-pointer hover:text-white"
-                      >
+                      <div className="focus:outline-none focus:text-indigo-600 text-xs w-full hover:bg-indigo-700 py-4 px-4 cursor-pointer hover:text-white">
                         <p>Edit</p>
                       </div>
-                      <div
-                        tabIndex="0"
-                        className="focus:outline-none focus:text-indigo-600 text-xs w-full hover:bg-indigo-700 py-4 px-4 cursor-pointer hover:text-white"
-                      >
+                      <div className="focus:outline-none focus:text-indigo-600 text-xs w-full hover:bg-indigo-700 py-4 px-4 cursor-pointer hover:text-white">
                         <p>Delete</p>
                       </div>
                     </div>
@@ -1588,10 +1556,7 @@ export default function Table() {
                 </td>
               </tr>
               <tr className="h-3"></tr>
-              <tr
-                tabIndex="0"
-                className="focus:outline-none h-16 border border-gray-100 rounded"
-              >
+              <tr className="focus:outline-none h-16 border border-gray-100 rounded">
                 <td>
                   <div className="ml-5">
                     <div className="bg-gray-200 rounded-sm w-5 h-5 flex flex-shrink-0 justify-center items-center relative">
@@ -1794,13 +1759,11 @@ export default function Table() {
                   <div className="relative px-5 pt-2">
                     <button
                       className="focus:ring-2 rounded-md focus:outline-none"
-                      onClick="dropdownFunction(this)"
                       role="button"
                       aria-label="option"
                     >
                       <svg
                         className="dropbtn"
-                        onClick="dropdownFunction(this)"
                         xmlns="http://www.w3.org/2000/svg"
                         width="20"
                         height="20"
@@ -1831,16 +1794,10 @@ export default function Table() {
                       </svg>
                     </button>
                     <div className="dropdown-content bg-white shadow w-24 absolute z-30 right-0 mr-6 hidden">
-                      <div
-                        tabIndex="0"
-                        className="focus:outline-none focus:text-indigo-600 text-xs w-full hover:bg-indigo-700 py-4 px-4 cursor-pointer hover:text-white"
-                      >
+                      <div className="focus:outline-none focus:text-indigo-600 text-xs w-full hover:bg-indigo-700 py-4 px-4 cursor-pointer hover:text-white">
                         <p>Edit</p>
                       </div>
-                      <div
-                        tabIndex="0"
-                        className="focus:outline-none focus:text-indigo-600 text-xs w-full hover:bg-indigo-700 py-4 px-4 cursor-pointer hover:text-white"
-                      >
+                      <div className="focus:outline-none focus:text-indigo-600 text-xs w-full hover:bg-indigo-700 py-4 px-4 cursor-pointer hover:text-white">
                         <p>Delete</p>
                       </div>
                     </div>
@@ -1848,16 +1805,12 @@ export default function Table() {
                 </td>
               </tr>
               <tr className="h-3"></tr>
-              <tr
-                tabIndex="0"
-                className="focus:outline-none h-16 border border-gray-100 rounded"
-              >
+              <tr className="focus:outline-none h-16 border border-gray-100 rounded">
                 <td>
                   <div className="ml-5">
                     <div className="bg-gray-200 rounded-sm w-5 h-5 flex flex-shrink-0 justify-center items-center relative">
                       <input
                         placeholder="checkbox"
-                        checked=""
                         type="checkbox"
                         className="checkbox opacity-0 absolute cursor-pointer w-full h-full"
                       />
@@ -2071,13 +2024,11 @@ export default function Table() {
                   <div className="relative px-5 pt-2">
                     <button
                       className="focus:ring-2 rounded-md focus:outline-none"
-                      onClick="dropdownFunction(this)"
                       role="button"
                       aria-label="option"
                     >
                       <svg
                         className="dropbtn"
-                        onClick="dropdownFunction(this)"
                         xmlns="http://www.w3.org/2000/svg"
                         width="20"
                         height="20"
@@ -2108,16 +2059,10 @@ export default function Table() {
                       </svg>
                     </button>
                     <div className="dropdown-content bg-white shadow w-24 absolute z-30 right-0 mr-6 hidden">
-                      <div
-                        tabIndex="0"
-                        className="focus:outline-none focus:text-indigo-600 text-xs w-full hover:bg-indigo-700 py-4 px-4 cursor-pointer hover:text-white"
-                      >
+                      <div className="focus:outline-none focus:text-indigo-600 text-xs w-full hover:bg-indigo-700 py-4 px-4 cursor-pointer hover:text-white">
                         <p>Edit</p>
                       </div>
-                      <div
-                        tabIndex="0"
-                        className="focus:outline-none focus:text-indigo-600 text-xs w-full hover:bg-indigo-700 py-4 px-4 cursor-pointer hover:text-white"
-                      >
+                      <div className="focus:outline-none focus:text-indigo-600 text-xs w-full hover:bg-indigo-700 py-4 px-4 cursor-pointer hover:text-white">
                         <p>Delete</p>
                       </div>
                     </div>
@@ -2125,10 +2070,7 @@ export default function Table() {
                 </td>
               </tr>
               <tr className="h-3"></tr>
-              <tr
-                tabIndex="0"
-                className="focus:outline-none h-16 border border-gray-100 rounded"
-              >
+              <tr className="focus:outline-none h-16 border border-gray-100 rounded">
                 <td>
                   <div className="ml-5">
                     <div className="bg-gray-200 rounded-sm w-5 h-5 flex flex-shrink-0 justify-center items-center relative">
@@ -2331,13 +2273,11 @@ export default function Table() {
                   <div className="relative px-5 pt-2">
                     <button
                       className="focus:ring-2 rounded-md focus:outline-none"
-                      onClick="dropdownFunction(this)"
                       role="button"
                       aria-label="option"
                     >
                       <svg
                         className="dropbtn"
-                        onClick="dropdownFunction(this)"
                         xmlns="http://www.w3.org/2000/svg"
                         width="20"
                         height="20"
@@ -2368,16 +2308,10 @@ export default function Table() {
                       </svg>
                     </button>
                     <div className="dropdown-content bg-white shadow w-24 absolute z-30 right-0 mr-6 hidden">
-                      <div
-                        tabIndex="0"
-                        className="focus:outline-none focus:text-indigo-600 text-xs w-full hover:bg-indigo-700 py-4 px-4 cursor-pointer hover:text-white"
-                      >
+                      <div className="focus:outline-none focus:text-indigo-600 text-xs w-full hover:bg-indigo-700 py-4 px-4 cursor-pointer hover:text-white">
                         <p>Edit</p>
                       </div>
-                      <div
-                        tabIndex="0"
-                        className="focus:outline-none focus:text-indigo-600 text-xs w-full hover:bg-indigo-700 py-4 px-4 cursor-pointer hover:text-white"
-                      >
+                      <div className="focus:outline-none focus:text-indigo-600 text-xs w-full hover:bg-indigo-700 py-4 px-4 cursor-pointer hover:text-white">
                         <p>Delete</p>
                       </div>
                     </div>

@@ -6,6 +6,8 @@ export const useUpdateNote = () => {
   const { user } = useUser();
   const queryClient = useQueryClient();
 
+  if (!user) return;
+
   return useMutation(
     ({ id, body }: any) => {
       return updateNote(id, body, user.id).then((result) => result.data);

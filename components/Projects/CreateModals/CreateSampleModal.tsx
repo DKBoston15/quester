@@ -4,6 +4,7 @@ import { XMarkIcon } from '@heroicons/react/24/outline';
 import { sampleDesigns, sampleTechniques } from 'constants/dropdownLists';
 import InputTypeSelectionDropdown from '../InputFields/InputTypeSelectionDropdown';
 import { useCreateSample } from 'hooks/samples/useCreateSample';
+import { getNameOrOriginal } from '@/utils/helpers';
 
 export default function CreateSampleModal({
   open,
@@ -16,10 +17,11 @@ export default function CreateSampleModal({
   const createSample = useCreateSample();
 
   const createNewSample = async () => {
+    if (!createSample) return;
     await createSample.mutateAsync({
       title,
-      design: design.name,
-      technique: technique.name,
+      design: getNameOrOriginal(design),
+      technique: getNameOrOriginal(technique),
       projectItemId
     });
 

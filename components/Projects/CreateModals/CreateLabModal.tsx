@@ -10,6 +10,7 @@ export default function CreateLabModal({ open, setOpen, projectItemId }: any) {
   const createLab = useCreateLab();
 
   const createNewLab = async () => {
+    if (!createLab) return;
     await createLab.mutateAsync({
       title,
       email,

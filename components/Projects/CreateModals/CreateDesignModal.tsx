@@ -4,6 +4,7 @@ import { XMarkIcon } from '@heroicons/react/24/outline';
 import { designOptions, designTechniques } from 'constants/dropdownLists';
 import InputTypeSelectionDropdown from '../InputFields/InputTypeSelectionDropdown';
 import { useCreateDesign } from 'hooks/designs/useCreateDesign';
+import { getNameOrOriginal } from '@/utils/helpers';
 
 export default function CreateDesignModal({
   open,
@@ -16,10 +17,11 @@ export default function CreateDesignModal({
   const createDesign = useCreateDesign();
 
   const createNewDesign = async () => {
+    if (!createDesign) return;
     await createDesign.mutateAsync({
       title,
-      technique: technique.name,
-      option: option.name,
+      technique: getNameOrOriginal(technique),
+      option: getNameOrOriginal(option),
       projectItemId
     });
 

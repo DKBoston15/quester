@@ -14,6 +14,7 @@ export default function CreateResearcherModal({
   const createResearcher = useCreateResearcher();
 
   const createNewResearcher = async () => {
+    if (!createResearcher) return;
     await createResearcher.mutateAsync({
       firstName,
       lastName,

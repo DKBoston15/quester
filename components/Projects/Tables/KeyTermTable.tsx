@@ -1,6 +1,4 @@
 import { useState } from 'react';
-import useGetJournalsByIdQuery from 'hooks/journals/useJournalsById';
-import CreateJournalModal from '../CreateModals/CreateJournalModal';
 import useGetKeyTermsByIdQuery from 'hooks/key_terms/useKeyTermsById';
 import CreateKeyTermModal from '../CreateModals/CreateKeyTermModal';
 

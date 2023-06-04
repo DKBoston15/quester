@@ -10,15 +10,9 @@ export const useUpdateTechnique = () => {
 
   return useMutation(
     ({ id, title, link, technique, method }: any) => {
-      return updateTechnique(
-        id,
-        title,
-        link,
-        technique,
-        method,
-        link,
-        user.id
-      ).then((result) => result.data);
+      return updateTechnique(id, title, link, method, technique, user.id).then(
+        (result) => result.data
+      );
     },
     {
       onSuccess: () => {

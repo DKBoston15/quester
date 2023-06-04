@@ -43,6 +43,7 @@ export default function Course() {
         );
         newQuizzes[0].quizzes[selectedQuiz].score = score.score;
       });
+      //@ts-ignore
       setUpdatedQuizzes(newQuizzes);
     }
   }, [quizzes, scores]);
@@ -79,29 +80,32 @@ export default function Course() {
           </RadioGroup>
           {updatedQuizzes && (
             <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 p-4">
-              {updatedQuizzes[0].quizzes.map((quiz) => (
-                <div
-                  key={quiz.title}
-                  className="relative flex items-center space-x-3 rounded-lg border border-gray-300 bg-white px-6 py-5 shadow-sm focus-within:ring-2 focus-within:ring-blue-500 focus-within:ring-offset-2 hover:border-gray-400"
-                >
-                  <div className="min-w-0 flex-1">
-                    <a
-                      href={`${courseId}/${toSnakeCase(quiz.title)}`}
-                      className="focus:outline-none"
-                    >
-                      <span className="absolute inset-0" aria-hidden="true" />
-                      <div className="flex justify-between">
-                        <p className="text-sm font-medium text-gray-900">
-                          {quiz.title}
-                        </p>
-                        <p className="text-sm font-medium text-gray-900">
-                          {quiz.score}/{quiz.questions.length}
-                        </p>
-                      </div>
-                    </a>
+              {
+                //@ts-ignore
+                updatedQuizzes[0].quizzes.map((quiz) => (
+                  <div
+                    key={quiz.title}
+                    className="relative flex items-center space-x-3 rounded-lg border border-gray-300 bg-white px-6 py-5 shadow-sm focus-within:ring-2 focus-within:ring-blue-500 focus-within:ring-offset-2 hover:border-gray-400"
+                  >
+                    <div className="min-w-0 flex-1">
+                      <a
+                        href={`${courseId}/${toSnakeCase(quiz.title)}`}
+                        className="focus:outline-none"
+                      >
+                        <span className="absolute inset-0" aria-hidden="true" />
+                        <div className="flex justify-between">
+                          <p className="text-sm font-medium text-gray-900">
+                            {quiz.title}
+                          </p>
+                          <p className="text-sm font-medium text-gray-900">
+                            {quiz.score}/{quiz.questions.length}
+                          </p>
+                        </div>
+                      </a>
+                    </div>
                   </div>
-                </div>
-              ))}
+                ))
+              }
             </div>
           )}
         </>

@@ -1,9 +1,10 @@
 import { Fragment, useState } from 'react';
 import { Dialog, Transition } from '@headlessui/react';
 import { XMarkIcon } from '@heroicons/react/24/outline';
-import { modelTypes, paradigmTypes } from 'constants/dropdownLists';
+import { paradigmTypes } from 'constants/dropdownLists';
 import InputTypeSelectionDropdown from '../InputFields/InputTypeSelectionDropdown';
 import { useCreateParadigm } from 'hooks/paradigms/useCreateParadigm';
+import { getNameOrOriginal } from '@/utils/helpers';
 
 export default function CreateParadigmModal({
   open,
@@ -15,9 +16,10 @@ export default function CreateParadigmModal({
   const createParadigm = useCreateParadigm();
 
   const createNewParadigm = async () => {
+    if (!createParadigm) return;
     await createParadigm.mutateAsync({
       title,
-      category: category.name,
+      category: getNameOrOriginal(category),
       projectItemId
     });
 

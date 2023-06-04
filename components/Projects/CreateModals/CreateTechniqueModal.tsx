@@ -4,6 +4,7 @@ import { XMarkIcon } from '@heroicons/react/24/outline';
 import { techniqueTechniques } from 'constants/dropdownLists';
 import InputTypeSelectionDropdown from '../InputFields/InputTypeSelectionDropdown';
 import { useCreateTechnique } from 'hooks/techniques/useCreateTechnique';
+import { getNameOrOriginal } from '@/utils/helpers';
 
 export default function CreateTechniqueModal({
   open,
@@ -16,9 +17,10 @@ export default function CreateTechniqueModal({
   const createTechnique = useCreateTechnique();
 
   const createNewTechnique = async () => {
+    if (!createTechnique) return;
     await createTechnique.mutateAsync({
       title,
-      technique: technique.name,
+      technique: getNameOrOriginal(technique),
       method,
       projectItemId
     });

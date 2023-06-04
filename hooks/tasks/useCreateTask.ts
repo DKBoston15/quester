@@ -6,6 +6,8 @@ export const useCreateTask = () => {
   const { user } = useUser();
   const queryClient = useQueryClient();
 
+  if (!user) return;
+
   return useMutation(
     ({ title, dueDate, status, urgency, projectItemId }: any) => {
       return createTask(

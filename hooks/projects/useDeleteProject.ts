@@ -6,6 +6,8 @@ export const useDeleteProject = () => {
   const { user } = useUser();
   const queryClient = useQueryClient();
 
+  if (!user) return;
+
   return useMutation(
     ({ id }: any) => {
       return deleteProject(id, user.id).then((result) => result.data);

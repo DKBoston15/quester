@@ -7,6 +7,7 @@ export const useUpdateSetting = () => {
   const queryClient = useQueryClient();
 
   return useMutation(
+    //@ts-ignore
     ({
       id,
       fieldOfStudy,

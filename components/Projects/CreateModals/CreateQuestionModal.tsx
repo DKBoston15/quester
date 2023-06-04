@@ -1,9 +1,6 @@
 import { Fragment, useState } from 'react';
 import { Dialog, Transition } from '@headlessui/react';
 import { XMarkIcon } from '@heroicons/react/24/outline';
-import { figureTypes } from 'constants/dropdownLists';
-import InputTypeSelectionDropdown from '../InputFields/InputTypeSelectionDropdown';
-import { useCreateFigure } from 'hooks/figures/useCreateFigure';
 import { useCreateQuestion } from 'hooks/questions/useCreateQuestion';
 
 export default function CreateQuestionModal({
@@ -16,6 +13,7 @@ export default function CreateQuestionModal({
   const createQuestion = useCreateQuestion();
 
   const createNewQuestion = async () => {
+    if (!createQuestion) return;
     await createQuestion.mutateAsync({
       title,
       questionOne,

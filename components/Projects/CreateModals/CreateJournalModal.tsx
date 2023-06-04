@@ -14,6 +14,7 @@ export default function CreateJournalModal({
   const createJournal = useCreateJournal();
 
   const createNewJournal = async () => {
+    if (!createJournal) return;
     await createJournal.mutateAsync({
       title,
       association,

@@ -14,6 +14,7 @@ export default function CreateTableModal({
   const createTable = useCreateTable();
 
   const createNewTable = async () => {
+    if (!createTable) return;
     await createTable.mutateAsync({
       title,
       rowCount,

@@ -1,5 +1,4 @@
 import React, { Fragment, useEffect, useState } from 'react';
-import { format } from 'date-fns';
 import { Menu, Transition } from '@headlessui/react';
 import { EllipsisVerticalIcon } from '@heroicons/react/20/solid';
 import { useDeleteTask } from 'hooks/tasks/useDeleteTask';
@@ -21,6 +20,7 @@ export default function Task({ task }: any) {
   }, []);
 
   const updateExistingTask = async (status: boolean) => {
+    if (!updateTask) return;
     await updateTask.mutateAsync({
       id: task.id,
       title: task.title,
@@ -31,6 +31,7 @@ export default function Task({ task }: any) {
   };
 
   const deleteExistingTask = async () => {
+    if (!deleteTask) return;
     await deleteTask.mutateAsync({
       id: task.id
     });
