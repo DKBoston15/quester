@@ -50,7 +50,7 @@ export default function Project() {
                 <div className="top-4 space-y-4">
                   <section aria-labelledby="who-to-follow-heading">
                     <div className="rounded-lg bg-white dark:bg-gray-700 dark:border-gray-700 shadow">
-                      <div className="p-6">
+                      <div className="p-6 mt-[4.3rem]">
                         <div className="flex justify-between">
                           <h2
                             id="who-to-follow-heading"
@@ -109,11 +109,11 @@ export default function Project() {
                       </div>
                     </div>
                   </section>
-                  <section aria-labelledby="trending-heading">
+                  {/* <section aria-labelledby="trending-heading">
                     <div className="rounded-lg bg-white shadow p-4">
                       <Events />
                     </div>
-                  </section>
+                  </section> */}
                 </div>
               </aside>
             </div>

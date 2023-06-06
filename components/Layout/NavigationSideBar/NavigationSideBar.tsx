@@ -1,9 +1,7 @@
-import React, { Fragment, useState } from 'react';
+import React, { Fragment, useEffect, useState } from 'react';
 import { useSidebar } from 'context/SidebarContext';
 import { Dialog, Transition } from '@headlessui/react';
 import {
-  CogIcon,
-  CreditCardIcon,
   DocumentChartBarIcon,
   HomeIcon,
   ScaleIcon,
@@ -13,6 +11,7 @@ import {
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import ThemeSelector from '@/components/ThemeSelector';
+import { useUser } from '@/utils/useUser';
 
 const navigation = [
   { name: 'Projects', href: '/app/projects', icon: HomeIcon, current: true },
@@ -36,9 +35,6 @@ const navigation = [
     current: false
   }
 ];
-const secondaryNavigation = [
-  { name: 'Settings', href: '/app/settings', icon: CogIcon }
-];
 
 function classNames(...classes: any) {
   return classes.filter(Boolean).join(' ');
@@ -46,9 +42,21 @@ function classNames(...classes: any) {
 
 export default function NavigationSideBar() {
   const [sidebarOpen, toggleSidebar] = useSidebar();
+  const { user, userDetails, subscription } = useUser();
+  const [name, setName] = useState('');
+
+  useEffect(() => {
+    if (userDetails) {
+      setName(
+        `${
+          userDetails.full_name ??
+          `${userDetails.first_name || ''} ${userDetails.last_name || ''}`
+        }`
+      );
+    }
+  }, [userDetails]);
 
   const router = useRouter();
-  const { projectItemId } = router.query;
 
   return (
     <>
@@ -106,7 +114,7 @@ export default function NavigationSideBar() {
                 </Transition.Child>
                 <div className="flex flex-shrink-0 items-center px-4">
                   <img
-                    className="w-[3rem] h-[6rem] mt-[-1rem] w-auto object-cover"
+                    className="w-[3rem] h-[6rem] mt-[-1rem] w-auto object-cover ml-[-1rem]"
                     src="/nav_logo.png"
                     alt="Quester logo"
                   />
@@ -115,7 +123,7 @@ export default function NavigationSideBar() {
                   className="mt-2 h-full flex-shrink-0 overflow-y-auto"
                   aria-label="Sidebar"
                 >
-                  <div className="space-y-1 px-2">
+                  <div className="space-y-2 px-2 ml-4 text-lg">
                     {navigation.map((item) => (
                       <Link
                         key={item.name}
@@ -138,25 +146,6 @@ export default function NavigationSideBar() {
                       </Link>
                     ))}
                   </div>
-                  <div className="mt-6 pt-6">
-                    <div className="space-y-1 px-2">
-                      {secondaryNavigation.map((item) => (
-                        <Link
-                          key={item.name}
-                          href={item.href}
-                          className="group flex items-center rounded-md px-2 py-2 text-base font-medium text-white-100 hover:bg-white-600 hover:text-white"
-                        >
-                          <div className="flex cursor-pointer">
-                            <item.icon
-                              className="mr-4 h-6 w-6 text-white-200"
-                              aria-hidden="true"
-                            />
-                            {item.name}
-                          </div>
-                        </Link>
-                      ))}
-                    </div>
-                  </div>
                 </nav>
               </Dialog.Panel>
             </Transition.Child>
@@ -171,7 +160,7 @@ export default function NavigationSideBar() {
       <div className="hidden lg:fixed lg:inset-y-0 lg:flex lg:w-64 lg:flex-col">
         {/* Sidebar component, swap this element with another sidebar if you like */}
         <div className="flex flex-grow flex-col overflow-y-auto bg-blue-700 dark:bg-gray-700 pt-5">
-          <div className="flex flex-shrink-0 items-center px-4">
+          <div className="flex flex-shrink-0 items-center px-4 ml-[-1rem]">
             <img
               className="w-[3rem] h-[6rem] mt-[-1rem] w-auto object-cover"
               src="/nav_logo.png"
@@ -183,7 +172,7 @@ export default function NavigationSideBar() {
             aria-label="Sidebar"
           >
             <div>
-              <div className="space-y-4 px-2">
+              <div className="space-y-4 px-2 ml-4">
                 {navigation.map((item) => (
                   <Link
                     key={item.name}
@@ -206,47 +195,21 @@ export default function NavigationSideBar() {
                   </Link>
                 ))}
               </div>
-              <div className="mt-6 pt-6">
-                <div className="space-y-4 px-2">
-                  {secondaryNavigation.map((item) => (
-                    <Link
-                      key={item.name}
-                      href={item.href}
-                      className="group flex items-center rounded-md px-2 py-2 text-lg font-medium leading-6 text-white-100 hover:bg-white-600 hover:text-white cursor-pointer"
-                    >
-                      <div className="flex cursor-pointer">
-                        <item.icon
-                          className="mr-4 h-6 w-6 text-white-200"
-                          aria-hidden="true"
-                        />
-                        {item.name}
-                      </div>
-                    </Link>
-                  ))}
-                </div>
-              </div>
             </div>
-            <div className="flex flex-shrink-0 bg-gray-700 p-4 justify-between">
-              <a href="#" className="group block w-full flex-shrink-0">
+            <div className="flex flex-shrink-0 bg-gray-700 p-4 justify-between dark:bg-gray-800">
+              <div className="group block w-full flex-shrink-0">
                 <div className="flex items-center justify-between">
                   <div className="flex items-center">
-                    <div>
-                      <img
-                        className="inline-block h-9 w-9 rounded-full"
-                        src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-                        alt=""
-                      />
-                    </div>
-                    <div className="ml-3">
-                      <p className="text-sm font-medium text-white">Tom Cook</p>
+                    <a className="ml-3" href="/app/settings">
+                      <p className="text-sm font-medium text-white">{name}</p>
                       <p className="text-xs font-medium text-gray-300 group-hover:text-gray-200">
-                        View profile
+                        View settings
                       </p>
-                    </div>
+                    </a>
                   </div>
                   <ThemeSelector />
                 </div>
-              </a>
+              </div>
             </div>
           </nav>
         </div>

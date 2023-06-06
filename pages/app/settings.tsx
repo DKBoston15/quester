@@ -179,7 +179,7 @@ export default function Settings() {
         <div className="">
           <div className="">
             <div className="mx-auto flex flex-col">
-              <main className="flex-1">
+              <main className="flex-1 dark:bg-[#1f242b]">
                 <div className="relative w-full px-6">
                   <div className="">
                     <div className="px-4 sm:px-6 lg:px-0">
@@ -226,9 +226,9 @@ export default function Settings() {
                                   onClick={() => setActiveTab(index)}
                                   className={classNames(
                                     index === activeTab
-                                      ? 'border-blue-500 text-blue-600'
+                                      ? 'border-blue-500 text-blue-600 dark:text-blue-600'
                                       : 'border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 ',
-                                    'whitespace-nowrap border-b-2 py-4 px-1 text-sm font-medium cursor-pointer'
+                                    'whitespace-nowrap border-b-2 py-4 px-1 text-sm font-medium cursor-pointer dark:text-white'
                                   )}
                                 >
                                   {tab.name}
@@ -246,10 +246,10 @@ export default function Settings() {
                         >
                           <div className="mt-10 divide-y divide-gray-200">
                             <div className="space-y-1">
-                              <h3 className="text-lg font-medium leading-6 text-gray-900">
+                              <h3 className="text-lg font-medium leading-6 text-gray-900 dark:text-white">
                                 Profile
                               </h3>
-                              <p className="max-w-2xl text-sm text-gray-500">
+                              <p className="max-w-2xl text-sm text-gray-500 dark:text-gray-300">
                                 Account Information
                               </p>
                             </div>
@@ -257,15 +257,17 @@ export default function Settings() {
                               <dl className="divide-y divide-gray-200">
                                 {!currentlyUpdating && (
                                   <div className="py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-5">
-                                    <dt className="text-sm font-medium text-gray-500">
+                                    <dt className="text-sm font-medium text-gray-500 dark:text-white">
                                       Name
                                     </dt>
                                     <dd className="mt-1 flex text-sm text-gray-900 sm:col-span-2 sm:mt-0">
-                                      <span className="flex-grow">{name}</span>
+                                      <span className="flex-grow dark:text-white">
+                                        {name}
+                                      </span>
                                       <span className="ml-4 flex-shrink-0">
                                         <button
                                           type="button"
-                                          className="rounded-md bg-white font-medium text-blue-600 hover:text-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+                                          className="rounded-md bg-white dark:bg-[#1f242b] font-medium text-blue-600 hover:text-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
                                           onClick={() =>
                                             setCurrentlyUpdating(true)
                                           }
@@ -278,7 +280,7 @@ export default function Settings() {
                                 )}
                                 {currentlyUpdating && (
                                   <div className="py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-5">
-                                    <dt className="text-sm font-medium text-gray-500">
+                                    <dt className="text-sm font-medium text-gray-500 dark:text-white">
                                       Name
                                     </dt>
                                     <dd className="mt-1 flex text-sm text-gray-900 sm:col-span-2 sm:mt-0">
@@ -293,21 +295,21 @@ export default function Settings() {
                                         <div className="flex space-x-4 justify-end">
                                           <button
                                             type="button"
-                                            className="inline-flex h-8 items-center justify-center rounded-md border border-transparent border border-gray-300 bg-white px-2 py-1 text-sm font-medium text-gray-700 shadow-sm focus:outline-none focus:ring-offset-2 focus:ring-offset-gray-100"
-                                            onClick={() =>
-                                              setCurrentlyUpdating(false)
-                                            }
-                                          >
-                                            Cancel
-                                          </button>
-                                          <button
-                                            type="button"
                                             className="inline-flex h-8 items-center justify-center rounded-md border border-transparent bg-blue-600 px-2 py-1 text-sm font-medium text-white shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-100"
                                             onClick={() =>
                                               updateUser(name, email)
                                             }
                                           >
                                             Save
+                                          </button>
+                                          <button
+                                            type="button"
+                                            className="inline-flex h-8 items-center justify-center rounded-md border border-transparent border border-gray-300 bg-white dark:bg-[#1f242b] dark:text-white px-2 py-1 text-sm font-medium text-gray-700 shadow-sm focus:outline-none focus:ring-offset-2 focus:ring-offset-gray-100"
+                                            onClick={() =>
+                                              setCurrentlyUpdating(false)
+                                            }
+                                          >
+                                            Cancel
                                           </button>
                                         </div>
                                       </span>
@@ -316,15 +318,17 @@ export default function Settings() {
                                 )}
                                 {!currentlyUpdating && (
                                   <div className="py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-5 sm:pt-5">
-                                    <dt className="text-sm font-medium text-gray-500">
+                                    <dt className="text-sm font-medium text-gray-500 dark:text-white">
                                       Email
                                     </dt>
                                     <dd className="mt-1 flex text-sm text-gray-900 sm:col-span-2 sm:mt-0">
-                                      <span className="flex-grow">{email}</span>
+                                      <span className="flex-grow dark:text-white">
+                                        {email}
+                                      </span>
                                       <span className="ml-4 flex-shrink-0">
                                         <button
                                           type="button"
-                                          className="rounded-md bg-white font-medium text-blue-600 hover:text-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+                                          className="rounded-md bg-white dark:bg-[#1f242b] font-medium text-blue-600 hover:text-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
                                           onClick={() =>
                                             setCurrentlyUpdating(true)
                                           }
@@ -338,7 +342,7 @@ export default function Settings() {
 
                                 {currentlyUpdating && (
                                   <div className="py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-5">
-                                    <dt className="text-sm font-medium text-gray-500">
+                                    <dt className="text-sm font-medium text-gray-500 dark:text-white">
                                       Email
                                     </dt>
                                     <dd className="mt-1 flex text-sm text-gray-900 sm:col-span-2 sm:mt-0">
@@ -353,15 +357,6 @@ export default function Settings() {
                                         <div className="flex space-x-4 justify-end">
                                           <button
                                             type="button"
-                                            className="inline-flex h-8 items-center justify-center rounded-md border border-transparent border border-gray-300 bg-white px-2 py-1 text-sm font-medium text-gray-700 shadow-sm focus:outline-none focus:ring-offset-2 focus:ring-offset-gray-100"
-                                            onClick={() =>
-                                              setCurrentlyUpdating(false)
-                                            }
-                                          >
-                                            Cancel
-                                          </button>
-                                          <button
-                                            type="button"
                                             className="inline-flex h-8 items-center justify-center rounded-md border border-transparent bg-blue-600 px-2 py-1 text-sm font-medium text-white shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-100"
                                             onClick={() =>
                                               updateUser(name, email)
@@ -369,17 +364,26 @@ export default function Settings() {
                                           >
                                             Save
                                           </button>
+                                          <button
+                                            type="button"
+                                            className="inline-flex h-8 items-center justify-center rounded-md border border-transparent border border-gray-300 bg-white dark:bg-[#1f242b] dark:text-white px-2 py-1 text-sm font-medium text-gray-700 shadow-sm focus:outline-none focus:ring-offset-2 focus:ring-offset-gray-100"
+                                            onClick={() =>
+                                              setCurrentlyUpdating(false)
+                                            }
+                                          >
+                                            Cancel
+                                          </button>
                                         </div>
                                       </span>
                                     </dd>
                                   </div>
                                 )}
                                 <div className="py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-5 sm:pt-5">
-                                  <dt className="text-sm font-medium text-gray-500">
+                                  <dt className="text-sm font-medium text-gray-500 dark:text-white">
                                     Your Plan
                                   </dt>
                                   <dd className="mt-1 flex text-sm text-gray-900 sm:col-span-2 sm:mt-0">
-                                    <span className="flex-grow">
+                                    <span className="flex-grow dark:text-white">
                                       {subscription
                                         ? `${subscription?.prices?.products?.name} plan`
                                         : ''}
@@ -389,7 +393,7 @@ export default function Settings() {
                                         type="button"
                                         disabled={loading || !subscription}
                                         onClick={redirectToCustomerPortal}
-                                        className="rounded-md bg-white font-medium text-blue-600 hover:text-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+                                        className="rounded-md bg-white dark:bg-[#1f242b] font-medium text-blue-600 hover:text-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
                                       >
                                         Open Account Portal
                                       </button>
@@ -408,10 +412,10 @@ export default function Settings() {
                         >
                           <div className="mt-10 divide-y divide-gray-200">
                             <div className="space-y-1">
-                              <h3 className="text-lg font-medium leading-6 text-gray-900">
+                              <h3 className="text-lg font-medium leading-6 text-gray-900 dark:text-white">
                                 About
                               </h3>
-                              <p className="max-w-2xl text-sm text-gray-500">
+                              <p className="max-w-2xl text-sm text-gray-500 dark:text-gray-300">
                                 Information specifically about you and your
                                 journey
                               </p>
@@ -420,17 +424,17 @@ export default function Settings() {
                               <dl className="divide-y divide-gray-200">
                                 {!currentlyUpdating && (
                                   <div className="py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-5">
-                                    <dt className="text-sm font-medium text-gray-500">
+                                    <dt className="text-sm font-medium text-gray-500 dark:text-white">
                                       Field of Study
                                     </dt>
                                     <dd className="mt-1 flex text-sm text-gray-900 sm:col-span-2 sm:mt-0">
-                                      <span className="flex-grow">
+                                      <span className="flex-grow dark:text-white">
                                         {fieldOfStudy}
                                       </span>
                                       <span className="ml-4 flex-shrink-0">
                                         <button
                                           type="button"
-                                          className="rounded-md bg-white font-medium text-blue-600 hover:text-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+                                          className="rounded-md bg-white dark:bg-[#1f242b] font-medium text-blue-600 hover:text-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
                                           onClick={() =>
                                             setCurrentlyUpdating(true)
                                           }
@@ -443,7 +447,7 @@ export default function Settings() {
                                 )}
                                 {currentlyUpdating && (
                                   <div className="py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-5">
-                                    <dt className="text-sm font-medium text-gray-500">
+                                    <dt className="text-sm font-medium text-gray-500 dark:text-white">
                                       Field of Study
                                     </dt>
                                     <dd className="mt-1 flex text-sm text-gray-900 sm:col-span-2 sm:mt-0">
@@ -458,19 +462,19 @@ export default function Settings() {
                                         <div className="flex space-x-4 justify-end">
                                           <button
                                             type="button"
-                                            className="inline-flex h-8 items-center justify-center rounded-md border border-transparent border border-gray-300 bg-white px-2 py-1 text-sm font-medium text-gray-700 shadow-sm focus:outline-none focus:ring-offset-2 focus:ring-offset-gray-100"
+                                            className="inline-flex h-8 items-center justify-center rounded-md border border-transparent bg-blue-600 px-2 py-1 text-sm font-medium text-white shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-100"
+                                            onClick={() => updateSettings()}
+                                          >
+                                            Save
+                                          </button>
+                                          <button
+                                            type="button"
+                                            className="inline-flex h-8 items-center justify-center rounded-md border border-transparent border border-gray-300 bg-white dark:bg-[#1f242b] dark:text-white px-2 py-1 text-sm font-medium text-gray-700 shadow-sm focus:outline-none focus:ring-offset-2 focus:ring-offset-gray-100"
                                             onClick={() =>
                                               setCurrentlyUpdating(false)
                                             }
                                           >
                                             Cancel
-                                          </button>
-                                          <button
-                                            type="button"
-                                            className="inline-flex h-8 items-center justify-center rounded-md border border-transparent bg-blue-600 px-2 py-1 text-sm font-medium text-white shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-100"
-                                            onClick={() => updateSettings()}
-                                          >
-                                            Save
                                           </button>
                                         </div>
                                       </span>
@@ -479,11 +483,11 @@ export default function Settings() {
                                 )}
                                 {!currentlyUpdating && (
                                   <div className="py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-5 sm:pt-5">
-                                    <dt className="text-sm font-medium text-gray-500">
+                                    <dt className="text-sm font-medium text-gray-500 dark:text-white">
                                       In Graduate School?
                                     </dt>
                                     <dd className="mt-1 flex text-sm text-gray-900 sm:col-span-2 sm:mt-0">
-                                      <span className="flex-grow">
+                                      <span className="flex-grow dark:text-white">
                                         {JSON.stringify(inGraduateSchool) ==
                                         'false'
                                           ? 'No'
@@ -492,7 +496,7 @@ export default function Settings() {
                                       <span className="ml-4 flex-shrink-0">
                                         <button
                                           type="button"
-                                          className="rounded-md bg-white font-medium text-blue-600 hover:text-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+                                          className="rounded-md bg-white dark:bg-[#1f242b] font-medium text-blue-600 hover:text-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
                                           onClick={() =>
                                             setCurrentlyUpdating(true)
                                           }
@@ -505,7 +509,7 @@ export default function Settings() {
                                 )}
                                 {currentlyUpdating && (
                                   <div className="py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-5">
-                                    <dt className="text-sm font-medium text-gray-500">
+                                    <dt className="text-sm font-medium text-gray-500 dark:text-white">
                                       In Graduate School?
                                     </dt>
                                     <dd className="mt-1 flex text-sm text-gray-900 sm:col-span-2 sm:mt-0">
@@ -514,7 +518,7 @@ export default function Settings() {
                                           id="inGraduateSchool"
                                           name="inGraduateSchool"
                                           type="checkbox"
-                                          className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
+                                          className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500 dark:accent-gray-600"
                                           checked={inGraduateSchool || false}
                                           onChange={() => {
                                             setInGraduateSchool(
@@ -527,19 +531,19 @@ export default function Settings() {
                                         <div className="flex space-x-4 justify-end">
                                           <button
                                             type="button"
-                                            className="inline-flex h-8 items-center justify-center rounded-md border border-transparent border border-gray-300 bg-white px-2 py-1 text-sm font-medium text-gray-700 shadow-sm focus:outline-none focus:ring-offset-2 focus:ring-offset-gray-100"
+                                            className="inline-flex h-8 items-center justify-center rounded-md border border-transparent bg-blue-600 px-2 py-1 text-sm font-medium text-white shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-100"
+                                            onClick={() => updateSettings()}
+                                          >
+                                            Save
+                                          </button>
+                                          <button
+                                            type="button"
+                                            className="inline-flex h-8 items-center justify-center rounded-md border border-transparent border border-gray-300 bg-white dark:bg-[#1f242b] dark:text-white px-2 py-1 text-sm font-medium text-gray-700 shadow-sm focus:outline-none focus:ring-offset-2 focus:ring-offset-gray-100"
                                             onClick={() =>
                                               setCurrentlyUpdating(false)
                                             }
                                           >
                                             Cancel
-                                          </button>
-                                          <button
-                                            type="button"
-                                            className="inline-flex h-8 items-center justify-center rounded-md border border-transparent bg-blue-600 px-2 py-1 text-sm font-medium text-white shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-100"
-                                            onClick={() => updateSettings()}
-                                          >
-                                            Save
                                           </button>
                                         </div>
                                       </span>
@@ -548,11 +552,11 @@ export default function Settings() {
                                 )}
                                 {!currentlyUpdating && (
                                   <div className="py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-5 sm:pt-5">
-                                    <dt className="text-sm font-medium text-gray-500">
+                                    <dt className="text-sm font-medium text-gray-500 dark:text-white">
                                       Participating in Coursework?
                                     </dt>
                                     <dd className="mt-1 flex text-sm text-gray-900 sm:col-span-2 sm:mt-0">
-                                      <span className="flex-grow">
+                                      <span className="flex-grow dark:text-white">
                                         {JSON.stringify(
                                           participatingInCoursework
                                         ) == 'false'
@@ -562,7 +566,7 @@ export default function Settings() {
                                       <span className="ml-4 flex-shrink-0">
                                         <button
                                           type="button"
-                                          className="rounded-md bg-white font-medium text-blue-600 hover:text-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+                                          className="rounded-md bg-white dark:bg-[#1f242b] font-medium text-blue-600 hover:text-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
                                           onClick={() =>
                                             setCurrentlyUpdating(true)
                                           }
@@ -575,7 +579,7 @@ export default function Settings() {
                                 )}
                                 {currentlyUpdating && (
                                   <div className="py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-5">
-                                    <dt className="text-sm font-medium text-gray-500">
+                                    <dt className="text-sm font-medium text-gray-500 dark:text-white">
                                       Participating in Coursework?
                                     </dt>
                                     <dd className="mt-1 flex text-sm text-gray-900 sm:col-span-2 sm:mt-0">
@@ -584,7 +588,7 @@ export default function Settings() {
                                           id="participatingInCoursework"
                                           name="participatingInCoursework"
                                           type="checkbox"
-                                          className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
+                                          className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500 dark:accent-gray-600"
                                           checked={
                                             participatingInCoursework || false
                                           }
@@ -599,19 +603,19 @@ export default function Settings() {
                                         <div className="flex space-x-4 justify-end">
                                           <button
                                             type="button"
-                                            className="inline-flex h-8 items-center justify-center rounded-md border border-transparent border border-gray-300 bg-white px-2 py-1 text-sm font-medium text-gray-700 shadow-sm focus:outline-none focus:ring-offset-2 focus:ring-offset-gray-100"
+                                            className="inline-flex h-8 items-center justify-center rounded-md border border-transparent bg-blue-600 px-2 py-1 text-sm font-medium text-white shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-100"
+                                            onClick={() => updateSettings()}
+                                          >
+                                            Save
+                                          </button>
+                                          <button
+                                            type="button"
+                                            className="inline-flex h-8 items-center justify-center rounded-md border border-transparent border border-gray-300 bg-white dark:bg-[#1f242b] dark:text-white px-2 py-1 text-sm font-medium text-gray-700 shadow-sm focus:outline-none focus:ring-offset-2 focus:ring-offset-gray-100"
                                             onClick={() =>
                                               setCurrentlyUpdating(false)
                                             }
                                           >
                                             Cancel
-                                          </button>
-                                          <button
-                                            type="button"
-                                            className="inline-flex h-8 items-center justify-center rounded-md border border-transparent bg-blue-600 px-2 py-1 text-sm font-medium text-white shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-100"
-                                            onClick={() => updateSettings()}
-                                          >
-                                            Save
                                           </button>
                                         </div>
                                       </span>
@@ -620,11 +624,11 @@ export default function Settings() {
                                 )}
                                 {!currentlyUpdating && (
                                   <div className="py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-5 sm:pt-5">
-                                    <dt className="text-sm font-medium text-gray-500">
+                                    <dt className="text-sm font-medium text-gray-500 dark:text-white">
                                       Looking at Graduate Schools?
                                     </dt>
                                     <dd className="mt-1 flex text-sm text-gray-900 sm:col-span-2 sm:mt-0">
-                                      <span className="flex-grow">
+                                      <span className="flex-grow dark:text-white">
                                         {JSON.stringify(
                                           lookingAtGraduateSchools
                                         ) == 'false'
@@ -634,7 +638,7 @@ export default function Settings() {
                                       <span className="ml-4 flex-shrink-0">
                                         <button
                                           type="button"
-                                          className="rounded-md bg-white font-medium text-blue-600 hover:text-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+                                          className="rounded-md bg-white dark:bg-[#1f242b] font-medium text-blue-600 hover:text-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
                                           onClick={() =>
                                             setCurrentlyUpdating(true)
                                           }
@@ -647,7 +651,7 @@ export default function Settings() {
                                 )}
                                 {currentlyUpdating && (
                                   <div className="py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-5">
-                                    <dt className="text-sm font-medium text-gray-500">
+                                    <dt className="text-sm font-medium text-gray-500 dark:text-white">
                                       Looking at Graduate Schools?
                                     </dt>
                                     <dd className="mt-1 flex text-sm text-gray-900 sm:col-span-2 sm:mt-0">
@@ -656,7 +660,7 @@ export default function Settings() {
                                           id="lookingAtGraduateSchools"
                                           name="lookingAtGraduateSchools"
                                           type="checkbox"
-                                          className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
+                                          className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500 dark:accent-gray-600"
                                           checked={
                                             lookingAtGraduateSchools || false
                                           }
@@ -671,19 +675,19 @@ export default function Settings() {
                                         <div className="flex space-x-4 justify-end">
                                           <button
                                             type="button"
-                                            className="inline-flex h-8 items-center justify-center rounded-md border border-transparent border border-gray-300 bg-white px-2 py-1 text-sm font-medium text-gray-700 shadow-sm focus:outline-none focus:ring-offset-2 focus:ring-offset-gray-100"
+                                            className="inline-flex h-8 items-center justify-center rounded-md border border-transparent bg-blue-600 px-2 py-1 text-sm font-medium text-white shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-100"
+                                            onClick={() => updateSettings()}
+                                          >
+                                            Save
+                                          </button>
+                                          <button
+                                            type="button"
+                                            className="inline-flex h-8 items-center justify-center rounded-md border border-transparent border border-gray-300 bg-white dark:bg-[#1f242b] dark:text-white px-2 py-1 text-sm font-medium text-gray-700 shadow-sm focus:outline-none focus:ring-offset-2 focus:ring-offset-gray-100"
                                             onClick={() =>
                                               setCurrentlyUpdating(false)
                                             }
                                           >
                                             Cancel
-                                          </button>
-                                          <button
-                                            type="button"
-                                            className="inline-flex h-8 items-center justify-center rounded-md border border-transparent bg-blue-600 px-2 py-1 text-sm font-medium text-white shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-100"
-                                            onClick={() => updateSettings()}
-                                          >
-                                            Save
                                           </button>
                                         </div>
                                       </span>
@@ -692,11 +696,11 @@ export default function Settings() {
                                 )}
                                 {!currentlyUpdating && (
                                   <div className="py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-5 sm:pt-5">
-                                    <dt className="text-sm font-medium text-gray-500">
+                                    <dt className="text-sm font-medium text-gray-500 dark:text-white">
                                       Degree Seeking?
                                     </dt>
                                     <dd className="mt-1 flex text-sm text-gray-900 sm:col-span-2 sm:mt-0">
-                                      <span className="flex-grow">
+                                      <span className="flex-grow dark:text-white">
                                         {JSON.stringify(degreeSeeking) ==
                                         'false'
                                           ? 'No'
@@ -705,7 +709,7 @@ export default function Settings() {
                                       <span className="ml-4 flex-shrink-0">
                                         <button
                                           type="button"
-                                          className="rounded-md bg-white font-medium text-blue-600 hover:text-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+                                          className="rounded-md bg-white dark:bg-[#1f242b] font-medium text-blue-600 hover:text-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
                                           onClick={() =>
                                             setCurrentlyUpdating(true)
                                           }
@@ -718,7 +722,7 @@ export default function Settings() {
                                 )}
                                 {currentlyUpdating && (
                                   <div className="py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-5">
-                                    <dt className="text-sm font-medium text-gray-500">
+                                    <dt className="text-sm font-medium text-gray-500 dark:text-white">
                                       Degree Seeking?
                                     </dt>
                                     <dd className="mt-1 flex text-sm text-gray-900 sm:col-span-2 sm:mt-0">
@@ -727,7 +731,7 @@ export default function Settings() {
                                           id="degreeSeeking"
                                           name="degreeSeeking"
                                           type="checkbox"
-                                          className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
+                                          className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500 dark:accent-gray-600"
                                           checked={degreeSeeking || false}
                                           onChange={() => {
                                             setDegreeSeeking(!degreeSeeking);
@@ -738,19 +742,19 @@ export default function Settings() {
                                         <div className="flex space-x-4 justify-end">
                                           <button
                                             type="button"
-                                            className="inline-flex h-8 items-center justify-center rounded-md border border-transparent border border-gray-300 bg-white px-2 py-1 text-sm font-medium text-gray-700 shadow-sm focus:outline-none focus:ring-offset-2 focus:ring-offset-gray-100"
+                                            className="inline-flex h-8 items-center justify-center rounded-md border border-transparent bg-blue-600 px-2 py-1 text-sm font-medium text-white shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-100"
+                                            onClick={() => updateSettings()}
+                                          >
+                                            Save
+                                          </button>
+                                          <button
+                                            type="button"
+                                            className="inline-flex h-8 items-center justify-center rounded-md border border-transparent border border-gray-300 bg-white dark:bg-[#1f242b] dark:text-white px-2 py-1 text-sm font-medium text-gray-700 shadow-sm focus:outline-none focus:ring-offset-2 focus:ring-offset-gray-100"
                                             onClick={() =>
                                               setCurrentlyUpdating(false)
                                             }
                                           >
                                             Cancel
-                                          </button>
-                                          <button
-                                            type="button"
-                                            className="inline-flex h-8 items-center justify-center rounded-md border border-transparent bg-blue-600 px-2 py-1 text-sm font-medium text-white shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-100"
-                                            onClick={() => updateSettings()}
-                                          >
-                                            Save
                                           </button>
                                         </div>
                                       </span>
@@ -759,17 +763,17 @@ export default function Settings() {
                                 )}
                                 {!currentlyUpdating && (
                                   <div className="py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-5 sm:pt-5">
-                                    <dt className="text-sm font-medium text-gray-500">
+                                    <dt className="text-sm font-medium text-gray-500 dark:text-white">
                                       University
                                     </dt>
                                     <dd className="mt-1 flex text-sm text-gray-900 sm:col-span-2 sm:mt-0">
-                                      <span className="flex-grow">
+                                      <span className="flex-grow dark:text-white">
                                         {university}
                                       </span>
                                       <span className="ml-4 flex-shrink-0">
                                         <button
                                           type="button"
-                                          className="rounded-md bg-white font-medium text-blue-600 hover:text-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+                                          className="rounded-md bg-white dark:bg-[#1f242b] font-medium text-blue-600 hover:text-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
                                           onClick={() =>
                                             setCurrentlyUpdating(true)
                                           }
@@ -782,7 +786,7 @@ export default function Settings() {
                                 )}
                                 {currentlyUpdating && (
                                   <div className="py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-5">
-                                    <dt className="text-sm font-medium text-gray-500">
+                                    <dt className="text-sm font-medium text-gray-500 dark:text-white">
                                       University
                                     </dt>
                                     <dd className="mt-1 flex text-sm text-gray-900 sm:col-span-2 sm:mt-0">
@@ -797,19 +801,19 @@ export default function Settings() {
                                         <div className="flex space-x-4 justify-end">
                                           <button
                                             type="button"
-                                            className="inline-flex h-8 items-center justify-center rounded-md border border-transparent border border-gray-300 bg-white px-2 py-1 text-sm font-medium text-gray-700 shadow-sm focus:outline-none focus:ring-offset-2 focus:ring-offset-gray-100"
+                                            className="inline-flex h-8 items-center justify-center rounded-md border border-transparent bg-blue-600 px-2 py-1 text-sm font-medium text-white shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-100"
+                                            onClick={() => updateSettings()}
+                                          >
+                                            Save
+                                          </button>
+                                          <button
+                                            type="button"
+                                            className="inline-flex h-8 items-center justify-center rounded-md border border-transparent border border-gray-300 bg-white dark:bg-[#1f242b] dark:text-white px-2 py-1 text-sm font-medium text-gray-700 shadow-sm focus:outline-none focus:ring-offset-2 focus:ring-offset-gray-100"
                                             onClick={() =>
                                               setCurrentlyUpdating(false)
                                             }
                                           >
                                             Cancel
-                                          </button>
-                                          <button
-                                            type="button"
-                                            className="inline-flex h-8 items-center justify-center rounded-md border border-transparent bg-blue-600 px-2 py-1 text-sm font-medium text-white shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-100"
-                                            onClick={() => updateSettings()}
-                                          >
-                                            Save
                                           </button>
                                         </div>
                                       </span>
@@ -818,17 +822,17 @@ export default function Settings() {
                                 )}
                                 {!currentlyUpdating && (
                                   <div className="py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-5 sm:pt-5">
-                                    <dt className="text-sm font-medium text-gray-500">
+                                    <dt className="text-sm font-medium text-gray-500 dark:text-white">
                                       Status
                                     </dt>
                                     <dd className="mt-1 flex text-sm text-gray-900 sm:col-span-2 sm:mt-0">
-                                      <span className="flex-grow">
+                                      <span className="flex-grow dark:text-white">
                                         {status}
                                       </span>
                                       <span className="ml-4 flex-shrink-0">
                                         <button
                                           type="button"
-                                          className="rounded-md bg-white font-medium text-blue-600 hover:text-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+                                          className="rounded-md bg-white dark:bg-[#1f242b] font-medium text-blue-600 hover:text-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
                                           onClick={() =>
                                             setCurrentlyUpdating(true)
                                           }
@@ -841,7 +845,7 @@ export default function Settings() {
                                 )}
                                 {currentlyUpdating && (
                                   <div className="py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-5">
-                                    <dt className="text-sm font-medium text-gray-500">
+                                    <dt className="text-sm font-medium text-gray-500 dark:text-white">
                                       Status
                                     </dt>
                                     <dd className="mt-1 flex text-sm text-gray-900 sm:col-span-2 sm:mt-0">
@@ -856,19 +860,19 @@ export default function Settings() {
                                         <div className="flex space-x-4 justify-end">
                                           <button
                                             type="button"
-                                            className="inline-flex h-8 items-center justify-center rounded-md border border-transparent border border-gray-300 bg-white px-2 py-1 text-sm font-medium text-gray-700 shadow-sm focus:outline-none focus:ring-offset-2 focus:ring-offset-gray-100"
+                                            className="inline-flex h-8 items-center justify-center rounded-md border border-transparent bg-blue-600 px-2 py-1 text-sm font-medium text-white shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-100"
+                                            onClick={() => updateSettings()}
+                                          >
+                                            Save
+                                          </button>
+                                          <button
+                                            type="button"
+                                            className="inline-flex h-8 items-center justify-center rounded-md border border-transparent border border-gray-300 bg-white dark:bg-[#1f242b] dark:text-white px-2 py-1 text-sm font-medium text-gray-700 shadow-sm focus:outline-none focus:ring-offset-2 focus:ring-offset-gray-100"
                                             onClick={() =>
                                               setCurrentlyUpdating(false)
                                             }
                                           >
                                             Cancel
-                                          </button>
-                                          <button
-                                            type="button"
-                                            className="inline-flex h-8 items-center justify-center rounded-md border border-transparent bg-blue-600 px-2 py-1 text-sm font-medium text-white shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-100"
-                                            onClick={() => updateSettings()}
-                                          >
-                                            Save
                                           </button>
                                         </div>
                                       </span>
@@ -877,11 +881,11 @@ export default function Settings() {
                                 )}
                                 {!currentlyUpdating && (
                                   <div className="py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-5 sm:pt-5">
-                                    <dt className="text-sm font-medium text-gray-500">
+                                    <dt className="text-sm font-medium text-gray-500 dark:text-white">
                                       Conducting Research?
                                     </dt>
                                     <dd className="mt-1 flex text-sm text-gray-900 sm:col-span-2 sm:mt-0">
-                                      <span className="flex-grow">
+                                      <span className="flex-grow dark:text-white">
                                         {JSON.stringify(conductingResearch) ==
                                         'false'
                                           ? 'No'
@@ -890,7 +894,7 @@ export default function Settings() {
                                       <span className="ml-4 flex-shrink-0">
                                         <button
                                           type="button"
-                                          className="rounded-md bg-white font-medium text-blue-600 hover:text-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+                                          className="rounded-md bg-white dark:bg-[#1f242b] font-medium text-blue-600 hover:text-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
                                           onClick={() =>
                                             setCurrentlyUpdating(true)
                                           }
@@ -903,7 +907,7 @@ export default function Settings() {
                                 )}
                                 {currentlyUpdating && (
                                   <div className="py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-5">
-                                    <dt className="text-sm font-medium text-gray-500">
+                                    <dt className="text-sm font-medium text-gray-500 dark:text-white">
                                       Conducting Research?
                                     </dt>
                                     <dd className="mt-1 flex text-sm text-gray-900 sm:col-span-2 sm:mt-0">
@@ -912,7 +916,7 @@ export default function Settings() {
                                           id="conductingResearch"
                                           name="conductingResearch"
                                           type="checkbox"
-                                          className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
+                                          className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500 dark:accent-gray-600"
                                           checked={conductingResearch || false}
                                           onChange={() => {
                                             setConductingResearch(
@@ -925,19 +929,19 @@ export default function Settings() {
                                         <div className="flex space-x-4 justify-end">
                                           <button
                                             type="button"
-                                            className="inline-flex h-8 items-center justify-center rounded-md border border-transparent border border-gray-300 bg-white px-2 py-1 text-sm font-medium text-gray-700 shadow-sm focus:outline-none focus:ring-offset-2 focus:ring-offset-gray-100"
+                                            className="inline-flex h-8 items-center justify-center rounded-md border border-transparent bg-blue-600 px-2 py-1 text-sm font-medium text-white shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-100"
+                                            onClick={() => updateSettings()}
+                                          >
+                                            Save
+                                          </button>
+                                          <button
+                                            type="button"
+                                            className="inline-flex h-8 items-center justify-center rounded-md border border-transparent border border-gray-300 bg-white dark:bg-[#1f242b] dark:text-white px-2 py-1 text-sm font-medium text-gray-700 shadow-sm focus:outline-none focus:ring-offset-2 focus:ring-offset-gray-100"
                                             onClick={() =>
                                               setCurrentlyUpdating(false)
                                             }
                                           >
                                             Cancel
-                                          </button>
-                                          <button
-                                            type="button"
-                                            className="inline-flex h-8 items-center justify-center rounded-md border border-transparent bg-blue-600 px-2 py-1 text-sm font-medium text-white shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-100"
-                                            onClick={() => updateSettings()}
-                                          >
-                                            Save
                                           </button>
                                         </div>
                                       </span>
@@ -946,11 +950,11 @@ export default function Settings() {
                                 )}
                                 {!currentlyUpdating && (
                                   <div className="py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-5 sm:pt-5">
-                                    <dt className="text-sm font-medium text-gray-500">
+                                    <dt className="text-sm font-medium text-gray-500 dark:text-white">
                                       Writing Proposal?
                                     </dt>
                                     <dd className="mt-1 flex text-sm text-gray-900 sm:col-span-2 sm:mt-0">
-                                      <span className="flex-grow">
+                                      <span className="flex-grow dark:text-white">
                                         {JSON.stringify(writingProposal) ==
                                         'false'
                                           ? 'No'
@@ -959,7 +963,7 @@ export default function Settings() {
                                       <span className="ml-4 flex-shrink-0">
                                         <button
                                           type="button"
-                                          className="rounded-md bg-white font-medium text-blue-600 hover:text-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+                                          className="rounded-md bg-white dark:bg-[#1f242b] font-medium text-blue-600 hover:text-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
                                           onClick={() =>
                                             setCurrentlyUpdating(true)
                                           }
@@ -972,7 +976,7 @@ export default function Settings() {
                                 )}
                                 {currentlyUpdating && (
                                   <div className="py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-5">
-                                    <dt className="text-sm font-medium text-gray-500">
+                                    <dt className="text-sm font-medium text-gray-500 dark:text-white">
                                       Writing Proposal?
                                     </dt>
                                     <dd className="mt-1 flex text-sm text-gray-900 sm:col-span-2 sm:mt-0">
@@ -981,7 +985,7 @@ export default function Settings() {
                                           id="writingProposal"
                                           name="writingProposal"
                                           type="checkbox"
-                                          className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
+                                          className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500 dark:accent-gray-600"
                                           checked={writingProposal || false}
                                           onChange={() => {
                                             setWritingProposal(
@@ -994,19 +998,19 @@ export default function Settings() {
                                         <div className="flex space-x-4 justify-end">
                                           <button
                                             type="button"
-                                            className="inline-flex h-8 items-center justify-center rounded-md border border-transparent border border-gray-300 bg-white px-2 py-1 text-sm font-medium text-gray-700 shadow-sm focus:outline-none focus:ring-offset-2 focus:ring-offset-gray-100"
+                                            className="inline-flex h-8 items-center justify-center rounded-md border border-transparent bg-blue-600 px-2 py-1 text-sm font-medium text-white shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-100"
+                                            onClick={() => updateSettings()}
+                                          >
+                                            Save
+                                          </button>
+                                          <button
+                                            type="button"
+                                            className="inline-flex h-8 items-center justify-center rounded-md border border-transparent border border-gray-300 bg-white dark:bg-[#1f242b] dark:text-white px-2 py-1 text-sm font-medium text-gray-700 shadow-sm focus:outline-none focus:ring-offset-2 focus:ring-offset-gray-100"
                                             onClick={() =>
                                               setCurrentlyUpdating(false)
                                             }
                                           >
                                             Cancel
-                                          </button>
-                                          <button
-                                            type="button"
-                                            className="inline-flex h-8 items-center justify-center rounded-md border border-transparent bg-blue-600 px-2 py-1 text-sm font-medium text-white shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-100"
-                                            onClick={() => updateSettings()}
-                                          >
-                                            Save
                                           </button>
                                         </div>
                                       </span>
@@ -1015,11 +1019,11 @@ export default function Settings() {
                                 )}
                                 {!currentlyUpdating && (
                                   <div className="py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-5 sm:pt-5">
-                                    <dt className="text-sm font-medium text-gray-500">
+                                    <dt className="text-sm font-medium text-gray-500 dark:text-white">
                                       Writing Dissertation?
                                     </dt>
                                     <dd className="mt-1 flex text-sm text-gray-900 sm:col-span-2 sm:mt-0">
-                                      <span className="flex-grow">
+                                      <span className="flex-grow dark:text-white">
                                         {JSON.stringify(writingDissertation) ==
                                         'false'
                                           ? 'No'
@@ -1028,7 +1032,7 @@ export default function Settings() {
                                       <span className="ml-4 flex-shrink-0">
                                         <button
                                           type="button"
-                                          className="rounded-md bg-white font-medium text-blue-600 hover:text-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+                                          className="rounded-md bg-white dark:bg-[#1f242b] font-medium text-blue-600 hover:text-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
                                           onClick={() =>
                                             setCurrentlyUpdating(true)
                                           }
@@ -1041,7 +1045,7 @@ export default function Settings() {
                                 )}
                                 {currentlyUpdating && (
                                   <div className="py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-5">
-                                    <dt className="text-sm font-medium text-gray-500">
+                                    <dt className="text-sm font-medium text-gray-500 dark:text-white">
                                       Writing Dissertation?
                                     </dt>
                                     <dd className="mt-1 flex text-sm text-gray-900 sm:col-span-2 sm:mt-0">
@@ -1050,7 +1054,7 @@ export default function Settings() {
                                           id="writingDissertation"
                                           name="writingDissertation"
                                           type="checkbox"
-                                          className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
+                                          className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500 dark:accent-gray-600"
                                           checked={writingDissertation || false}
                                           onChange={() => {
                                             setWritingDissertation(
@@ -1063,19 +1067,19 @@ export default function Settings() {
                                         <div className="flex space-x-4 justify-end">
                                           <button
                                             type="button"
-                                            className="inline-flex h-8 items-center justify-center rounded-md border border-transparent border border-gray-300 bg-white px-2 py-1 text-sm font-medium text-gray-700 shadow-sm focus:outline-none focus:ring-offset-2 focus:ring-offset-gray-100"
+                                            className="inline-flex h-8 items-center justify-center rounded-md border border-transparent bg-blue-600 px-2 py-1 text-sm font-medium text-white shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-100"
+                                            onClick={() => updateSettings()}
+                                          >
+                                            Save
+                                          </button>
+                                          <button
+                                            type="button"
+                                            className="inline-flex h-8 items-center justify-center rounded-md border border-transparent border border-gray-300 bg-white dark:bg-[#1f242b] dark:text-white px-2 py-1 text-sm font-medium text-gray-700 shadow-sm focus:outline-none focus:ring-offset-2 focus:ring-offset-gray-100"
                                             onClick={() =>
                                               setCurrentlyUpdating(false)
                                             }
                                           >
                                             Cancel
-                                          </button>
-                                          <button
-                                            type="button"
-                                            className="inline-flex h-8 items-center justify-center rounded-md border border-transparent bg-blue-600 px-2 py-1 text-sm font-medium text-white shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-100"
-                                            onClick={() => updateSettings()}
-                                          >
-                                            Save
                                           </button>
                                         </div>
                                       </span>
@@ -1084,11 +1088,11 @@ export default function Settings() {
                                 )}
                                 {!currentlyUpdating && (
                                   <div className="py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-5 sm:pt-5">
-                                    <dt className="text-sm font-medium text-gray-500">
+                                    <dt className="text-sm font-medium text-gray-500 dark:text-white">
                                       Attending Conferences?
                                     </dt>
                                     <dd className="mt-1 flex text-sm text-gray-900 sm:col-span-2 sm:mt-0">
-                                      <span className="flex-grow">
+                                      <span className="flex-grow dark:text-white">
                                         {JSON.stringify(attendingConferences) ==
                                         'false'
                                           ? 'No'
@@ -1097,7 +1101,7 @@ export default function Settings() {
                                       <span className="ml-4 flex-shrink-0">
                                         <button
                                           type="button"
-                                          className="rounded-md bg-white font-medium text-blue-600 hover:text-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+                                          className="rounded-md bg-white dark:bg-[#1f242b] font-medium text-blue-600 hover:text-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
                                           onClick={() =>
                                             setCurrentlyUpdating(true)
                                           }
@@ -1110,7 +1114,7 @@ export default function Settings() {
                                 )}
                                 {currentlyUpdating && (
                                   <div className="py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-5">
-                                    <dt className="text-sm font-medium text-gray-500">
+                                    <dt className="text-sm font-medium text-gray-500 dark:text-white">
                                       Attending Conferences?
                                     </dt>
                                     <dd className="mt-1 flex text-sm text-gray-900 sm:col-span-2 sm:mt-0">
@@ -1119,7 +1123,7 @@ export default function Settings() {
                                           id="attendingConferences"
                                           name="attendingConferences"
                                           type="checkbox"
-                                          className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
+                                          className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500 dark:accent-gray-600"
                                           checked={
                                             attendingConferences || false
                                           }
@@ -1134,19 +1138,19 @@ export default function Settings() {
                                         <div className="flex space-x-4 justify-end">
                                           <button
                                             type="button"
-                                            className="inline-flex h-8 items-center justify-center rounded-md border border-transparent border border-gray-300 bg-white px-2 py-1 text-sm font-medium text-gray-700 shadow-sm focus:outline-none focus:ring-offset-2 focus:ring-offset-gray-100"
+                                            className="inline-flex h-8 items-center justify-center rounded-md border border-transparent bg-blue-600 px-2 py-1 text-sm font-medium text-white shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-100"
+                                            onClick={() => updateSettings()}
+                                          >
+                                            Save
+                                          </button>
+                                          <button
+                                            type="button"
+                                            className="inline-flex h-8 items-center justify-center rounded-md border border-transparent border border-gray-300 bg-white dark:bg-[#1f242b] dark:text-white px-2 py-1 text-sm font-medium text-gray-700 shadow-sm focus:outline-none focus:ring-offset-2 focus:ring-offset-gray-100"
                                             onClick={() =>
                                               setCurrentlyUpdating(false)
                                             }
                                           >
                                             Cancel
-                                          </button>
-                                          <button
-                                            type="button"
-                                            className="inline-flex h-8 items-center justify-center rounded-md border border-transparent bg-blue-600 px-2 py-1 text-sm font-medium text-white shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-100"
-                                            onClick={() => updateSettings()}
-                                          >
-                                            Save
                                           </button>
                                         </div>
                                       </span>
@@ -1155,11 +1159,11 @@ export default function Settings() {
                                 )}
                                 {!currentlyUpdating && (
                                   <div className="py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-5 sm:pt-5">
-                                    <dt className="text-sm font-medium text-gray-500">
+                                    <dt className="text-sm font-medium text-gray-500 dark:text-white">
                                       Looking for Positions?
                                     </dt>
                                     <dd className="mt-1 flex text-sm text-gray-900 sm:col-span-2 sm:mt-0">
-                                      <span className="flex-grow">
+                                      <span className="flex-grow dark:text-white">
                                         {JSON.stringify(lookingForPositions) ==
                                         'false'
                                           ? 'No'
@@ -1168,7 +1172,7 @@ export default function Settings() {
                                       <span className="ml-4 flex-shrink-0">
                                         <button
                                           type="button"
-                                          className="rounded-md bg-white font-medium text-blue-600 hover:text-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+                                          className="rounded-md bg-white dark:bg-[#1f242b] font-medium text-blue-600 hover:text-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
                                           onClick={() =>
                                             setCurrentlyUpdating(true)
                                           }
@@ -1181,7 +1185,7 @@ export default function Settings() {
                                 )}
                                 {currentlyUpdating && (
                                   <div className="py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-5">
-                                    <dt className="text-sm font-medium text-gray-500">
+                                    <dt className="text-sm font-medium text-gray-500 dark:text-white">
                                       Looking for Positions?
                                     </dt>
                                     <dd className="mt-1 flex text-sm text-gray-900 sm:col-span-2 sm:mt-0">
@@ -1190,7 +1194,7 @@ export default function Settings() {
                                           id="lookingForPositions"
                                           name="lookingForPositions"
                                           type="checkbox"
-                                          className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
+                                          className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500 dark:accent-gray-600"
                                           checked={lookingForPositions || false}
                                           onChange={() => {
                                             setLookingForPositions(
@@ -1203,19 +1207,19 @@ export default function Settings() {
                                         <div className="flex space-x-4 justify-end">
                                           <button
                                             type="button"
-                                            className="inline-flex h-8 items-center justify-center rounded-md border border-transparent border border-gray-300 bg-white px-2 py-1 text-sm font-medium text-gray-700 shadow-sm focus:outline-none focus:ring-offset-2 focus:ring-offset-gray-100"
+                                            className="inline-flex h-8 items-center justify-center rounded-md border border-transparent bg-blue-600 px-2 py-1 text-sm font-medium text-white shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-100"
+                                            onClick={() => updateSettings()}
+                                          >
+                                            Save
+                                          </button>
+                                          <button
+                                            type="button"
+                                            className="inline-flex h-8 items-center justify-center rounded-md border border-transparent border border-gray-300 bg-white dark:bg-[#1f242b] dark:text-white px-2 py-1 text-sm font-medium text-gray-700 shadow-sm focus:outline-none focus:ring-offset-2 focus:ring-offset-gray-100"
                                             onClick={() =>
                                               setCurrentlyUpdating(false)
                                             }
                                           >
                                             Cancel
-                                          </button>
-                                          <button
-                                            type="button"
-                                            className="inline-flex h-8 items-center justify-center rounded-md border border-transparent bg-blue-600 px-2 py-1 text-sm font-medium text-white shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-100"
-                                            onClick={() => updateSettings()}
-                                          >
-                                            Save
                                           </button>
                                         </div>
                                       </span>
@@ -1234,10 +1238,10 @@ export default function Settings() {
                         >
                           <div className="mt-10 divide-y divide-gray-200">
                             <div className="space-y-1">
-                              <h3 className="text-lg font-medium leading-6 text-gray-900">
+                              <h3 className="text-lg font-medium leading-6 text-gray-900 dark:text-white">
                                 Settings
                               </h3>
-                              <p className="max-w-2xl text-sm text-gray-500">
+                              <p className="max-w-2xl text-sm text-gray-500 dark:text-gray-300">
                                 General settings for your time using Quester.
                               </p>
                             </div>
@@ -1245,7 +1249,7 @@ export default function Settings() {
                               <dl className="divide-y divide-gray-200">
                                 {!currentlyUpdating && (
                                   <div className="py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-5">
-                                    <dt className="text-sm font-medium text-gray-500">
+                                    <dt className="text-sm font-medium text-gray-500 dark:text-white">
                                       Dark Mode
                                     </dt>
                                     <dd className="mt-1 flex text-sm text-gray-900 sm:col-span-2 sm:mt-0">
@@ -1255,7 +1259,7 @@ export default function Settings() {
                                       <span className="ml-4 flex-shrink-0">
                                         <button
                                           type="button"
-                                          className="rounded-md bg-white font-medium text-blue-600 hover:text-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+                                          className="rounded-md bg-white dark:bg-[#1f242b] font-medium text-blue-600 hover:text-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
                                           onClick={() =>
                                             setCurrentlyUpdating(true)
                                           }
@@ -1268,7 +1272,7 @@ export default function Settings() {
                                 )}
                                 {currentlyUpdating && (
                                   <div className="py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-5">
-                                    <dt className="text-sm font-medium text-gray-500">
+                                    <dt className="text-sm font-medium text-gray-500 dark:text-white">
                                       Dark Mode?
                                     </dt>
                                     <dd className="mt-1 flex text-sm text-gray-900 sm:col-span-2 sm:mt-0">
@@ -1277,7 +1281,7 @@ export default function Settings() {
                                           id="darkMode"
                                           name="darkMode"
                                           type="checkbox"
-                                          className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
+                                          className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500 dark:accent-gray-600"
                                           checked={darkMode || false}
                                           onChange={() => {
                                             if (!darkMode) {
@@ -1293,19 +1297,19 @@ export default function Settings() {
                                         <div className="flex space-x-4 justify-end">
                                           <button
                                             type="button"
-                                            className="inline-flex h-8 items-center justify-center rounded-md border border-transparent border border-gray-300 bg-white px-2 py-1 text-sm font-medium text-gray-700 shadow-sm focus:outline-none focus:ring-offset-2 focus:ring-offset-gray-100"
+                                            className="inline-flex h-8 items-center justify-center rounded-md border border-transparent bg-blue-600 px-2 py-1 text-sm font-medium text-white shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-100"
+                                            onClick={() => updateSettings()}
+                                          >
+                                            Save
+                                          </button>
+                                          <button
+                                            type="button"
+                                            className="inline-flex h-8 items-center justify-center rounded-md border border-transparent border border-gray-300 bg-white dark:bg-[#1f242b] dark:text-white px-2 py-1 text-sm font-medium text-gray-700 shadow-sm focus:outline-none focus:ring-offset-2 focus:ring-offset-gray-100"
                                             onClick={() =>
                                               setCurrentlyUpdating(false)
                                             }
                                           >
                                             Cancel
-                                          </button>
-                                          <button
-                                            type="button"
-                                            className="inline-flex h-8 items-center justify-center rounded-md border border-transparent bg-blue-600 px-2 py-1 text-sm font-medium text-white shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-100"
-                                            onClick={() => updateSettings()}
-                                          >
-                                            Save
                                           </button>
                                         </div>
                                       </span>

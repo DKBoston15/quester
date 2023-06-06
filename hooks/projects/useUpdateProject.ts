@@ -5,8 +5,6 @@ import { useMutation, useQueryClient } from 'react-query';
 export const useUpdateProject = () => {
   const { user } = useUser();
 
-  if (!user) return;
-
   const queryClient = useQueryClient();
 
   return useMutation(
@@ -27,6 +25,7 @@ export const useUpdateProject = () => {
         pinned,
         description,
         checklist,
+        //@ts-ignore
         user.id
       ).then((result) => result.data);
     },

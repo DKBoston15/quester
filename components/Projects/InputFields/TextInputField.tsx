@@ -15,7 +15,7 @@ export default function TextInputField({ value, setValue, title, width }: any) {
           id={title}
           className={`block ${
             width ? width : 'w-10/12'
-          } rounded-md border-gray-300 border-1 border h-10 text-black focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm px-2`}
+          } dark:bg-gray-700 dark:text-white dark:border-none rounded-md border-gray-300 border-1 border h-10 text-black focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm px-2`}
           value={value || ''}
           onChange={(e) => setValue(e.target.value)}
         />

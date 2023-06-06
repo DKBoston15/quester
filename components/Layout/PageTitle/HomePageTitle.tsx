@@ -23,12 +23,12 @@ export default function HomePageTItle({ setOpen }: any) {
         </h1>
       </div>
       <div className="mt-4 flex sm:mt-0 sm:ml-4">
-        <button
+        {/* <button
           type="button"
           className="sm:order-0 order-1 ml-3 inline-flex items-center rounded-md border border-gray-300 dark:bg-gray-700 dark:text-white dark:border-gray-700 bg-white px-4 py-2 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 sm:ml-0"
         >
           Share
-        </button>
+        </button> */}
         <button
           onClick={() => setOpen(true)}
           type="button"

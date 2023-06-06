@@ -18,7 +18,7 @@ export default function SettingsPageTitle() {
         </button>
       </div>
       <div className="min-w-0 flex-1 pl-4">
-        <h1 className="text-lg font-medium leading-6 text-gray-900 sm:truncate">
+        <h1 className="text-lg font-medium leading-6 text-gray-900 sm:truncate dark:text-white">
           Settings
         </h1>
       </div>
