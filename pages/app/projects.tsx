@@ -6,7 +6,7 @@ import {
   ChevronRightIcon,
   EllipsisVerticalIcon
 } from '@heroicons/react/20/solid';
-import HomePageTItle from '@/components/Layout/PageTitle/HomePageTItle';
+import HomePageTitle from '@/components/Layout/PageTitle/HomePageTitle';
 import _ from 'lodash';
 import CreateProjectModal from '@/components/Projects/CreateModals/CreateProjectModal';
 import DeleteProjectModal from '@/components/Projects/DeleteModals/DeleteProjectModal';
@@ -130,7 +130,7 @@ export default function Home() {
         deleteModalOpen={deleteModalOpen}
       />
       {/* Page title & actions */}
-      <HomePageTItle setOpen={setOpen} />
+      <HomePageTitle setOpen={setOpen} />
       {/* Pinned projects */}
       {!isLoading && (
         <>
