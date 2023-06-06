@@ -26,6 +26,7 @@ export default function Table() {
         const retrievedTable = await getTableById({
           id: tableId
         });
+        //@ts-ignore
         setTable(retrievedTable.data[0]);
       }
     };
@@ -48,7 +49,10 @@ export default function Table() {
                 </div>
                 <div>
                   <h1 className="text-2xl font-bold text-gray-900">
-                    {table.title}
+                    {
+                      //@ts-ignore
+                      table.title
+                    }
                   </h1>
                 </div>
               </div>

@@ -24,6 +24,7 @@ export default function Model() {
     const getModel = async () => {
       if (modelId) {
         const retrievedModel = await getModelById({ id: modelId });
+        //@ts-ignore
         setModel(retrievedModel.data[0]);
       }
     };
@@ -46,7 +47,10 @@ export default function Model() {
                 </div>
                 <div>
                   <h1 className="text-2xl font-bold text-gray-900">
-                    {model.title}
+                    {
+                      //@ts-ignore
+                      model.title
+                    }
                   </h1>
                 </div>
               </div>

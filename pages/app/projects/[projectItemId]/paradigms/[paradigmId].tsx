@@ -24,6 +24,7 @@ export default function Paradigm() {
     const getParadigm = async () => {
       if (paradigmId) {
         const retrievedParadigm = await getParadigmById({ id: paradigmId });
+        //@ts-ignore
         setParadigm(retrievedParadigm.data[0]);
       }
     };
@@ -46,7 +47,10 @@ export default function Paradigm() {
                 </div>
                 <div>
                   <h1 className="text-2xl font-bold text-gray-900">
-                    {paradigm.title}
+                    {
+                      //@ts-ignore
+                      paradigm.title
+                    }
                   </h1>
                 </div>
               </div>

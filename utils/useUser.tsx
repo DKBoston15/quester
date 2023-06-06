@@ -54,9 +54,11 @@ export const MyUserContextProvider = (props: any) => {
           const subscriptionPromise = results[1];
 
           if (userDetailsPromise.status === 'fulfilled')
+            //@ts-ignore
             setUserDetails(userDetailsPromise.value.data);
 
           if (subscriptionPromise.status === 'fulfilled')
+            //@ts-ignore
             setSubscription(subscriptionPromise.value.data);
           setIsloadingData(false);
         }

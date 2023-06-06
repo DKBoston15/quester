@@ -17,7 +17,6 @@ import {
   PencilIcon
 } from '@heroicons/react/24/outline';
 import FuzzySearch from 'fuzzy-search';
-import Tooltip from '@/components/Tooltip';
 import EditDocumentModal from '@/components/Documents/modals/EditDocumentModal';
 import useGetProjectsQuery from 'hooks/projects/useProjects';
 
@@ -52,15 +51,17 @@ export default function Document() {
   useEffect(() => {
     const getDocument = async () => {
       const document = await getDocumentById({ id: documentId });
-      setEditorState(document.data[0].data);
-      setTitle(document.data[0].title);
-      setProjectItemId(document.data[0].project_item_id);
-      if (projects) {
-        const currentProject = projects.filter(
-          (project) => project.id == document.data[0].project_item_id
-        );
-        if (currentProject[0]) {
-          setProjectTitle(currentProject[0].title);
+      if (document.data) {
+        setEditorState(document.data[0].data);
+        setTitle(document.data[0].title);
+        setProjectItemId(document.data[0].project_item_id);
+        if (projects) {
+          const currentProject = projects.filter(
+            (project) => project.id == document.data[0].project_item_id
+          );
+          if (currentProject[0]) {
+            setProjectTitle(currentProject[0].title);
+          }
         }
       }
     };
@@ -71,17 +72,20 @@ export default function Document() {
   }, [router, documentId, documents, projects]);
 
   useEffect(() => {
+    //@ts-ignore
     setFilteredDocuments(documents);
   }, [documents]);
 
   const [searchTerm, setSearchTerm] = useState('');
 
-  const handleSearch = (event) => {
+  const handleSearch = (event: any) => {
     setSearchTerm(event.target.value);
+    //@ts-ignore
     const searcher = new FuzzySearch(documents, ['title'], {
       caseSensitive: false
     });
     const result = searcher.search(event.target.value);
+    //@ts-ignore
     setFilteredDocuments(result);
   };
 
@@ -176,19 +180,27 @@ export default function Document() {
                   {filteredDocuments.map((document) => (
                     <a
                       className="group hover:bg-gray-100 rounded-xl p-1 px-4 truncate flex justify-between"
+                      //@ts-ignore
                       key={document.id}
+                      //@ts-ignore
                       href={`${document.id}`}
                     >
-                      <span className="truncate w-56">{document.title}</span>
+                      <span className="truncate w-56">
+                        {
+                          //@ts-ignore
+                          document.title
+                        }
+                      </span>
                       <PencilIcon
                         className="w-4 group-hover:block hover:scale-125 text-gray-500 hidden"
                         onClick={(e) => {
                           e.preventDefault();
-                          console.log(document.id);
-                          console.log(document.title);
                           setSelectedDocument({
+                            //@ts-ignore
                             id: document.id,
+                            //@ts-ignore
                             title: document.title,
+                            //@ts-ignore
                             projectItemId: document.project_item_id
                           });
                           setOpen(true);
@@ -199,7 +211,6 @@ export default function Document() {
                 </div>
               )}
             </div>
-            {/* End secondary column */}
           </aside>
         </div>
       </div>

@@ -49,7 +49,10 @@ export default function Researcher() {
                 </div>
                 <div>
                   <h1 className="text-2xl font-bold text-gray-900">
-                    {researcher.title}
+                    {
+                      //@ts-ignore
+                      researcher.title
+                    }
                   </h1>
                 </div>
               </div>

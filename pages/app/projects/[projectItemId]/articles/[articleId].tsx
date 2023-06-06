@@ -24,6 +24,7 @@ export default function Article() {
     const getArticle = async () => {
       if (articleId) {
         const retrievedArticle = await getArticleById({ id: articleId });
+        //@ts-ignore
         setArticle(retrievedArticle.data[0]);
       }
     };
@@ -46,7 +47,10 @@ export default function Article() {
                 </div>
                 <div>
                   <h1 className="text-2xl font-bold text-gray-900">
-                    {article.title}
+                    {
+                      //@ts-ignore
+                      article.title
+                    }
                   </h1>
                 </div>
               </div>

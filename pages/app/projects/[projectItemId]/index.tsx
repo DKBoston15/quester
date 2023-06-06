@@ -19,6 +19,7 @@ export default function Project() {
   useEffect(() => {
     if (projects) {
       const project = projects.find((project) => project.id == projectItemId);
+      //@ts-ignore
       setSelectedProject(project);
     }
   }, [projects, projectItemId]);
@@ -27,6 +28,7 @@ export default function Project() {
     const getDocuments = async () => {
       const docs = await getDocumentsById({ projectItemId });
       if (docs.data) {
+        //@ts-ignore
         setDocuments(docs.data);
       }
     };
@@ -74,13 +76,20 @@ export default function Project() {
                             >
                               {documents.map((document) => (
                                 <li
+                                  //@ts-ignore
                                   key={document.id}
                                   className="flex items-center space-x-3 py-4"
                                 >
                                   <div className="min-w-0 flex-1">
                                     <p className="text-sm font-medium text-gray-900 dark:text-white">
-                                      <a href={`/app/documents/${document.id}`}>
-                                        {document.title}
+                                      <a
+                                        //@ts-ignore
+                                        href={`/app/documents/${document.id}`}
+                                      >
+                                        {
+                                          //@ts-ignore
+                                          document.title
+                                        }
                                       </a>
                                     </p>
                                   </div>

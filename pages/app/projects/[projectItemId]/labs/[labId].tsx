@@ -24,6 +24,7 @@ export default function Lab() {
     const getLab = async () => {
       if (labId) {
         const retrievedLab = await getLabById({ id: labId });
+        //@ts-ignore
         setLab(retrievedLab.data[0]);
       }
     };
@@ -46,7 +47,10 @@ export default function Lab() {
                 </div>
                 <div>
                   <h1 className="text-2xl font-bold text-gray-900">
-                    {lab.title}
+                    {
+                      //@ts-ignore
+                      lab.title
+                    }
                   </h1>
                 </div>
               </div>

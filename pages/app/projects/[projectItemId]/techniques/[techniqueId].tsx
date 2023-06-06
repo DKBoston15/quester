@@ -26,6 +26,7 @@ export default function Technique() {
         const retrievedTechnique = await getTechniqueById({
           id: techniqueId
         });
+        //@ts-ignore
         setTechnique(retrievedTechnique.data[0]);
       }
     };
@@ -48,7 +49,10 @@ export default function Technique() {
                 </div>
                 <div>
                   <h1 className="text-2xl font-bold text-gray-900">
-                    {technique.title}
+                    {
+                      //@ts-ignore
+                      technique.title
+                    }
                   </h1>
                 </div>
               </div>

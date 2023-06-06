@@ -4,9 +4,10 @@ import { useMutation, useQueryClient } from 'react-query';
 
 export const useCreateProject = () => {
   const { user } = useUser();
-  const queryClient = useQueryClient();
 
   if (!user) return;
+
+  const queryClient = useQueryClient();
 
   return useMutation(
     ({ title, type, bgColorClass, pinned }: any) => {

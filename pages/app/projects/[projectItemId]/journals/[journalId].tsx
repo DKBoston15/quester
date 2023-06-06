@@ -24,6 +24,7 @@ export default function Journal() {
     const getJournal = async () => {
       if (journalId) {
         const retrievedJournal = await getJournalById({ id: journalId });
+        //@ts-ignore
         setJournal(retrievedJournal.data[0]);
       }
     };
@@ -46,7 +47,10 @@ export default function Journal() {
                 </div>
                 <div>
                   <h1 className="text-2xl font-bold text-gray-900">
-                    {journal.title}
+                    {
+                      //@ts-ignore
+                      journal.title
+                    }
                   </h1>
                 </div>
               </div>

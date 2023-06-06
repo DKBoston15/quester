@@ -24,6 +24,7 @@ export default function Design() {
     const getDesign = async () => {
       if (designId) {
         const retrievedDesign = await getDesignById({ id: designId });
+        //@ts-ignore
         setDesign(retrievedDesign.data[0]);
       }
     };
@@ -46,7 +47,10 @@ export default function Design() {
                 </div>
                 <div>
                   <h1 className="text-2xl font-bold text-gray-900">
-                    {design.title}
+                    {
+                      //@ts-ignore
+                      design.title
+                    }
                   </h1>
                 </div>
               </div>

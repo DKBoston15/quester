@@ -4,9 +4,10 @@ import { useMutation, useQueryClient } from 'react-query';
 
 export const useUpdateProject = () => {
   const { user } = useUser();
-  const queryClient = useQueryClient();
 
   if (!user) return;
+
+  const queryClient = useQueryClient();
 
   return useMutation(
     ({

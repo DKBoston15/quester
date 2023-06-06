@@ -24,6 +24,7 @@ export default function KeyTerm() {
     const getKeyTerm = async () => {
       if (keyTermId) {
         const retrievedKeyTerm = await getKeyTermById({ id: keyTermId });
+        //@ts-ignore
         setKeyTerm(retrievedKeyTerm.data[0]);
       }
     };
@@ -46,7 +47,10 @@ export default function KeyTerm() {
                 </div>
                 <div>
                   <h1 className="text-2xl font-bold text-gray-900">
-                    {keyTerm.title}
+                    {
+                      //@ts-ignore
+                      keyTerm.title
+                    }
                   </h1>
                 </div>
               </div>

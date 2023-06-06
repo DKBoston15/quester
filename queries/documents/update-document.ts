@@ -7,13 +7,16 @@ export async function updateDocument(
   projectItemId: string,
   userId: string
 ) {
-  return supabase
-    .from('documents')
-    .update({
-      title,
-      data: newData,
-      project_item_id: projectItemId
-    })
-    .eq('user_id', userId)
-    .eq('id', parseInt(id));
+  return (
+    supabase
+      .from('documents')
+      .update({
+        title,
+        data: newData,
+        project_item_id: projectItemId
+      })
+      .eq('user_id', userId)
+      //@ts-ignore
+      .eq('id', parseInt(id))
+  );
 }

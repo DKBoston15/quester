@@ -24,6 +24,7 @@ export default function Question() {
     const getQuestion = async () => {
       if (questionId) {
         const retrievedQuestion = await getQuestionById({ id: questionId });
+        //@ts-ignore
         setQuestion(retrievedQuestion.data[0]);
       }
     };
@@ -46,7 +47,10 @@ export default function Question() {
                 </div>
                 <div>
                   <h1 className="text-2xl font-bold text-gray-900">
-                    {question.title}
+                    {
+                      //@ts-ignore
+                      question.title
+                    }
                   </h1>
                 </div>
               </div>

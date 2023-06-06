@@ -24,6 +24,7 @@ export default function Figure() {
     const getFigure = async () => {
       if (figureId) {
         const retrievedFigure = await getFigureById({ id: figureId });
+        //@ts-ignore
         setFigure(retrievedFigure.data[0]);
       }
     };
@@ -46,7 +47,10 @@ export default function Figure() {
                 </div>
                 <div>
                   <h1 className="text-2xl font-bold text-gray-900">
-                    {figure.title}
+                    {
+                      //@ts-ignore
+                      figure.title
+                    }
                   </h1>
                 </div>
               </div>

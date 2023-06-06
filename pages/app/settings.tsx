@@ -17,7 +17,7 @@ const tabs = [
   { name: 'Settings', href: '#', current: false }
 ];
 
-function classNames(...classes) {
+function classNames(...classes: any[]) {
   return classes.filter(Boolean).join(' ');
 }
 
@@ -110,6 +110,7 @@ export default function Settings() {
       );
     }
     if (user) {
+      //@ts-ignore
       setEmail(user ? user.email : undefined);
     }
   }, [userDetails]);
@@ -139,17 +140,20 @@ export default function Settings() {
 
   const updateUser = async (name: string, email: string) => {
     setCurrentlyUpdating(false);
+    //@ts-ignore
     if (email != user.email) {
       const { data, error } = await supabase.auth.updateUser({
         email
       });
     }
+    //@ts-ignore
     await updateUserName(user, name);
   };
 
   const updateSettingsFunc = useUpdateSetting();
   const updateSettings = async () => {
     await updateSettingsFunc?.mutateAsync({
+      //@ts-ignore
       id: settings[0].id,
       fieldOfStudy,
       inGraduateSchool,
@@ -200,6 +204,7 @@ export default function Settings() {
                                 setActiveTab(2);
                               }
                             }}
+                            //@ts-ignore
                             defaultValue={tabs.find((tab) => tab.current).name}
                           >
                             {tabs.map((tab, index) => (

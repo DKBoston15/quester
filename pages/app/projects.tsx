@@ -61,11 +61,13 @@ export default function Home() {
 
   useEffect(() => {
     if (projects) {
+      //@ts-ignore
       setPinnedProjects(projects.filter((project) => project.pinned));
     }
   }, [projects]);
 
-  const getProjectById = (id) => {
+  const getProjectById = (id: any) => {
+    //@ts-ignore
     const project = projects.find((project) => project.id === id);
     if (project) {
       return project;
@@ -73,26 +75,33 @@ export default function Home() {
     return 'Project not found';
   };
 
-  const togglePin = async (id) => {
+  const togglePin = async (id: any) => {
     const project = getProjectById(id);
+    if (!updateProject) return;
     await updateProject.mutateAsync({
       id,
+      //@ts-ignore
       title: project.title,
+      //@ts-ignore
       type: project.type,
       bgColorClass: _.sample(projectColors),
+      //@ts-ignore
       pinned: !project.pinned
     });
   };
 
-  const deleteCurrentProject = async (id) => {
+  const deleteCurrentProject = async (id: any) => {
     setDeleteModalOpen(false);
+    if (!deleteProject) return;
     await deleteProject.mutateAsync({
       id
     });
   };
   const createNewProject = async () => {
+    if (!createProject) return;
     await createProject.mutateAsync({
       title: projectName,
+      //@ts-ignore
       type: selectedType.name,
       bgColorClass: _.sample(projectColors),
       pinned: false
@@ -135,24 +144,33 @@ export default function Home() {
             >
               {pinnedProjects.map((project) => (
                 <li
+                  //@ts-ignore
                   key={project.id}
                   className="relative col-span-1 flex rounded-md shadow-sm h-12 "
                 >
                   <div
                     className={classNames(
+                      //@ts-ignore
                       project.bg_color_class,
                       'flex-shrink-0 flex items-center justify-center w-16 text-white text-sm font-medium rounded-l-md'
                     )}
                   >
-                    {project.title.slice(0, 2)}
+                    {
+                      //@ts-ignore
+                      project.title.slice(0, 2)
+                    }
                   </div>
                   <div className="flex flex-1 items-center justify-between truncate rounded-r-md bg-white dark:bg-gray-700">
                     <div className="flex-1 truncate px-4 py-2 text-sm">
                       <a
+                        //@ts-ignore
                         href={`/app/projects/${project.id}`}
                         className="font-medium text-gray-900 hover:text-gray-600 dark:text-white"
                       >
-                        {project.title}
+                        {
+                          //@ts-ignore
+                          project.title
+                        }
                       </a>
                     </div>
                     <Menu as="div" className="flex-shrink-0 pr-2">
@@ -177,6 +195,7 @@ export default function Home() {
                             <Menu.Item>
                               {({ active }) => (
                                 <a
+                                  //@ts-ignore
                                   href={`/app/projects/${project.id}`}
                                   className={classNames(
                                     active
@@ -194,6 +213,7 @@ export default function Home() {
                             <Menu.Item>
                               {({ active }) => (
                                 <div
+                                  //@ts-ignore
                                   onClick={() => togglePin(project.id)}
                                   className={classNames(
                                     active
@@ -242,34 +262,37 @@ export default function Home() {
               role="list"
               className="mt-3 divide-y divide-gray-100 dark:divide-gray-700 border-t border-gray-200 dark:border-gray-700"
             >
-              {projects.map((project) => (
-                <li key={project.id}>
-                  <a
-                    href={`/app/projects/${project.id}`}
-                    className="group flex items-center justify-between px-4 py-4 hover:bg-gray-50 sm:px-6"
-                  >
-                    <span className="flex items-center space-x-3 truncate">
-                      <span
-                        className={classNames(
-                          project.bg_color_class,
-                          'w-2.5 h-2.5 flex-shrink-0 rounded-full'
-                        )}
-                        aria-hidden="true"
-                      />
-                      <span className="truncate text-sm font-medium leading-6">
-                        {project.title}{' '}
-                        <span className="truncate font-normal text-gray-500 dark:text-white">
-                          as {project.type}
+              {
+                //@ts-ignore
+                projects.map((project) => (
+                  <li key={project.id}>
+                    <a
+                      href={`/app/projects/${project.id}`}
+                      className="group flex items-center justify-between px-4 py-4 hover:bg-gray-50 sm:px-6"
+                    >
+                      <span className="flex items-center space-x-3 truncate">
+                        <span
+                          className={classNames(
+                            project.bg_color_class,
+                            'w-2.5 h-2.5 flex-shrink-0 rounded-full'
+                          )}
+                          aria-hidden="true"
+                        />
+                        <span className="truncate text-sm font-medium leading-6">
+                          {project.title}{' '}
+                          <span className="truncate font-normal text-gray-500 dark:text-white">
+                            as {project.type}
+                          </span>
                         </span>
                       </span>
-                    </span>
-                    <ChevronRightIcon
-                      className="ml-4 h-5 w-5 text-gray-400 group-hover:text-gray-500"
-                      aria-hidden="true"
-                    />
-                  </a>
-                </li>
-              ))}
+                      <ChevronRightIcon
+                        className="ml-4 h-5 w-5 text-gray-400 group-hover:text-gray-500"
+                        aria-hidden="true"
+                      />
+                    </a>
+                  </li>
+                ))
+              }
             </ul>
           </div>
 
@@ -300,59 +323,62 @@ export default function Home() {
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-gray-100 dark:divide-gray-700 dark:bg-[#1f242b] bg-white dark:bg-gray-700">
-                  {projects.map((project) => (
-                    <tr key={project.id}>
-                      <td className="w-full max-w-0 whitespace-nowrap px-6 py-3 text-sm font-medium text-gray-900 dark:text-white">
-                        <div className="flex items-center space-x-3 lg:pl-2">
-                          <div
-                            className={classNames(
-                              project.bg_color_class,
-                              'flex-shrink-0 w-2.5 h-2.5 rounded-full'
-                            )}
-                            aria-hidden="true"
-                          />
+                  {
+                    //@ts-ignore
+                    projects.map((project) => (
+                      <tr key={project.id}>
+                        <td className="w-full max-w-0 whitespace-nowrap px-6 py-3 text-sm font-medium text-gray-900 dark:text-white">
+                          <div className="flex items-center space-x-3 lg:pl-2">
+                            <div
+                              className={classNames(
+                                project.bg_color_class,
+                                'flex-shrink-0 w-2.5 h-2.5 rounded-full'
+                              )}
+                              aria-hidden="true"
+                            />
+                            <a
+                              href={`/app/projects/${project.id}`}
+                              className="truncate hover:text-gray-600"
+                            >
+                              <span>
+                                {project.title}{' '}
+                                <span className="font-normal text-gray-500 dark:text-gray-400">
+                                  as {project.type}
+                                </span>
+                              </span>
+                            </a>
+                          </div>
+                        </td>
+                        <td className="whitespace-nowrap px-6 py-3 text-right text-sm font-medium">
                           <a
                             href={`/app/projects/${project.id}`}
-                            className="truncate hover:text-gray-600"
+                            className="text-indigo-600 hover:text-indigo-900 dark:text-blue-500 dark:hover:text-blue-700"
                           >
-                            <span>
-                              {project.title}{' '}
-                              <span className="font-normal text-gray-500 dark:text-gray-400">
-                                as {project.type}
-                              </span>
-                            </span>
+                            Edit
                           </a>
-                        </div>
-                      </td>
-                      <td className="whitespace-nowrap px-6 py-3 text-right text-sm font-medium">
-                        <a
-                          href={`/app/projects/${project.id}`}
-                          className="text-indigo-600 hover:text-indigo-900 dark:text-blue-500 dark:hover:text-blue-700"
-                        >
-                          Edit
-                        </a>
-                      </td>
-                      <td className="whitespace-nowrap px-6 py-3 text-right text-sm font-medium">
-                        <div
-                          onClick={() => togglePin(project.id)}
-                          className="text-indigo-600 hover:text-indigo-900 cursor-pointer dark:text-blue-500 dark:hover:text-blue-700"
-                        >
-                          {project.pinned ? 'Unpin' : 'Pin'}
-                        </div>
-                      </td>
-                      <td className="whitespace-nowrap px-6 py-3 text-right text-sm font-medium">
-                        <a
-                          onClick={() => {
-                            setSelectedProjectId(project.id);
-                            setDeleteModalOpen(true);
-                          }}
-                          className="text-red-600 hover:text-red-900 cursor-pointer"
-                        >
-                          Delete
-                        </a>
-                      </td>
-                    </tr>
-                  ))}
+                        </td>
+                        <td className="whitespace-nowrap px-6 py-3 text-right text-sm font-medium">
+                          <div
+                            onClick={() => togglePin(project.id)}
+                            className="text-indigo-600 hover:text-indigo-900 cursor-pointer dark:text-blue-500 dark:hover:text-blue-700"
+                          >
+                            {project.pinned ? 'Unpin' : 'Pin'}
+                          </div>
+                        </td>
+                        <td className="whitespace-nowrap px-6 py-3 text-right text-sm font-medium">
+                          <a
+                            onClick={() => {
+                              setSelectedProjectId(project.id);
+                              setDeleteModalOpen(true);
+                            }}
+                            className="text-red-600 hover:text-red-900 cursor-pointer"
+                          >
+                            Delete
+                          </a>
+                        </td>
+                      </tr>
+                    ))
+                  }
                 </tbody>
               </table>
             </div>

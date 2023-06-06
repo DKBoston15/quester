@@ -26,6 +26,7 @@ export default function Sample() {
         const retrievedSample = await getSampleById({
           id: sampleId
         });
+        //@ts-ignore
         setSample(retrievedSample.data[0]);
       }
     };
@@ -48,7 +49,10 @@ export default function Sample() {
                 </div>
                 <div>
                   <h1 className="text-2xl font-bold text-gray-900">
-                    {sample.title}
+                    {
+                      //@ts-ignore
+                      sample.title
+                    }
                   </h1>
                 </div>
               </div>
