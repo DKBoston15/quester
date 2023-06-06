@@ -1,5 +1,5 @@
 import Layout from '@/components/Layout/Layout';
-import ProjectPageTitle from '@/components/Layout/PageTitle/ProjectPageTitle';
+import ProjectPageTitle from '../../../../components/Layout/PageTitle/ProjectPageTItle';
 import { useRouter } from 'next/router';
 import Events from '@/components/Projects/Events';
 import { Tabs } from '@/components/Projects/Layout/Tabs';
