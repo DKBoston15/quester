@@ -6,7 +6,6 @@ import { Tabs } from '@/components/Projects/Layout/Tabs';
 import useGetProjectsQuery from 'hooks/projects/useProjects';
 import { useEffect, useState } from 'react';
 import SectionGrid from '@/components/Projects/Layout/SectionGrid';
-import useGetDocumentsByIdQuery from 'hooks/documents/useDocumentsById';
 import { getDocumentsById } from 'queries/documents/get-documents-by-id';
 
 export default function Project() {
