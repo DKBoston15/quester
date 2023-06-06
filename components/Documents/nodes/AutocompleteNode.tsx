@@ -1,5 +1,4 @@
 import type { Spread } from 'lexical';
-
 import {
   DecoratorNode,
   EditorConfig,
@@ -9,7 +8,7 @@ import {
 import * as React from 'react';
 
 import { useSharedAutocompleteContext } from '../context/SharedAutocompleteContext';
-import { uuid as UUID } from '../Plugins/AutocompletePlugin';
+import { uuid as UUID } from '../plugins/AutocompletePlugin';
 
 declare global {
   interface Navigator {
