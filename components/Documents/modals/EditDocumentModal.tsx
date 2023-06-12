@@ -26,10 +26,12 @@ export default function EditDocumentModal({
   const [selectedProject, setSelectedProject] = useState();
   const updateDocument = useUpdateDocument();
   const [projectOptions, setProjectOptions] = useState([]);
-  const { data: projects, isLoading, isError } = useGetProjectsQuery();
+  const { data: projects } = useGetProjectsQuery();
 
   useEffect(() => {
-    setNewTitle(selectedDocument.title);
+    if (selectedDocument) {
+      setNewTitle(selectedDocument.title);
+    }
   }, [selectedDocument]);
 
   const updateExistingDocument = async () => {

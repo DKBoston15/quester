@@ -1,3 +1,4 @@
+//@ts-nocheck
 import { useUser } from '@/utils/useUser';
 import { createDocument } from 'queries/documents/create-document';
 import { useMutation, useQueryClient } from 'react-query';
@@ -14,8 +15,6 @@ export const useCreateDocument = () => {
   const { user } = useUser();
   const queryClient = useQueryClient();
 
-  if (!user) return;
-
   return useMutation<CreateDocumentOutput, unknown, CreateDocumentInput>(
     ({ title, data, projectItemId }) => {
       return createDocument(title, data, projectItemId, user.id).then(
@@ -25,7 +24,7 @@ export const useCreateDocument = () => {
       );
     },
     {
-      onSuccess: (data, variables, context) => {
+      onSuccess: () => {
         queryClient.invalidateQueries('documents');
       }
     }

@@ -1,62 +1,16 @@
 import Layout from '@/components/Layout/Layout';
 import {
-  Bars4Icon,
-  CalendarIcon,
-  ClockIcon,
   MagnifyingGlassCircleIcon,
-  PencilIcon,
-  PhotoIcon,
-  TableCellsIcon,
-  ViewColumnsIcon
+  PencilIcon
 } from '@heroicons/react/24/outline';
 import { useCreateDocument } from 'hooks/documents/useCreateDocument';
 import useGetDocuments from 'hooks/documents/useDocuments';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import FuzzySearch from 'fuzzy-search';
-
-const items = [
-  {
-    title: 'Create a Research Design Document',
-    description: 'A standard research design document to build off of.',
-    icon: Bars4Icon,
-    background: 'bg-pink-500'
-  },
-  {
-    title: 'Create a Reference List',
-    description: 'A list of your references.',
-    icon: CalendarIcon,
-    background: 'bg-yellow-500'
-  },
-  {
-    title: 'Create something else',
-    description: 'Great for something!.',
-    icon: PhotoIcon,
-    background: 'bg-green-500'
-  },
-  {
-    title: 'Create something else',
-    description: 'Great for something!.',
-    icon: ViewColumnsIcon,
-    background: 'bg-blue-500'
-  },
-  {
-    title: 'Create something else',
-    description: 'Great for something!.',
-    icon: TableCellsIcon,
-    background: 'bg-indigo-500'
-  },
-  {
-    title: 'Create something else',
-    description: 'Great for something!.',
-    icon: ClockIcon,
-    background: 'bg-purple-500'
-  }
-];
-
-function classNames(...classes: any[]) {
-  return classes.filter(Boolean).join(' ');
-}
+import Link from 'next/link';
+import EditDocumentModal from '@/components/Documents/modals/EditDocumentModal';
+import useGetProjectsQuery from 'hooks/projects/useProjects';
 
 export default function Index() {
   const router = useRouter();
@@ -74,12 +28,24 @@ export default function Index() {
     router.push(`documents/${data[0].id}`);
   };
 
-  const { data: documents, isLoading, isError } = useGetDocuments();
+  const { data: documents } = useGetDocuments();
 
   const [searchTerm, setSearchTerm] = useState('');
   const [filteredDocuments, setFilteredDocuments] = useState([]);
   const [open, setOpen] = useState(false);
   const [selectedDocument, setSelectedDocument] = useState();
+  const { data: projects } = useGetProjectsQuery();
+
+  const getProjectTitle = (projectItemId: any) => {
+    if (projects) {
+      const currentProject = projects.filter(
+        (project) => project.id == projectItemId
+      );
+      if (currentProject[0]) {
+        return currentProject[0].title;
+      }
+    }
+  };
 
   useEffect(() => {
     //@ts-ignore
@@ -99,6 +65,14 @@ export default function Index() {
 
   return (
     <Layout>
+      {open && (
+        <EditDocumentModal
+          setSelectedDocument={setSelectedDocument}
+          open={open}
+          setOpen={setOpen}
+          selectedDocument={selectedDocument}
+        />
+      )}
       <div className="p-12">
         <h2 className="text-lg font-medium text-gray-900">Documents</h2>
         {/* <p className="mt-1 text-sm text-gray-500">
@@ -166,32 +140,48 @@ export default function Index() {
                           }
                         >
                           <td className="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-0">
-                            <a
+                            <Link
+                              className="cursor-pointer"
                               href={`/app/documents/${
                                 //@ts-ignore
                                 filteredDocument.id
                               }`}
                             >
-                              <span className="truncate w-56">
+                              <div className="pb-2 space-x-6 flex items-center">
+                                <span className="truncate w-56 cursor-pointer">
+                                  {
+                                    //@ts-ignore
+                                    filteredDocument.title
+                                  }
+                                </span>
                                 {
                                   //@ts-ignore
-                                  filteredDocument.title
+                                  filteredDocument.project_item_id && (
+                                    <div className="bg-gray-300 p-2 rounded-lg text-sm">
+                                      {getProjectTitle(
+                                        //@ts-ignore
+                                        filteredDocument.project_item_id
+                                      )}
+                                    </div>
+                                  )
                                 }
-                              </span>
-                            </a>
+                              </div>
+                            </Link>
                           </td>
 
                           <td className="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-0">
                             <PencilIcon
-                              className="w-4 group-hover:block text-gray-500"
+                              className="w-4 group-hover:block text-gray-500 cursor-pointer"
                               onClick={(e) => {
                                 e.preventDefault();
                                 setSelectedDocument({
                                   //@ts-ignore
-                                  id: document.id,
-                                  title: document.title,
+                                  id: filteredDocument.id,
                                   //@ts-ignore
-                                  projectItemId: document.project_item_id
+                                  title: filteredDocument.title,
+                                  projectItemId:
+                                    //@ts-ignore
+                                    filteredDocument.project_item_id
                                 });
                                 setOpen(true);
                               }}
