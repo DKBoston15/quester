@@ -26,8 +26,7 @@ export default function EditDocumentModal({
   const [selectedProject, setSelectedProject] = useState();
   const updateDocument = useUpdateDocument();
   const [projectOptions, setProjectOptions] = useState([]);
-  const { data: projects, isLoading, isError } = useGetProjectsQuery();
-  console.log(selectedDocument);
+  const { data: projects } = useGetProjectsQuery();
 
   useEffect(() => {
     if (selectedDocument) {
