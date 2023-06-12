@@ -6,6 +6,7 @@
     "dev": "next",
     "build": "next build",
     "start": "next start",
+    "test": "jest",
     "stripe:listen": "stripe listen --forward-to=localhost:3000/api/webhooks --project-name=saas-starter"
   },
   "dependencies": {
@@ -54,8 +55,11 @@
     "y-websocket": "^1.4.5"
   },
   "devDependencies": {
+    "@testing-library/jest-dom": "^5.16.5",
+    "@testing-library/react": "^12.1.5",
     "@types/classnames": "2.3.1",
     "@types/fuzzy-search": "^2.1.2",
+    "@types/jest": "^29.5.2",
     "@types/katex": "^0.16.0",
     "@types/lodash-es": "^4.17.6",
     "@types/node": "^17.0.13",
@@ -65,8 +69,11 @@
     "@types/react-dom": "^18.0.10",
     "@types/sortablejs": "^1.15.0",
     "autoprefixer": "^10.4.2",
+    "jest": "^29.5.0",
+    "jest-environment-jsdom": "^29.5.0",
     "postcss": "8.4.5",
     "prettier": "2.5.1",
+    "ts-jest": "^29.1.0",
     "typescript": "^4.5.5"
   },
   "prettier": {

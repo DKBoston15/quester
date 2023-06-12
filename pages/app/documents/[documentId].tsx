@@ -40,11 +40,7 @@ export default function Document() {
   });
 
   const { data: documents, isLoading, isError } = useGetDocuments();
-  const {
-    data: projects,
-    isLoading: projectIsLoading,
-    isError: projectsIsError
-  } = useGetProjectsQuery();
+  const { data: projects } = useGetProjectsQuery();
   const [filteredDocuments, setFilteredDocuments] = useState([]);
   const [selectedDocument, setSelectedDocument] = useState();
 

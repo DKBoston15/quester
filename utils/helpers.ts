@@ -1,4 +1,5 @@
 import { Price } from 'types';
+import { Project } from './types';
 
 export const getURL = () => {
   let url =
@@ -51,4 +52,18 @@ export const getNameOrOriginal = (value: any): string | typeof value => {
   return typeof value === 'object' && value !== null && 'name' in value
     ? value.name
     : value;
+};
+
+export function classNames(...classes: any) {
+  return classes.filter(Boolean).join(' ');
+}
+
+export const getProjectById = (id: any, projects: Project[]) => {
+  if (projects) {
+    const project = projects.find((project) => project.id === id);
+    if (project) {
+      return project;
+    }
+  }
+  return 'Project not found';
 };
