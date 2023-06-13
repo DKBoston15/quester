@@ -12,12 +12,24 @@ import { Testimonials } from '@/components/LandingPage/Testimonials';
 import { getActiveProductsWithPrices } from 'utils/supabase-client';
 import { Product } from 'types';
 import { GetStaticPropsResult } from 'next';
+import { useRouter } from 'next/router';
+import { useUser } from '@/utils/useUser';
+import { useEffect } from 'react';
 
 interface Props {
   products: Product[];
 }
 
 export default function Home({ products }: Props) {
+  const router = useRouter();
+  const user = useUser();
+
+  useEffect(() => {
+    if (user) {
+      router.replace('/app/projects');
+    }
+  }, [user]);
+
   return (
     <>
       <Head>
@@ -29,7 +41,7 @@ export default function Home({ products }: Props) {
         <Hero />
         <PrimaryFeatures />
         {/* <SecondaryFeatures /> */}
-        <Testimonials />
+        {/* <Testimonials /> */}
         <CallToAction />
         <Pricing products={products} />
         {/* <Faqs /> */}

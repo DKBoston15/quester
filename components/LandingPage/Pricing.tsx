@@ -47,19 +47,19 @@ interface FeatureList {
 
 const featuresList: FeatureList[] = [
   {
-    id: 'prod_N8ssJ5vBUEHJ1N',
+    id: 'test',
     features: ['Send 25 quotes and invoices']
   },
   {
     id: 'prod_N94Hz4BR88o1cM',
-    features: ['Send 25 quotes and invoices', 'Connect up to 5 bank accounts']
+    features: ['1 Project', 'Knowledge Base Access', 'Task Tracking']
   },
   {
     id: 'prod_N8vFmE0wcvcSuN',
     features: [
-      'Send 25 quotes and invoices',
-      'Connect up to 5 bank accounts',
-      'Track up to 50 expenses per month'
+      'Unlimited Projects',
+      'Access to a library of courses and quizzes',
+      'Access to Ask a Professor'
     ]
   }
 ];
@@ -207,7 +207,7 @@ export function Pricing({ products }: PricingProps) {
             setBillingInterval={setBillingInterval}
           />
         </div>
-        <div className="mt-12 space-y-4 sm:mt-16 sm:space-y-0 sm:grid sm:grid-cols-2 sm:gap-6 lg:max-w-4xl lg:mx-auto xl:max-w-none xl:mx-0 xl:grid-cols-3">
+        <div className="mt-12 space-y-4 sm:mt-16 sm:space-y-0 sm:grid sm:grid-cols-2 sm:gap-6 lg:max-w-4xl lg:mx-auto xl:max-w-none xl:mx-0 xl:grid-cols-2">
           {products.map((product: any) => {
             const price = product?.prices?.find(
               (price: any) => price.interval === billingInterval

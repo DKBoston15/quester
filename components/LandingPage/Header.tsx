@@ -103,7 +103,7 @@ export function Header() {
             <Link href="#" aria-label="Home">
               <img
                 src="/quester_logo_name.png"
-                className="w-48 h-24 brightness-0 object-cover"
+                className="w-36 md:lg-48 lg:w-48 h-24 brightness-0 object-cover"
               />
             </Link>
             <div className="hidden md:flex md:gap-x-6">
@@ -138,7 +138,7 @@ export function Header() {
                     <NavLink href="/login">Sign in</NavLink>
                   </div>
                   <Button href="/login" color="blue">
-                    <span>
+                    <span className="whitespace-none">
                       Get started{' '}
                       <span className="hidden lg:inline">today</span>
                     </span>
@@ -146,9 +146,6 @@ export function Header() {
                 </>
               )}
             </>
-            <div className="-mr-1 md:hidden">
-              <MobileNavigation />
-            </div>
           </div>
         </nav>
       </Container>

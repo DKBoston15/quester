@@ -38,7 +38,8 @@ export default function Login() {
             appearance={{
               theme: ThemeSupa,
               className: {
-                message: 'text-black'
+                message: 'text-black',
+                container: 'w-[24rem]'
               },
               variables: {
                 default: {

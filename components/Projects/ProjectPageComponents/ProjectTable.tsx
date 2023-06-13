@@ -49,9 +49,9 @@ export default function ProjectTable({
                     />
                     <Link
                       href={`/app/projects/${project.id}`}
-                      className="truncate hover:text-gray-600"
+                      className="truncate hover:text-gray-600 cursor-pointer"
                     >
-                      <span>
+                      <span className="cursor-pointer">
                         {project.title}{' '}
                         <span className="font-normal text-gray-500 dark:text-gray-400">
                           as {project.type}
@@ -59,14 +59,6 @@ export default function ProjectTable({
                       </span>
                     </Link>
                   </div>
-                </td>
-                <td className="whitespace-nowrap px-6 py-3 text-right text-sm font-medium">
-                  <Link
-                    href={`/app/projects/${project.id}`}
-                    className="text-indigo-600 hover:text-indigo-900 dark:text-blue-500 dark:hover:text-blue-700"
-                  >
-                    Edit
-                  </Link>
                 </td>
                 <td className="whitespace-nowrap px-6 py-3 text-right text-sm font-medium">
                   <div
